@@ -44,7 +44,7 @@
                              Style="{StaticResource NavigationViewItemRadioButtonStyle}"
                              Tag="&#xE81C;" GroupName="menu"/>
 
-                <Grid Height="20"/>
+                <Rectangle Height="20"/>
 
                 <!--<Rectangle Height="1" Fill="{ThemeResource SystemControlForegroundBaseHighBrush}" Opacity="0.12"
                            Margin="12 6" HorizontalAlignment="Stretch"/>-->
