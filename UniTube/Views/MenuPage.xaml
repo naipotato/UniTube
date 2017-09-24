@@ -44,8 +44,10 @@
                              Style="{StaticResource NavigationViewItemRadioButtonStyle}"
                              Tag="&#xE81C;" GroupName="menu"/>
 
-                <Rectangle Height="1" Fill="{ThemeResource SystemControlForegroundBaseHighBrush}" Opacity="0.12"
-                           Margin="12 6" HorizontalAlignment="Stretch"/>
+                <Grid Height="20"/>
+
+                <!--<Rectangle Height="1" Fill="{ThemeResource SystemControlForegroundBaseHighBrush}" Opacity="0.12"
+                           Margin="12 6" HorizontalAlignment="Stretch"/>-->
 
                 <RadioButton Content="{Binding Source={StaticResource Localized}, Path=[SubscribedMenu]}"
                              Style="{StaticResource NavigationViewItemRadioButtonStyle}"
@@ -66,8 +68,8 @@
                 </TransitionCollection>
             </StackPanel.ChildrenTransitions>
 
-            <Rectangle Height="1" Fill="{ThemeResource SystemControlForegroundBaseHighBrush}" Opacity="0.12"
-                       Margin="12 0 12 6" HorizontalAlignment="Stretch"/>
+            <!--<Rectangle Height="1" Fill="{ThemeResource SystemControlForegroundBaseHighBrush}" Opacity="0.12"
+                       Margin="12 0 12 6" HorizontalAlignment="Stretch"/>-->
 
             <RadioButton Content="{Binding Source={StaticResource Localized}, Path=[SettingsMenu]}"
                          Style="{StaticResource NavigationViewItemRadioButtonStyle}"
