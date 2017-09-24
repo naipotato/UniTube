@@ -7,5 +7,5 @@
     mc:Ignorable="d"
     Title="{Binding Source={StaticResource Localized}, Path=[UserCancelDialogTitle]}"
     PrimaryButtonText="{Binding Source={StaticResource Localized}, Path=[CloseDialogButton]}"
-    Background="{ThemeResource SystemControlAcrylicElementBrush}"
+    Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}"
     Content="{Binding Source={StaticResource Localized}, Path=[UserCancelDialogMessage]}"/>

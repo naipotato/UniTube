@@ -42,7 +42,7 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <Grid x:Name="BottomLayer" Background="{StaticResource MainColorAcrylicBrush}" Margin="0 -24 0 0">
+        <Grid x:Name="BottomLayer" Background="{StaticResource MainColorBrush}" Margin="0 -24 0 0">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="24"/>
@@ -80,7 +80,7 @@
 
         </Grid>
 
-        <Grid x:Name="MidLayer" Background="{ThemeResource SystemControlAcrylicWindowBrush}" Grid.Row="1"/>
+        <Grid x:Name="MidLayer" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}" Grid.Row="1"/>
 
         <Grid x:Name="TopLayer" Grid.RowSpan="2" Margin="20 40 20 20" MaxHeight="560" MaxWidth="500">
 
@@ -117,7 +117,7 @@
 
                 <Button Content="{Binding Source={StaticResource Localized}, Path=[LogInButton]}"
                         Background="{StaticResource MainColorBrush}" MinWidth="120" MinHeight="36"
-                        RequestedTheme="Dark" Style="{StaticResource ColorRevealButtonStyle}"
+                        RequestedTheme="Dark" Style="{StaticResource ColorButtonStyle}"
                         Command="{Binding LogInCommand}" x:Name="LoginButton"/>
 
                 <HyperlinkButton Content="{Binding Source={StaticResource Localized}, Path=[ContinueButton]}"

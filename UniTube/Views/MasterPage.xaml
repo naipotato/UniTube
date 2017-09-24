@@ -20,7 +20,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         
-        <Grid x:Name="BottomLayer" Background="{StaticResource MainColorAcrylicBrush}" Margin="0 -24 0 0"
+        <Grid x:Name="BottomLayer" Background="{StaticResource MainColorBrush}" Margin="0 -24 0 0"
               Grid.ColumnSpan="2" RequestedTheme="Dark">
 
             <Grid.RowDefinitions>
@@ -72,7 +72,7 @@
 
         </Grid>
 
-        <Grid x:Name="MidLayer" Background="{ThemeResource SystemControlAcrylicWindowBrush}" Grid.Row="1">
+        <Grid x:Name="MidLayer" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}" Grid.Row="1">
             <views:MenuPage/>
         </Grid>
         

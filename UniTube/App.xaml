@@ -10,9 +10,56 @@
             <Color x:Key="MainColor">#FFD32F2F</Color>
             <SolidColorBrush x:Key="MainColorBrush" Color="{StaticResource MainColor}"/>
 
-            <AcrylicBrush x:Key="MainColorAcrylicBrush" BackgroundSource="HostBackdrop"
-                          TintColor="{StaticResource MainColor}" TintOpacity="0.7"
-                          FallbackColor="{StaticResource MainColor}"/>
+            <Style x:Key="PaneToggleButtonStyle" TargetType="Button">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontFamily" Value="{StaticResource SymbolThemeFontFamily}" />
+                <Setter Property="MinHeight" Value="48" />
+                <Setter Property="MinWidth" Value="48" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="VerticalAlignment" Value="Top" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Content" Value="&#xE700;" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Grid x:Name="LayoutRoot" Width="{TemplateBinding MinWidth}" Height="{TemplateBinding MinHeight}" Margin="{TemplateBinding Padding}" Background="{TemplateBinding Background}">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="PointerOver">
+                                            <VisualState.Setters>
+                                                <Setter Target="LayoutRoot.Background" Value="{ThemeResource SystemControlHighlightListLowBrush}" />
+                                                <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SystemControlHighlightAltBaseHighBrush}" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <VisualState.Setters>
+                                                <Setter Target="LayoutRoot.Background" Value="{ThemeResource SystemControlHighlightListMediumBrush}" />
+                                                <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SystemControlHighlightAltBaseHighBrush}" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Disabled">
+                                            <VisualState.Setters>
+                                                <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SystemControlDisabledBaseMediumLowBrush}" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Viewbox x:Name="IconHost" Width="16" Height="16" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" AutomationProperties.AccessibilityView="Raw">
+                                    <ContentPresenter x:Name="ContentPresenter" Content="{TemplateBinding Content}" FontSize="{TemplateBinding FontSize}" AutomationProperties.AccessibilityView="Raw" />
+                                </Viewbox>
+                                <Border x:Name="RevealBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
 
             <services:LocalizedStrings x:Key="Localized"/>
 
@@ -20,11 +67,11 @@
 
             <x:String x:Key="LogoUniTube">M9.9 54.83c-.067-9.4 15.3-7.917 13.654 1.222.078 22.622-.169 45.255.115 67.869.6 11.522 5.513 24.678 17.5 28.68 12.441 4.275 29.107 2.9 36.822-8.963 7.586-11.844 5.219-26.2 5.617-39.471 0-16.326-.021-32.61-.021-49.337 0-1.954-.261-4.168 1.3-5.47 1.954-1.823 3.819-1.321 6.122 0 27.754 15.924 54.414 31.318 82.67 47.892.391.261 3.517 1.563 3.386 4.3-.13 2.475-2.344 3.387-3.386 4.168-31.63 18.09-63.3 37.16-95.378 55.294-13.492 7.145-30.106 7.562-44.466 2.874-11.149-3.661-18.668-13.741-21.495-24.731-3.764-12.211-2-25.048-2.411-37.605Q9.91 78.19 9.9 54.83Z</x:String>
 
-            <Style x:Key="ColorRevealButtonStyle" TargetType="Button">
-                <Setter Property="Background" Value="{ThemeResource ButtonRevealBackground}" />
-                <Setter Property="Foreground" Value="{ThemeResource ButtonForeground}" />
-                <Setter Property="BorderBrush" Value="{ThemeResource ButtonRevealBorderBrush}" />
-                <Setter Property="BorderThickness" Value="{ThemeResource ButtonRevealBorderThemeThickness}" />
+            <Style x:Key="ColorButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}" />
+                <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="2" />
                 <Setter Property="Padding" Value="8,4,8,4" />
                 <Setter Property="HorizontalAlignment" Value="Left" />
                 <Setter Property="VerticalAlignment" Value="Center" />
@@ -49,10 +96,9 @@
 
                                         <VisualState x:Name="PointerOver">
                                             <VisualState.Setters>
-                                                <Setter Target="RootGrid.(RevealBrush.State)" Value="PointerOver" />
-                                                <Setter Target="ContentGrid.Background" Value="{ThemeResource ButtonRevealBackgroundPointerOver}" />
-                                                <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ButtonRevealBorderBrushPointerOver}" />
-                                                <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ButtonForegroundPointerOver}" />
+                                                <Setter Target="ContentGrid.Background" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}" />
+                                                <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource SystemControlBackgroundBaseMediumLowBrush}" />
+                                                <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
                                             </VisualState.Setters>
 
                                             <Storyboard>
@@ -62,10 +108,9 @@
 
                                         <VisualState x:Name="Pressed">
                                             <VisualState.Setters>
-                                                <Setter Target="RootGrid.(RevealBrush.State)" Value="Pressed" />
-                                                <Setter Target="ContentGrid.Background" Value="{ThemeResource ButtonRevealBackgroundPressed}" />
-                                                <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ButtonRevealBorderBrushPressed}" />
-                                                <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ButtonForegroundPressed}" />
+                                                <Setter Target="ContentGrid.Background" Value="{ThemeResource SystemControlBackgroundBaseMediumLowBrush}" />
+                                                <Setter Target="ContentPresenter.BorderBrush" Value="Transparent" />
+                                                <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
                                             </VisualState.Setters>
 
                                             <Storyboard>
@@ -75,9 +120,9 @@
 
                                         <VisualState x:Name="Disabled">
                                             <VisualState.Setters>
-                                                <Setter Target="ContentGrid.Background" Value="{ThemeResource ButtonRevealBackgroundDisabled}" />
-                                                <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ButtonRevealBorderBrushDisabled}" />
-                                                <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ButtonForegroundDisabled}" />
+                                                <Setter Target="ContentGrid.Background" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}" />
+                                                <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource SystemControlDisabledTransparentBrush}" />
+                                                <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SystemControlDisabledBaseMediumLowBrush}" />
                                             </VisualState.Setters>
                                         </VisualState>
                                     </VisualStateGroup>
@@ -105,10 +150,10 @@
             <viewmodels:VMLocator x:Key="Locator"/>
 
             <Style x:Key="NavigationViewItemRadioButtonStyle" TargetType="RadioButton">
-                <Setter Property="Foreground" Value="{ThemeResource NavigationViewItemForeground}"/>
-                <Setter Property="Background" Value="{ThemeResource NavigationViewItemBackground}"/>
-                <Setter Property="BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrush}"/>
-                <Setter Property="BorderThickness" Value="{ThemeResource NavigationViewItemBorderThickness}"/>
+                <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="UseSystemFocusVisuals" Value="True"/>
                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
                 <Setter Property="Template">
@@ -120,16 +165,12 @@
                                         <VisualState x:Name="Normal"/>
                                         <VisualState x:Name="PointerOver">
                                             <VisualState.Setters>
-                                                <Setter Target="LayoutRoot.(RevealBrush.State)" Value="PointerOver" />
-                                                <Setter Target="LayoutRoot.Background" Value="{ThemeResource NavigationViewItemBackgroundPointerOver}" />
-                                                <Setter Target="RevealBorder.BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrushPointerOver}" />
+                                                <Setter Target="LayoutRoot.Background" Value="{ThemeResource SystemControlHighlightListLowBrush}"/>
                                             </VisualState.Setters>
                                         </VisualState>
                                         <VisualState x:Name="Pressed">
                                             <VisualState.Setters>
-                                                <Setter Target="LayoutRoot.(RevealBrush.State)" Value="Pressed" />
-                                                <Setter Target="LayoutRoot.Background" Value="{ThemeResource NavigationViewItemBackgroundPressed}" />
-                                                <Setter Target="RevealBorder.BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrushPressed}" />
+                                                <Setter Target="LayoutRoot.Background" Value="{ThemeResource SystemControlHighlightListMediumBrush}"/>
                                             </VisualState.Setters>
                                         </VisualState>
                                     </VisualStateGroup>
