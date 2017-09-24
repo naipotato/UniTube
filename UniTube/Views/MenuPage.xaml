@@ -1,0 +1,79 @@
+﻿<Page
+    x:Class="UniTube.Views.MenuPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid>
+        
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <RepositionThemeTransition IsStaggeringEnabled="False"/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="0 10 0 0">
+
+                <StackPanel.ChildrenTransitions>
+                    <TransitionCollection>
+                        <RepositionThemeTransition IsStaggeringEnabled="False"/>
+                    </TransitionCollection>
+                </StackPanel.ChildrenTransitions>
+
+                <RadioButton Content="{Binding Source={StaticResource Localized}, Path=[HomeMenu]}"
+                             Style="{StaticResource NavigationViewItemRadioButtonStyle}"
+                             Tag="&#xE10F;" GroupName="menu" IsChecked="True"/>
+
+                <RadioButton Content="{Binding Source={StaticResource Localized}, Path=[LikedMenu]}"
+                             Style="{StaticResource NavigationViewItemRadioButtonStyle}"
+                             Tag="&#xE19F;" GroupName="menu"/>
+
+                <RadioButton Content="{Binding Source={StaticResource Localized}, Path=[SavedMenu]}"
+                             Style="{StaticResource NavigationViewItemRadioButtonStyle}"
+                             Tag="&#xE105;" GroupName="menu"/>
+
+                <RadioButton Content="{Binding Source={StaticResource Localized}, Path=[HistoryMenu]}"
+                             Style="{StaticResource NavigationViewItemRadioButtonStyle}"
+                             Tag="&#xE81C;" GroupName="menu"/>
+
+                <Rectangle Height="1" Fill="{ThemeResource SystemControlForegroundBaseHighBrush}" Opacity="0.12"
+                           Margin="12 6" HorizontalAlignment="Stretch"/>
+
+                <RadioButton Content="{Binding Source={StaticResource Localized}, Path=[SubscribedMenu]}"
+                             Style="{StaticResource NavigationViewItemRadioButtonStyle}"
+                             Tag="&#xE125;" GroupName="menu"/>
+
+                <ListView ScrollViewer.VerticalScrollMode="Disabled">
+                    
+                </ListView>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="1">
+
+            <StackPanel.ChildrenTransitions>
+                <TransitionCollection>
+                    <RepositionThemeTransition IsStaggeringEnabled="False"/>
+                </TransitionCollection>
+            </StackPanel.ChildrenTransitions>
+
+            <Rectangle Height="1" Fill="{ThemeResource SystemControlForegroundBaseHighBrush}" Opacity="0.12"
+                       Margin="12 0 12 6" HorizontalAlignment="Stretch"/>
+
+            <RadioButton Content="{Binding Source={StaticResource Localized}, Path=[SettingsMenu]}"
+                         Style="{StaticResource NavigationViewItemRadioButtonStyle}"
+                         Tag="&#xE115;" GroupName="menu"/>
+
+        </StackPanel>
+
+    </Grid>
+</Page>
