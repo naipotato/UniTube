@@ -17,6 +17,8 @@ namespace UniTube.Services
 
         public static void SetMainPage(string pageName, NavigationTransitionInfo infoOverride = null)
         {
+            infoOverride = infoOverride == null ? new EntranceNavigationTransitionInfo() : infoOverride;
+
             switch (pageName)
             {
                 case "MasterPage":
