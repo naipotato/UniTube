@@ -68,6 +68,9 @@
                 </TransitionCollection>
             </StackPanel.ChildrenTransitions>
 
+            <RadioButton Content="{Binding Source={StaticResource Localized}, Path=[SignInMenu]}"
+                         Style="{StaticResource NavigationViewItemRadioButtonStyle}"
+                         Tag="&#xE1E2;" GroupName="menu"/>
 
             <RadioButton Content="{Binding Source={StaticResource Localized}, Path=[SettingsMenu]}"
                          Style="{StaticResource NavigationViewItemRadioButtonStyle}"
