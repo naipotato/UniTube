@@ -152,6 +152,9 @@
   <data name="SettingsMenu" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="SignInMenu" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
   <data name="SubscribedMenu" xml:space="preserve">
     <value>Subscribed to</value>
   </data>
