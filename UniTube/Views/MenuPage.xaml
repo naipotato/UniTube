@@ -53,9 +53,9 @@
                              Style="{StaticResource NavigationViewItemRadioButtonStyle}"
                              Tag="&#xE125;" GroupName="menu"/>
 
-                <ListView ScrollViewer.VerticalScrollMode="Disabled">
+                <!--<ListView ScrollViewer.VerticalScrollMode="Disabled">
                     
-                </ListView>
+                </ListView>-->
 
             </StackPanel>
         </ScrollViewer>
