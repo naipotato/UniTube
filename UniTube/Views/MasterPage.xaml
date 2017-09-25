@@ -64,9 +64,19 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
                 <Button x:Name="PaneToggleButton" Style="{StaticResource PaneToggleButtonStyle}"/>
+
+                <TextBlock x:Name="TitlePage" Text="Home" Grid.Column="1" FontSize="20" FontWeight="SemiBold"
+                           VerticalAlignment="Center" Margin="10 0 0 0"/>
+
+                <Button x:Name="UploadButton" Style="{StaticResource PaneToggleButtonStyle}" Content="&#xE11C;"
+                        Grid.Column="3"/>
+
+                <Button x:Name="SearchButton" Style="{StaticResource PaneToggleButtonStyle}" Content="&#xE094;"
+                        Grid.Column="4"/>
 
             </Grid>
 
