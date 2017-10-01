@@ -101,7 +101,7 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            
+
             <viewmodels:VMLocator x:Key="Locator"/>
 
             <Style x:Key="NavigationViewItemRadioButtonStyle" TargetType="RadioButton">

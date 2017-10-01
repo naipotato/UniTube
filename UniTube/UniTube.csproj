@@ -123,6 +123,7 @@
     <Compile Include="Services\LocalizedStrings.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\WhatsNewDisplayService.cs" />
+    <Compile Include="ViewModels\MasterViewModel.cs" />
     <Compile Include="ViewModels\VMLocator.cs" />
     <Compile Include="ViewModels\WelcomeViewModel.cs" />
     <Compile Include="Views\ExtendedSplash.xaml.cs">
