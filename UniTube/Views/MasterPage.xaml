@@ -57,7 +57,7 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <Grid x:Name="BottomLayer" Background="{StaticResource MainColorAcrylicBrush}" Margin="0 -24 0 0"
+        <Grid x:Name="BottomLayer" Background="{StaticResource MainColorBrush}" Margin="0 -24 0 0"
               RequestedTheme="Dark">
 
             <Grid.RowDefinitions>
@@ -104,7 +104,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Button x:Name="PaneToggleButton" Style="{StaticResource PaneToggleButtonStyle}"
+                <Button x:Name="PaneToggleButton" Style="{StaticResource IconButtonStyle}" Content="&#xE700;"
                         Command="{Binding OpenClosePaneCommand}"/>
 
                 <TextBlock x:Name="TitlePage" Text="Home" Grid.Column="1" FontSize="20" FontWeight="SemiBold"

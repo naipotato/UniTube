@@ -7,7 +7,7 @@
     mc:Ignorable="d"
     Title="What's new on UniTube"
     PrimaryButtonText="{Binding Source={StaticResource Localized}, Path=[CloseDialogButton]}"
-    Background="{ThemeResource SystemControlAcrylicElementBrush}">
+    Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
 
     <Grid>
         <TextBlock>
