@@ -20,6 +20,48 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                
+                <VisualState x:Name="Small">
+                    
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    
+                    <VisualState.Setters>
+                        
+                    </VisualState.Setters>
+                    
+                </VisualState>
+                
+                <VisualState x:Name="Medium">
+                    
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="641"/>
+                    </VisualState.StateTriggers>
+                    
+                    <VisualState.Setters>
+                        <Setter Target="TitlePage.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                    
+                </VisualState>
+
+                <VisualState x:Name="Large">
+                    
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1008"/>
+                    </VisualState.StateTriggers>
+                    
+                    <VisualState.Setters>
+                        <Setter Target="TitlePage.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                    
+                </VisualState>
+                
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
         <Grid x:Name="BottomLayer" Background="{StaticResource MainColorAcrylicBrush}" Margin="0 -24 0 0"
               Grid.ColumnSpan="2" RequestedTheme="Dark">
 
