@@ -51,7 +51,7 @@ namespace UniTube
             ElementSoundPlayer.State = ElementSoundPlayerState.On; // I like so much this sounds
             if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile")
             {
-                ElementSoundPlayer.Volume = 0.5; // They sounds very loud on mobile devices, believe me :s
+                ElementSoundPlayer.Volume = 0.3; // They sounds very loud on mobile devices, believe me :s
             }
 
             CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
