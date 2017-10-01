@@ -4,8 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:controls1="using:UniTube.Controls"
+    xmlns:controls="using:UniTube.Controls"
     mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator}, Path=Welcome}">
 
     <Page.Resources>
@@ -129,7 +128,7 @@
 
         </Grid>
 
-        <controls1:Loading Grid.RowSpan="2" IsActive="{Binding IsLoading}" Foreground="{StaticResource MainColorBrush}"/>
+        <controls:Loading Grid.RowSpan="2" IsActive="{Binding IsLoading}" Foreground="{StaticResource MainColorBrush}"/>
 
     </Grid>
 </Page>
