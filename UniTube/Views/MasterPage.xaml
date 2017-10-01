@@ -25,7 +25,7 @@
                     </VisualState.StateTriggers>
                     
                     <VisualState.Setters>
-                        
+                        <Setter Target="PaneToggleButton.ElementSoundMode" Value="FocusOnly"/>
                     </VisualState.Setters>
                     
                 </VisualState>
@@ -38,6 +38,7 @@
                     
                     <VisualState.Setters>
                         <Setter Target="TitlePage.Visibility" Value="Collapsed"/>
+                        <Setter Target="PaneToggleButton.ElementSoundMode" Value="FocusOnly"/>
                     </VisualState.Setters>
                     
                 </VisualState>
