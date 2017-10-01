@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:UniTube.Controls"
     mc:Ignorable="d">
 
     <Grid>
@@ -17,6 +18,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="8"/>
         </Grid.RowDefinitions>
 
         <ScrollViewer VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Auto">
@@ -28,34 +30,22 @@
                     </TransitionCollection>
                 </StackPanel.ChildrenTransitions>
 
-                <RadioButton Content="{Binding Source={StaticResource Localized}, Path=[HomeMenu]}"
-                             Style="{StaticResource NavigationViewItemRadioButtonStyle}"
-                             Tag="&#xE10F;" GroupName="menu" IsChecked="True"/>
+                <controls:HamburgerMenuItem Content="{Binding Source={StaticResource Localized}, Path=[HomeMenu]}"
+                                            Glyph="&#xE10F;" GroupName="menu" IsChecked="True"/>
 
-                <RadioButton Content="{Binding Source={StaticResource Localized}, Path=[LikedMenu]}"
-                             Style="{StaticResource NavigationViewItemRadioButtonStyle}"
-                             Tag="&#xE19F;" GroupName="menu"/>
+                <controls:HamburgerMenuItem Content="{Binding Source={StaticResource Localized}, Path=[LikedMenu]}"
+                                            Glyph="&#xE19F;" GroupName="menu"/>
 
-                <RadioButton Content="{Binding Source={StaticResource Localized}, Path=[SavedMenu]}"
-                             Style="{StaticResource NavigationViewItemRadioButtonStyle}"
-                             Tag="&#xE105;" GroupName="menu"/>
+                <controls:HamburgerMenuItem Content="{Binding Source={StaticResource Localized}, Path=[SavedMenu]}"
+                                            Glyph="&#xE105;" GroupName="menu"/>
 
-                <RadioButton Content="{Binding Source={StaticResource Localized}, Path=[HistoryMenu]}"
-                             Style="{StaticResource NavigationViewItemRadioButtonStyle}"
-                             Tag="&#xE81C;" GroupName="menu"/>
+                <controls:HamburgerMenuItem Content="{Binding Source={StaticResource Localized}, Path=[HistoryMenu]}"
+                                            Glyph="&#xE81C;" GroupName="menu"/>
 
-                <Rectangle Height="20"/>
+                <controls:HamburgerMenuItemSeparator/>
 
-                <!--<Rectangle Height="1" Fill="{ThemeResource SystemControlForegroundBaseHighBrush}" Opacity="0.12"
-                           Margin="12 6" HorizontalAlignment="Stretch"/>-->
-
-                <RadioButton Content="{Binding Source={StaticResource Localized}, Path=[SubscribedMenu]}"
-                             Style="{StaticResource NavigationViewItemRadioButtonStyle}"
-                             Tag="&#xE125;" GroupName="menu"/>
-
-                <!--<ListView ScrollViewer.VerticalScrollMode="Disabled">
-                    
-                </ListView>-->
+                <controls:HamburgerMenuItem Content="{Binding Source={StaticResource Localized}, Path=[SubscribedMenu]}"
+                                            Glyph="&#xE125;" GroupName="menu"/>
 
             </StackPanel>
         </ScrollViewer>
@@ -68,13 +58,11 @@
                 </TransitionCollection>
             </StackPanel.ChildrenTransitions>
 
-            <RadioButton Content="{Binding Source={StaticResource Localized}, Path=[SignInMenu]}"
-                         Style="{StaticResource NavigationViewItemRadioButtonStyle}"
-                         Tag="&#xE1E2;" GroupName="menu"/>
+            <controls:HamburgerMenuItemButton Content="{Binding Source={StaticResource Localized}, Path=[SignInMenu]}"
+                                              Glyph="&#xE1E2;"/>
 
-            <RadioButton Content="{Binding Source={StaticResource Localized}, Path=[SettingsMenu]}"
-                         Style="{StaticResource NavigationViewItemRadioButtonStyle}"
-                         Tag="&#xE115;" GroupName="menu"/>
+            <controls:HamburgerMenuItem Content="{Binding Source={StaticResource Localized}, Path=[SettingsMenu]}"
+                                        Glyph="&#xE115;" GroupName="menu"/>
 
         </StackPanel>
 

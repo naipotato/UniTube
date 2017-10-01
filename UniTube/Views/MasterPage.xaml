@@ -15,11 +15,6 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="256"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 
@@ -63,7 +58,7 @@
         </VisualStateManager.VisualStateGroups>
 
         <Grid x:Name="BottomLayer" Background="{StaticResource MainColorAcrylicBrush}" Margin="0 -24 0 0"
-              Grid.ColumnSpan="2" RequestedTheme="Dark">
+              RequestedTheme="Dark">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="24"/>
@@ -109,35 +104,42 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Button x:Name="PaneToggleButton" Style="{StaticResource PaneToggleButtonStyle}"/>
+                <Button x:Name="PaneToggleButton" Style="{StaticResource PaneToggleButtonStyle}"
+                        Command="{Binding OpenClosePaneCommand}"/>
 
                 <TextBlock x:Name="TitlePage" Text="Home" Grid.Column="1" FontSize="20" FontWeight="SemiBold"
                            VerticalAlignment="Center" Margin="10 0 0 0"/>
 
-                <Button x:Name="UploadButton" Style="{StaticResource PaneToggleButtonStyle}" Content="&#xE11C;"
+                <Button x:Name="UploadButton" Style="{StaticResource IconButtonStyle}" Content="&#xE11C;"
                         Grid.Column="3"/>
 
-                <Button x:Name="SearchButton" Style="{StaticResource PaneToggleButtonStyle}" Content="&#xE094;"
+                <Button x:Name="SearchButton" Style="{StaticResource IconButtonStyle}" Content="&#xE094;"
                         Grid.Column="4"/>
 
             </Grid>
 
         </Grid>
 
-        <Grid x:Name="MidLayer" Background="{ThemeResource SystemControlAcrylicWindowBrush}" Grid.Row="1">
-            <views:MenuPage/>
-        </Grid>
-        
-        <Grid x:Name="TopLayer" Grid.Row="1" Grid.Column="1" Margin="0 -20 0 0">
-
-            <controls:DropShadowPanel BlurRadius="6.0" ShadowOpacity="0.16"
-                                      OffsetX="-3.0" OffsetY="-3.0" Color="Black"
-                                      HorizontalContentAlignment="Stretch"
-                                      VerticalContentAlignment="Stretch">
-                <Rectangle Fill="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}"/>
-            </controls:DropShadowPanel>
+        <controls:HamburgerMenu Grid.Row="1" IsPaneOpen="{Binding IsPaneOpen, Mode=TwoWay}">
             
-        </Grid>
-        
+            <controls:HamburgerMenu.Pane>
+                <views:MenuPage/>
+            </controls:HamburgerMenu.Pane>
+            
+            <Grid x:Name="TopLayer" Margin="0 -20 0 0">
+
+                <controls:DropShadowPanel BlurRadius="6.0" ShadowOpacity="0.16"
+                                          OffsetX="-3.0" OffsetY="-3.0" Color="Black"
+                                          HorizontalContentAlignment="Stretch"
+                                          VerticalContentAlignment="Stretch">
+                    <Rectangle Fill="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}"/>
+                </controls:DropShadowPanel>
+
+                <Image Source="ms-appx:///Assets/SplashScreen/SplashScreen.png" Stretch="Uniform"/>
+
+            </Grid>
+
+        </controls:HamburgerMenu>
+
     </Grid>
 </Page>

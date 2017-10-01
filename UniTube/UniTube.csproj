@@ -101,8 +101,18 @@
     </Compile>
     <Compile Include="Controls\DropShadowPanel\DropShadowPanel.cs" />
     <Compile Include="Controls\DropShadowPanel\DropShadowPanel.Properties.cs" />
+    <Compile Include="Controls\HamburgerMenu\HamburgerMenuItemButton.cs" />
+    <Compile Include="Controls\HamburgerMenu\HamburgerMenuItemButton.Properties.cs" />
     <Compile Include="Controls\Loading\Loading.cs" />
     <Compile Include="Controls\Loading\Loading.Properties.cs" />
+    <Compile Include="Controls\HamburgerMenu\HamburgerMenu.cs" />
+    <Compile Include="Controls\HamburgerMenu\HamburgerMenu.Properties.cs" />
+    <Compile Include="Controls\HamburgerMenu\HamburgerMenuDisplayMode.cs" />
+    <Compile Include="Controls\HamburgerMenu\HamburgerMenuDisplayModeChangedEventArgs.cs" />
+    <Compile Include="Controls\HamburgerMenu\HamburgerMenuItem.cs" />
+    <Compile Include="Controls\HamburgerMenu\HamburgerMenuItem.Properties.cs" />
+    <Compile Include="Controls\HamburgerMenu\HamburgerMenuItemSeparator.cs" />
+    <Compile Include="Controls\HamburgerMenu\HamburgerMenuTemplateSettings.cs" />
     <Compile Include="Core\Authentication\Authenticator.cs" />
     <Compile Include="Core\Authentication\AuthResponse.cs" />
     <Compile Include="Core\Client.cs" />
@@ -232,6 +242,11 @@
     <Page Include="Controls\Loading\Loading.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\HamburgerMenu\HamburgerMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="Dialogs\ErrorHttpDialog.xaml">
       <SubType>Designer</SubType>

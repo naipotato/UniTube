@@ -3,6 +3,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Loading/Loading.xaml"/>
+        <ResourceDictionary Source="HamburgerMenu/HamburgerMenu.xaml"/>
         <ResourceDictionary Source="DropShadowPanel/DropShadowPanel.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     
