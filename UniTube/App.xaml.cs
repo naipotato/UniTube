@@ -8,6 +8,7 @@ using UniTube.Views;
 
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Background;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Metadata;
@@ -146,6 +147,8 @@ namespace UniTube
                 }
             }
             Window.Current.Activate();
+
+            RegisterBackgroundTask();
         }
 
         private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
@@ -175,6 +178,33 @@ namespace UniTube
             if (!refreshToken.IsNullOrEmpty())
             {
                 AuthInfo = await Authenticator.RefreshAccesTokenAsync(refreshToken, new ErrorHttpDialog());
+            }
+        }
+
+        private void RegisterBackgroundTask()
+        {
+            var taskRegistered = false;
+            var liveTileTaskName = "LiveTileTask";
+
+            foreach (var task in BackgroundTaskRegistration.AllTasks)
+            {
+                if (task.Value.Name == liveTileTaskName)
+                {
+                    taskRegistered = true;
+                    break;
+                }
+            }
+
+            if (!taskRegistered)
+            {
+                var builder = new BackgroundTaskBuilder
+                {
+                    Name = liveTileTaskName,
+                    TaskEntryPoint = "UniTube.Tasks.LiveTileTask"
+                };
+                builder.SetTrigger(new TimeTrigger(15, false));
+                builder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
+                BackgroundTaskRegistration task = builder.Register();
             }
         }
     }

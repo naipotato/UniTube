@@ -278,6 +278,10 @@
       <Project>{C2BC89FD-262B-475A-8CCA-ED591A44A7AF}</Project>
       <Name>UniTube.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UniTube.Tasks\UniTube.Tasks.csproj">
+      <Project>{e413cb41-8d3a-41d8-8c2f-b11862353a62}</Project>
+      <Name>UniTube.Tasks</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
