@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 using Windows.Security.Authentication.Web;
@@ -14,7 +13,7 @@ namespace UniTube.Core.Authentication
 {
     public static class Authenticator
     {
-        public static async Task<AuthResponse> AuthenticateAsync(ContentDialog userCancelDialog, ContentDialog errorHttpDialog)
+        public static async Task<AuthResponse> AuthenticateAsync(ContentDialog userCancelDialog = null, ContentDialog errorHttpDialog = null)
         {
             WebAuthenticationResult authenticationResult = null;
             try
@@ -28,7 +27,7 @@ namespace UniTube.Core.Authentication
             }
             catch (FileNotFoundException)
             {
-                await errorHttpDialog.ShowAsync();
+                await errorHttpDialog?.ShowAsync();
                 return null;
             }
 
@@ -41,10 +40,10 @@ namespace UniTube.Core.Authentication
                     authorizationCode = authorizationCode.Substring(13);
                     break;
                 case WebAuthenticationStatus.UserCancel:
-                    await userCancelDialog.ShowAsync();
+                    await userCancelDialog?.ShowAsync();
                     return null;
                 case WebAuthenticationStatus.ErrorHttp:
-                    await errorHttpDialog.ShowAsync();
+                    await errorHttpDialog?.ShowAsync();
                     return null;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -59,7 +58,7 @@ namespace UniTube.Core.Authentication
                 new KeyValuePair<string, string>("grant_type", "authorization_code")
             };
 
-            var httpClient = new Windows.Web.Http.HttpClient();
+            var httpClient = new HttpClient();
             var httpContent = new HttpFormUrlEncodedContent(pairs);
 
             try
@@ -73,18 +72,18 @@ namespace UniTube.Core.Authentication
                 }
                 else
                 {
-                    await errorHttpDialog.ShowAsync();
+                    await errorHttpDialog?.ShowAsync();
                 }
             }
             catch
             {
-                await errorHttpDialog.ShowAsync();
+                await errorHttpDialog?.ShowAsync();
             }
 
             return null;
         }
 
-        public static async Task<AuthResponse> RefreshAccesTokenAsync(string refreshToken, ContentDialog errorHttpDialog)
+        public static async Task<AuthResponse> RefreshAccesTokenAsync(string refreshToken, ContentDialog errorHttpDialog = null)
         {
             var pairs = new List<KeyValuePair<string, string>>
             {
@@ -94,7 +93,7 @@ namespace UniTube.Core.Authentication
                 new KeyValuePair<string, string>("grant_type", "refresh_token")
             };
 
-            var httpClient = new Windows.Web.Http.HttpClient();
+            var httpClient = new HttpClient();
             var httpContent = new HttpFormUrlEncodedContent(pairs);
 
             try
@@ -108,12 +107,12 @@ namespace UniTube.Core.Authentication
                 }
                 else
                 {
-                    await errorHttpDialog.ShowAsync();
+                    await errorHttpDialog?.ShowAsync();
                 }
             }
             catch
             {
-                await errorHttpDialog.ShowAsync();
+                await errorHttpDialog?.ShowAsync();
             }
 
             return null;
