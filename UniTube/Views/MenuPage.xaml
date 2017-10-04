@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:UniTube.Controls"
+    xmlns:controlsfcu="using:UniTube.Controls?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)"
     mc:Ignorable="d">
 
     <Grid>
@@ -31,20 +32,25 @@
                 </StackPanel.ChildrenTransitions>
 
                 <controls:HamburgerMenuItem Content="{Binding Source={StaticResource Localized}, Path=[HomeMenu]}"
+                                            controlsfcu:Style="{StaticResource HamburgerMenuItemRevealStyle}"
                                             Glyph="&#xE10F;" GroupName="menu" IsChecked="True"/>
 
                 <controls:HamburgerMenuItem Content="{Binding Source={StaticResource Localized}, Path=[LikedMenu]}"
+                                            controlsfcu:Style="{StaticResource HamburgerMenuItemRevealStyle}"
                                             Glyph="&#xE19F;" GroupName="menu"/>
 
                 <controls:HamburgerMenuItem Content="{Binding Source={StaticResource Localized}, Path=[SavedMenu]}"
+                                            controlsfcu:Style="{StaticResource HamburgerMenuItemRevealStyle}"
                                             Glyph="&#xE105;" GroupName="menu"/>
 
                 <controls:HamburgerMenuItem Content="{Binding Source={StaticResource Localized}, Path=[HistoryMenu]}"
+                                            controlsfcu:Style="{StaticResource HamburgerMenuItemRevealStyle}"
                                             Glyph="&#xE81C;" GroupName="menu"/>
 
                 <controls:HamburgerMenuItemSeparator/>
 
                 <controls:HamburgerMenuItem Content="{Binding Source={StaticResource Localized}, Path=[SubscribedMenu]}"
+                                            controlsfcu:Style="{StaticResource HamburgerMenuItemRevealStyle}"
                                             Glyph="&#xE125;" GroupName="menu"/>
 
             </StackPanel>
@@ -59,9 +65,11 @@
             </StackPanel.ChildrenTransitions>
 
             <controls:HamburgerMenuItemButton Content="{Binding Source={StaticResource Localized}, Path=[SignInMenu]}"
+                                              controlsfcu:Style="{StaticResource HamburgerMenuItemButtonRevealStyle}"
                                               Glyph="&#xE1E2;"/>
 
             <controls:HamburgerMenuItem Content="{Binding Source={StaticResource Localized}, Path=[SettingsMenu]}"
+                                        controlsfcu:Style="{StaticResource HamburgerMenuItemRevealStyle}"
                                         Glyph="&#xE115;" GroupName="menu"/>
 
         </StackPanel>

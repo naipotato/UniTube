@@ -6,6 +6,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:UniTube.Views"
     xmlns:controls="using:UniTube.Controls"
+    xmlns:controlsfcu="using:UniTube.Controls?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)"
+    xmlns:fcu="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)"
+    xmlns:cu="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,5)"
     mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator}, Path=Master}">
 
     <Grid>
@@ -58,8 +61,8 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <Grid x:Name="BottomLayer" Background="{StaticResource MainColorBrush}" Margin="0 -24 0 0"
-              RequestedTheme="Dark">
+        <Grid x:Name="BottomLayer" cu:Background="{StaticResource MainColorBrush}" Margin="0 -24 0 0"
+              RequestedTheme="Dark" fcu:Background="{StaticResource MainColorAcrylicBrush}">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="24"/>
@@ -105,23 +108,24 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Button x:Name="PaneToggleButton" Style="{StaticResource IconButtonStyle}" Content="&#xE700;"
-                        Command="{Binding OpenClosePaneCommand}"/>
+                <Button x:Name="PaneToggleButton" cu:Style="{StaticResource IconButtonStyle}" cu:Content="&#xE700;"
+                        fcu:Style="{StaticResource PaneToggleButtonStyle}" Command="{Binding OpenClosePaneCommand}"/>
 
                 <TextBlock x:Name="TitlePage" Text="Home" Grid.Column="1" FontSize="20" FontWeight="SemiBold"
                            VerticalAlignment="Center" Margin="10 0 0 0"/>
 
-                <Button x:Name="UploadButton" Style="{StaticResource IconButtonStyle}" Content="&#xE11C;"
-                        Grid.Column="3"/>
+                <Button x:Name="UploadButton" cu:Style="{StaticResource IconButtonStyle}" Content="&#xE11C;"
+                        Grid.Column="3" fcu:Style="{StaticResource IconButtonRevealStyle}"/>
 
-                <Button x:Name="SearchButton" Style="{StaticResource IconButtonStyle}" Content="&#xE094;"
-                        Grid.Column="4"/>
+                <Button x:Name="SearchButton" cu:Style="{StaticResource IconButtonStyle}" Content="&#xE094;"
+                        Grid.Column="4" fcu:Style="{StaticResource IconButtonRevealStyle}"/>
 
             </Grid>
 
         </Grid>
 
-        <controls:HamburgerMenu Grid.Row="1" IsPaneOpen="{Binding IsPaneOpen, Mode=TwoWay}">
+        <controls:HamburgerMenu Grid.Row="1" IsPaneOpen="{Binding IsPaneOpen, Mode=TwoWay}"
+                                controlsfcu:Style="{StaticResource HamburgerMenuFluentStyle}">
             
             <controls:HamburgerMenu.Pane>
                 <views:MenuPage/>
