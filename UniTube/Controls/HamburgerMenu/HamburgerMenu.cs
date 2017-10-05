@@ -76,15 +76,6 @@ namespace UniTube.Controls
 
         private void OnIsPaneOpenChanged(bool newValue)
         {
-            if (newValue && DisplayMode != HamburgerMenuDisplayMode.Expanded)
-            {
-                ElementSoundPlayer.Play(ElementSoundKind.MoveNext);
-            }
-            else if (DisplayMode != HamburgerMenuDisplayMode.Expanded)
-            {
-                ElementSoundPlayer.Play(ElementSoundKind.MovePrevious);
-            }
-
             UpdateDisplayMode(DisplayMode, newValue);
         }
 
