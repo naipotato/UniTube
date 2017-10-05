@@ -53,5 +53,16 @@ namespace UniTube.Views
         {
             TitleBar.Visibility = sender.IsVisible ? Visibility.Visible : Visibility.Collapsed;
         }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            SearchBoxVisibleState.IsActive = true;
+            SearchBox.Focus(FocusState.Programmatic);
+        }
+
+        private void SearchBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            SearchBoxVisibleState.IsActive = false;
+        }
     }
 }
