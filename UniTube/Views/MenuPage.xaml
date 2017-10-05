@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:UniTube.Controls"
     xmlns:controlsfcu="using:UniTube.Controls?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)"
-    mc:Ignorable="d">
+    mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator}, Path=Master}">
 
     <Grid>
         
@@ -37,7 +37,7 @@
 
                 <controls:HamburgerMenuItem Content="{Binding Source={StaticResource Localized}, Path=[LikedMenu]}"
                                             controlsfcu:Style="{StaticResource HamburgerMenuItemRevealStyle}"
-                                            Glyph="&#xE19F;" GroupName="menu"/>
+                                            Glyph="&#xE19F;" GroupName="menu" Visibility="{Binding IsLoggedIn}"/>
 
                 <controls:HamburgerMenuItem Content="{Binding Source={StaticResource Localized}, Path=[SavedMenu]}"
                                             controlsfcu:Style="{StaticResource HamburgerMenuItemRevealStyle}"
@@ -51,7 +51,7 @@
 
                 <controls:HamburgerMenuItem Content="{Binding Source={StaticResource Localized}, Path=[SubscribedMenu]}"
                                             controlsfcu:Style="{StaticResource HamburgerMenuItemRevealStyle}"
-                                            Glyph="&#xE125;" GroupName="menu"/>
+                                            Glyph="&#xE125;" GroupName="menu" Visibility="{Binding IsLoggedIn}"/>
 
             </StackPanel>
         </ScrollViewer>

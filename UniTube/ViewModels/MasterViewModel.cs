@@ -2,12 +2,14 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using Windows.Storage;
 
 namespace UniTube.ViewModels
 {
     public class MasterViewModel : INotifyPropertyChanged
     {
         private bool _isPaneOpen;
+        private bool _isLoggedIn;
 
         public bool IsPaneOpen
         {
@@ -22,9 +24,27 @@ namespace UniTube.ViewModels
             }
         }
 
+        public bool IsLoggedIn
+        {
+            get { return _isLoggedIn; }
+            set
+            {
+                if (_isLoggedIn != value)
+                {
+                    _isLoggedIn = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public ICommand OpenClosePaneCommand
         {
             get { return new RelayCommand(OpenClosePane); }
+        }
+
+        public MasterViewModel()
+        {
+            IsLoggedIn = ApplicationData.Current.RoamingSettings.Values.ContainsKey("RefreshToken");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
