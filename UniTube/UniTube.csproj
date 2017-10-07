@@ -99,6 +99,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Toolbar\Toolbar.cs" />
+    <Compile Include="Controls\Toolbar\Toolbar.Properties.cs" />
+    <Compile Include="Controls\Toolbar\ToolbarButton.cs" />
+    <Compile Include="Controls\Toolbar\ToolbarMode.cs" />
+    <Compile Include="Controls\Toolbar\IToolbarElement.cs" />
     <Compile Include="Controls\DropShadowPanel\DropShadowPanel.cs" />
     <Compile Include="Controls\DropShadowPanel\DropShadowPanel.Properties.cs" />
     <Compile Include="Controls\HamburgerMenu\HamburgerMenuItemButton.cs" />
@@ -225,6 +230,11 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\Toolbar\Toolbar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
     <Page Include="Controls\DropShadowPanel\DropShadowPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

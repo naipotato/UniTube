@@ -5,6 +5,7 @@
         <ResourceDictionary Source="Loading/Loading.xaml"/>
         <ResourceDictionary Source="HamburgerMenu/HamburgerMenu.xaml"/>
         <ResourceDictionary Source="DropShadowPanel/DropShadowPanel.xaml"/>
+        <ResourceDictionary Source="Toolbar/Toolbar.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     
 </ResourceDictionary>

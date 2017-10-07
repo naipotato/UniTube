@@ -19,7 +19,6 @@
         </Grid.RowDefinitions>
 
         <VisualStateManager.VisualStateGroups>
-            
             <VisualStateGroup>
 
                 <VisualState x:Name="Small">
@@ -27,63 +26,32 @@
                         <AdaptiveTrigger MinWindowWidth="0"/>
                     </VisualState.StateTriggers>
                 </VisualState>
-                
+
                 <VisualState x:Name="Medium">
-                    
+
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="641"/>
                     </VisualState.StateTriggers>
-                    
+
                     <VisualState.Setters>
                         <Setter Target="TitlePage.Visibility" Value="Collapsed"/>
-                        <Setter Target="SearchButton.Visibility" Value="Collapsed"/>
-                        <Setter Target="SearchBox.Visibility" Value="Visible"/>
                     </VisualState.Setters>
-                    
+
                 </VisualState>
 
                 <VisualState x:Name="Large">
-                    
+
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="1008"/>
                     </VisualState.StateTriggers>
-                    
-                    <VisualState.Setters>
-                        <Setter Target="TitlePage.Visibility" Value="Collapsed"/>
-                        <Setter Target="SearchButton.Visibility" Value="Collapsed"/>
-                        <Setter Target="SearchBox.Visibility" Value="Visible"/>
-                    </VisualState.Setters>
-                    
-                </VisualState>
-                
-            </VisualStateGroup>
-
-            <VisualStateGroup x:Name="SearchBoxStates">
-
-                <VisualState x:Name="Visible">
-
-                    <VisualState.StateTriggers>
-                        <StateTrigger x:Name="SearchBoxVisibleState"/>
-                    </VisualState.StateTriggers>
 
                     <VisualState.Setters>
-                        <Setter Target="SearchBox.Visibility" Value="Visible"/>
-                        <Setter Target="SearchButton.Visibility" Value="Collapsed"/>
-                        <Setter Target="UploadButton.Visibility" Value="Collapsed"/>
                         <Setter Target="TitlePage.Visibility" Value="Collapsed"/>
-                        <Setter Target="SearchColumn.Width" Value="*"/>
-                        <Setter Target="SearchBox.Margin" Value="10 0"/>
-                        <Setter Target="SearchBox.HorizontalAlignment" Value="Stretch"/>
-                        <Setter Target="TitleColumn.Width" Value="Auto"/>
-                        <Setter Target="SearchBox.Width" Value="Auto"/>
                     </VisualState.Setters>
 
                 </VisualState>
 
-                <VisualState x:Name="Collapsed"/>
-
             </VisualStateGroup>
-            
         </VisualStateManager.VisualStateGroups>
 
         <Grid x:Name="BottomLayer" cu:Background="{StaticResource MainColorBrush}" Margin="0 -24 0 0"
@@ -123,36 +91,33 @@
 
             </Grid>
 
-            <Grid x:Name="AppBar" Grid.Row="2">
+            <controls:Toolbar x:Name="Toolbar" Grid.Row="2" Content="Home"
+                              PaneToggleButtonCommand="{Binding OpenClosePaneCommand}">
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="48"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition x:Name="TitleColumn" Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition x:Name="SearchColumn" Width="Auto"/>
-                </Grid.ColumnDefinitions>
+                <controls:Toolbar.Actions>
+                    <controls:ToolbarButton x:Name="UploadButton" Content="&#xE11C;"
+                                            controlsfcu:Style="{StaticResource RevealToolbarButtonStyle}"/>
+                </controls:Toolbar.Actions>
 
-                <Button x:Name="PaneToggleButton" cu:Style="{StaticResource IconButtonStyle}" cu:Content="&#xE700;"
-                        fcu:Style="{StaticResource PaneToggleButtonStyle}" Command="{Binding OpenClosePaneCommand}"/>
-
-                <TextBlock x:Name="TitlePage" Text="Home" Grid.Column="1" FontSize="20" FontWeight="SemiBold"
-                           VerticalAlignment="Center" Margin="10 0 0 0"/>
-
-                <Button x:Name="UploadButton" cu:Style="{StaticResource IconButtonStyle}" Content="&#xE11C;"
-                        Grid.Column="3" fcu:Style="{StaticResource IconButtonRevealStyle}"/>
-
-                <Grid Grid.Column="4">
-                    <Button x:Name="SearchButton" cu:Style="{StaticResource IconButtonStyle}" Content="&#xE094;"
-                            Grid.Column="4" fcu:Style="{StaticResource IconButtonRevealStyle}"
-                            Click="SearchButton_Click"/>
+                <controls:Toolbar.AutoSuggestBox>
                     <AutoSuggestBox PlaceholderText="{Binding Source={StaticResource Localized}, Path=[SearchPlaceholder]}"
-                                    QueryIcon="Find" x:Name="SearchBox" Width="312" Height="40" Margin="0 0 10 0"
-                                    VerticalAlignment="Center" TextBoxStyle="{StaticResource SearchBarTextBoxStyle}"
-                                    LostFocus="SearchBox_LostFocus" Visibility="Collapsed"/>
-                </Grid>
+                                    QueryIcon="Find" Height="40" VerticalAlignment="Center"
+                                    TextBoxStyle="{StaticResource SearchBarTextBoxStyle}"/>
+                </controls:Toolbar.AutoSuggestBox>
 
-            </Grid>
+                <controls:Toolbar.ContentTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" FontSize="20" FontWeight="SemiBold"/>
+                    </DataTemplate>
+                </controls:Toolbar.ContentTemplate>
+
+                <controlsfcu:Toolbar.PaneToggleButtonStyle>
+                    <Style TargetType="controls:ToolbarButton" BasedOn="{StaticResource RevealToolbarButtonStyle}">
+                        <Setter Property="Content" Value="&#xE700;"/>
+                    </Style>
+                </controlsfcu:Toolbar.PaneToggleButtonStyle>
+
+            </controls:Toolbar>
 
         </Grid>
 

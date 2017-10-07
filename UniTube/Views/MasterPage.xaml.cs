@@ -1,4 +1,5 @@
 ﻿using Windows.ApplicationModel.Core;
+using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
@@ -52,17 +53,6 @@ namespace UniTube.Views
         private void CoreTitleBar_IsVisibleChanged(CoreApplicationViewTitleBar sender, object args)
         {
             TitleBar.Visibility = sender.IsVisible ? Visibility.Visible : Visibility.Collapsed;
-        }
-
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
-        {
-            SearchBoxVisibleState.IsActive = true;
-            SearchBox.Focus(FocusState.Programmatic);
-        }
-
-        private void SearchBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            SearchBoxVisibleState.IsActive = false;
         }
     }
 }
