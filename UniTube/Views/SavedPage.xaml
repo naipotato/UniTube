@@ -5,6 +5,11 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d">
 
+    <Page.DataContext>
+        <Binding Path="SavedViewModel"
+                 Source="{StaticResource Locator}" />
+    </Page.DataContext>
+    
     <Grid>
         <StackPanel VerticalAlignment="Center"
                     HorizontalAlignment="Center"
