@@ -128,6 +128,7 @@
       <DependentUpon>WhatsNewDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Json.cs" />
+    <Compile Include="Helpers\ListViewBehaviour.cs" />
     <Compile Include="Helpers\SettingsStorageExtensions.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
