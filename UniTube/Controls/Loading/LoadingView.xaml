@@ -3,29 +3,32 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:UniTube.Controls">
 
-    <Style TargetType="local:Loading">
-        <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundAltMediumBrush}"/>
+    <Style TargetType="local:LoadingView">
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="LoadingBackground" Value="{ThemeResource SystemControlBackgroundAltMediumBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="local:Loading">
+                <ControlTemplate TargetType="local:LoadingView">
                     <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="ActiveStates">
                                 <VisualStateGroup.Transitions>
-                                    <VisualTransition From="Active" To="Inactive">
+                                    <VisualTransition From="Loading" To="NotLoading">
                                         <Storyboard>
-                                            <DoubleAnimation Duration="0:0:0.2" From="1" To="0" Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Opacity"/>
+                                            <DoubleAnimation Duration="0:0:0.2" From="1" To="0" Storyboard.TargetName="LoadingGrid" Storyboard.TargetProperty="Opacity"/>
                                         </Storyboard>
                                     </VisualTransition>
-                                    <VisualTransition From="Inactive" To="Active">
+                                    <VisualTransition From="NotLoading" To="Loading">
                                         <Storyboard>
-                                            <DoubleAnimation Duration="0:0:0.2" From="0" To="1" Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Opacity"/>
+                                            <DoubleAnimation Duration="0:0:0.2" From="0" To="1" Storyboard.TargetName="LoadingGrid" Storyboard.TargetProperty="Opacity"/>
                                         </Storyboard>
                                     </VisualTransition>
                                 </VisualStateGroup.Transitions>
-                                <VisualState x:Name="Active">
+                                <VisualState x:Name="Loading">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Visibility">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoadingGrid" Storyboard.TargetProperty="Visibility">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="progressRing" Storyboard.TargetProperty="IsActive">
@@ -33,9 +36,9 @@
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
-                                <VisualState x:Name="Inactive">
+                                <VisualState x:Name="NotLoading">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Visibility">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoadingGrid" Storyboard.TargetProperty="Visibility">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="progressRing" Storyboard.TargetProperty="IsActive">
@@ -45,7 +48,10 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <ProgressRing x:Name="progressRing" IsActive="True" Height="48" Width="48" Foreground="{TemplateBinding Foreground}"/>
+                        <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Margin="{TemplateBinding Padding}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        <Grid x:Name="LoadingGrid" Background="{TemplateBinding LoadingBackground}">
+                            <ProgressRing x:Name="progressRing" IsActive="True" Height="48" Width="48" Foreground="{TemplateBinding RingForeground}"/>
+                        </Grid>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
