@@ -18,9 +18,7 @@ namespace UniTube.Services
             var lastVersion = await ApplicationData.Current.LocalSettings.ReadAsync<string>(nameof(currentVersion));
 
             if (lastVersion == null)
-            {
                 await ApplicationData.Current.LocalSettings.SaveAsync(nameof(currentVersion), currentVersion);
-            }
             else
             {
                 if (currentVersion != lastVersion)
@@ -34,8 +32,6 @@ namespace UniTube.Services
         }
 
         private static string PackageVersionToReadableString(PackageVersion packageVersion)
-        {
-            return $"{packageVersion.Major}.{packageVersion.Minor}.{packageVersion.Build}.{packageVersion.Revision}";
-        }
+            => $"{packageVersion.Major}.{packageVersion.Minor}.{packageVersion.Build}.{packageVersion.Revision}";
     }
 }
