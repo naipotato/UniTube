@@ -11,10 +11,7 @@ namespace UniTube.Helpers
     {
         private const string FileExtension = ".json";
 
-        public static bool IsRoamingStorageAvailable(this ApplicationData appData)
-        {
-            return appData.RoamingStorageQuota == 0;
-        }
+        public static bool IsRoamingStorageAvailable(this ApplicationData appData) => appData.RoamingStorageQuota == 0;
 
         public static async Task SaveAsync<T>(this StorageFolder folder, string name, T content)
         {
@@ -26,10 +23,7 @@ namespace UniTube.Helpers
 
         public static async Task<T> ReadAsync<T>(this StorageFolder folder, string name)
         {
-            if (!File.Exists(Path.Combine(folder.Path, GetFileName(name))))
-            {
-                return default(T);
-            }
+            if (!File.Exists(Path.Combine(folder.Path, GetFileName(name)))) return default(T);
 
             var file = await folder.GetFileAsync($"{name}.json");
             var fileContent = await FileIO.ReadTextAsync(file);
@@ -37,17 +31,11 @@ namespace UniTube.Helpers
             return await Json.ToObjectAsync<T>(fileContent);
         }
 
-        public static async Task SaveAsync<T>(this ApplicationDataContainer settings, string key, T value)
-        {
-            settings.Values[key] = await Json.StringifyAsync(value);
-        }
+        public static async Task SaveAsync<T>(this ApplicationDataContainer settings, string key, T value) => settings.Values[key] = await Json.StringifyAsync(value);
 
         public static async Task<T> ReadAsync<T>(this ApplicationDataContainer settings, string key)
         {
-            if (settings.Values.TryGetValue(key, out object obj))
-            {
-                return await Json.ToObjectAsync<T>((string)obj);
-            }
+            if (settings.Values.TryGetValue(key, out object obj)) return await Json.ToObjectAsync<T>((string)obj);
 
             return default(T);
         }
@@ -55,14 +43,10 @@ namespace UniTube.Helpers
         public static async Task<StorageFile> SaveFileAsync(this StorageFolder folder, byte[] content, string fileName, CreationCollisionOption options = CreationCollisionOption.ReplaceExisting)
         {
             if (content == null)
-            {
                 throw new ArgumentNullException("content");
-            }
 
             if (string.IsNullOrEmpty(fileName))
-            {
                 throw new ArgumentException("File name is null or empty. Specify a valid file name", "fileName");
-            }
 
             var storageFile = await folder.CreateFileAsync(fileName, options);
             await FileIO.WriteBytesAsync(storageFile, content);
@@ -76,7 +60,7 @@ namespace UniTube.Helpers
             if ((item != null) && item.IsOfType(StorageItemTypes.File))
             {
                 var storageFile = await folder.GetFileAsync(fileName);
-                byte[] content = await storageFile.ReadBytesAsync();
+                var content = await storageFile.ReadBytesAsync();
                 return content;
             }
 
@@ -102,9 +86,6 @@ namespace UniTube.Helpers
             return null;
         }
 
-        private static string GetFileName(string name)
-        {
-            return string.Concat(name, FileExtension);
-        }
+        private static string GetFileName(string name) => string.Concat(name, FileExtension);
     }
 }
