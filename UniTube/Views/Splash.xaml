@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="UniTube.Views.Splash"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+
+    <Grid Background="#D32F2F">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="180" />
+        </Grid.RowDefinitions>
+
+        <Canvas>
+            <Image x:Name="extendedSplashImage"
+                   Source="ms-appx:///Assets/SplashScreen/SplashScreen.png" />
+        </Canvas>
+        
+        <ProgressRing x:Name="splashProgressRing"
+                      IsActive="True"
+                      Width="48"
+                      Height="48"
+                      Grid.Row="1"
+                      VerticalAlignment="Top"
+                      Foreground="White" />
+        
+    </Grid>
+    
+</UserControl>
