@@ -3,5 +3,6 @@
     enum Pages
     {
         Master,
+        Settings,
     }
 }

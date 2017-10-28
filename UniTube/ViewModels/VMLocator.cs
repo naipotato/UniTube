@@ -7,5 +7,8 @@
         public MasterViewModel MasterViewModel =>
             _masterViewModel ?? (_masterViewModel = new MasterViewModel());
 
+        private SettingsViewModel _settingsViewModel;
+        public SettingsViewModel SettingsViewModel =>
+            _settingsViewModel ?? (_settingsViewModel = new SettingsViewModel());
     }
 }

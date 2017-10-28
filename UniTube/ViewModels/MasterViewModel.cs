@@ -145,6 +145,11 @@ namespace UniTube.ViewModels
 
         private void UpdatePageTitle(string obj)
         {
+            switch (obj)
+            {
+                case "SettingsPage":
+                    PageTitle = "Settings";
+                    break;
             }
         }
         #endregion
