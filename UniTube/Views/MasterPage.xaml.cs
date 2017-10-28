@@ -1,38 +1,34 @@
-﻿using Windows.ApplicationModel.Core;
-using Windows.Foundation;
+﻿using UniTube.ViewModels;
+
+using Windows.ApplicationModel.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
-
-// La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace UniTube.Views
 {
-    /// <summary>
-    /// Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
-    /// </summary>
     public sealed partial class MasterPage : Page
     {
+        private MasterViewModel ViewModel => (DataContext as MasterViewModel);
+
         public MasterPage()
         {
             InitializeComponent();
+            NavigationCacheMode = NavigationCacheMode.Required;
+            Loaded += OnMasterPageLoaded;
         }
+
+        private void OnMasterPageLoaded(object sender, RoutedEventArgs e)
+            => ViewModel.MasterNavigationService = HamburgerMenu.NavigationService;
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            ConnectedAnimation topLayerAnimation = ConnectedAnimationService.GetForCurrentView().GetAnimation("topLayer");
-            if (topLayerAnimation != null)
-            {
-                topLayerAnimation.TryStart(TopLayer);
-            }
-
             var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             Window.Current.SetTitleBar(MainTitleBar);
-            coreTitleBar.IsVisibleChanged += CoreTitleBar_IsVisibleChanged;
-            coreTitleBar.LayoutMetricsChanged += CoreTitleBar_LayoutMetricsChanged;
+            coreTitleBar.IsVisibleChanged += OnCoreTitleBarIsVisibleChanged;
+            coreTitleBar.LayoutMetricsChanged += OnCoreTitleBarLayoutMetricsChanged;
             TitleBar.Height = coreTitleBar.Height;
         }
 
@@ -41,18 +37,14 @@ namespace UniTube.Views
             base.OnNavigatingFrom(e);
 
             var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-            coreTitleBar.IsVisibleChanged -= CoreTitleBar_IsVisibleChanged;
-            coreTitleBar.LayoutMetricsChanged -= CoreTitleBar_LayoutMetricsChanged;
+            coreTitleBar.IsVisibleChanged -= OnCoreTitleBarIsVisibleChanged;
+            coreTitleBar.LayoutMetricsChanged -= OnCoreTitleBarLayoutMetricsChanged;
         }
 
-        private void CoreTitleBar_LayoutMetricsChanged(CoreApplicationViewTitleBar sender, object args)
-        {
-            TitleBar.Height = sender.Height;
-        }
+        private void OnCoreTitleBarLayoutMetricsChanged(CoreApplicationViewTitleBar sender, object args)
+            => TitleBar.Height = sender.Height;
 
-        private void CoreTitleBar_IsVisibleChanged(CoreApplicationViewTitleBar sender, object args)
-        {
-            TitleBar.Visibility = sender.IsVisible ? Visibility.Visible : Visibility.Collapsed;
-        }
+        private void OnCoreTitleBarIsVisibleChanged(CoreApplicationViewTitleBar sender, object args)
+            => TitleBar.Visibility = sender.IsVisible ? Visibility.Visible : Visibility.Collapsed;
     }
 }
