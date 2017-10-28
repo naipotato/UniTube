@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5" IgnorableNamespaces="uap mp uap5">
   <Identity Name="17542NahuelGomezCastro.UniTube" Publisher="CN=C2FF9EFA-BAA6-4DB2-A031-439014A0F01E" Version="1.2.0.0" />
   <mp:PhoneIdentity PhoneProductId="a3678f2b-bac1-4700-9459-ccd147373438" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
@@ -23,7 +23,7 @@
             <uap:ShowOn Tile="square310x310Logo" />
           </uap:ShowNameOnTiles>
         </uap:DefaultTile>
-        <uap:SplashScreen Image="Assets\SplashScreen\SplashScreen.png" BackgroundColor="#D32F2F" />
+        <uap:SplashScreen Image="Assets\SplashScreen\SplashScreen.png" BackgroundColor="#D32F2F" uap5:Optional="true" />
       </uap:VisualElements>
       <Extensions>
         <Extension Category="windows.backgroundTasks" EntryPoint="UniTube.Tasks.LiveTileTask">
