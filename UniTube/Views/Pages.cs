@@ -2,7 +2,9 @@
 {
     enum Pages
     {
+        History,
         Master,
+        Saved,
         Settings,
     }
 }

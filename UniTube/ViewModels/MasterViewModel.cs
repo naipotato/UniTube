@@ -147,6 +147,12 @@ namespace UniTube.ViewModels
         {
             switch (obj)
             {
+                case "HistoryPage":
+                    PageTitle = "History";
+                    break;
+                case "SavedPage":
+                    PageTitle = "Saved";
+                    break;
                 case "SettingsPage":
                     PageTitle = "Settings";
                     break;

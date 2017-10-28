@@ -73,7 +73,9 @@ namespace UniTube
         public override async Task OnInitializeAsync(IActivatedEventArgs args)
         {
             var keys = PageKeys<Pages>();
+            keys.TryAdd(Pages.History, typeof(HistoryPage));
             keys.TryAdd(Pages.Master, typeof(MasterPage));
+            keys.TryAdd(Pages.Saved, typeof(SavedPage));
             keys.TryAdd(Pages.Settings, typeof(SettingsPage));
 
             CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
