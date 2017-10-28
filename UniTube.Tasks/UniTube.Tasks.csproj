@@ -11,7 +11,7 @@
     <AssemblyName>UniTube.Tasks</AssemblyName>
     <DefaultLanguage>es-ES</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.16278.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.16299.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -113,12 +113,12 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>5.4.0</Version>
+      <Version>6.0.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UniTube.Core\UniTube.Core.csproj">
-      <Project>{C2BC89FD-262B-475A-8CCA-ED591A44A7AF}</Project>
+      <Project>{c2bc89fd-262b-475a-8cca-ed591a44a7af}</Project>
       <Name>UniTube.Core</Name>
     </ProjectReference>
   </ItemGroup>

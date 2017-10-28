@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 
 using UniTube.Core;
 using UniTube.Core.Requests;
+using UniTube.Core.Resources;
 
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Background;
-using Windows.ApplicationModel.Core;
 using Windows.Data.Xml.Dom;
+using Windows.System.UserProfile;
 using Windows.UI.Notifications;
 using Windows.UI.StartScreen;
 
@@ -19,12 +20,12 @@ namespace UniTube.Tasks
     {
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
-            BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
+            var deferral = taskInstance.GetDeferral();
 
-            AppListEntry entry = (await Package.Current.GetAppListEntriesAsync())[0];
+            var entry = (await Package.Current.GetAppListEntriesAsync())[0];
 
-            bool isSupported = StartScreenManager.GetDefault().SupportsAppListEntry(entry);
-            bool isPinned = await StartScreenManager.GetDefault().ContainsAppListEntryAsync(entry);
+            var isSupported = StartScreenManager.GetDefault().SupportsAppListEntry(entry);
+            var isPinned = await StartScreenManager.GetDefault().ContainsAppListEntryAsync(entry);
 
             if (isSupported && isPinned)
             {
@@ -41,24 +42,21 @@ namespace UniTube.Tasks
 
         private static async Task<List<TileVideoUpdate>> GetTrendingList()
         {
-            List<TileVideoUpdate> trending = new List<TileVideoUpdate>();
+            var trending = new List<TileVideoUpdate>();
 
             try
             {
-                VideoListRequest videoListRequest = new VideoListRequest
-                {
-                    Part = "snippet",
-                    Chart = "mostPopular",
-                    MaxResults = 5,
-                    RegionCode = Windows.System.UserProfile.GlobalizationPreferences.HomeGeographicRegion,
-                    Key = Client.ApiKey,
-                    Fields = "items/snippet(title,channelTitle,channelId,thumbnails/high/url)"
-                };
+                var videoListRequest = Video.List("snippet");
+                videoListRequest.Chart = VideoListRequest.ChartEnum.MostPopular;
+                videoListRequest.MaxResults = 5;
+                videoListRequest.RegionCode = GlobalizationPreferences.HomeGeographicRegion;
+                videoListRequest.Key = Client.ApiKey;
+                videoListRequest.Fields = "items/snippet(title,channelTitle,channelId,thumbnails/high/url)";
 
-                var videoListResponse = await videoListRequest.ExecuteAsync();
-
-                if (videoListResponse != null)
+                try
                 {
+                    var videoListResponse = await videoListRequest.ExecuteAsync();
+
                     foreach (var item in videoListResponse.Items)
                     {
                         var tileVideoUpdate = new TileVideoUpdate
@@ -68,21 +66,23 @@ namespace UniTube.Tasks
                             Title = item.Snippet.Title
                         };
 
-                        ChannelListRequest channelListRequest = new ChannelListRequest
+                        var channelListRequest = Channel.List("snippet");
+                        channelListRequest.Id = item.Snippet.ChannelId;
+                        channelListRequest.Fields = "items/snippet/thumbnails/high/url";
+                        channelListRequest.Key = Client.ApiKey;
+
+                        try
                         {
-                            Part = "snippet",
-                            Id = item.Snippet.ChannelId,
-                            Fields = "items/snippet/thumbnails/high/url",
-                            Key = Client.ApiKey
-                        };
+                            var channelListResponse = await channelListRequest.ExecuteAsync();
 
-                        var channelListResponse = await channelListRequest.ExecuteAsync();
+                            tileVideoUpdate.ProfilePicUrl = channelListResponse.Items[0].Snippet.Thumbnails.High.Url;
 
-                        tileVideoUpdate.ProfilePicUrl = channelListResponse != null ? channelListResponse.Items[0].Snippet.Thumbnails.High.Url : string.Empty;
-
-                        trending.Add(tileVideoUpdate);
+                            trending.Add(tileVideoUpdate);
+                        }
+                        catch { }
                     }
                 }
+                catch { }
             }
             catch (Exception ex)
             {
