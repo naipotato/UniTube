@@ -21,5 +21,9 @@
         private TrendingViewModel _trendingViewModel;
         public TrendingViewModel TrendingViewModel =>
             _trendingViewModel ?? (_trendingViewModel = new TrendingViewModel());
+
+        private VideoViewModel _videoViewModel;
+        public VideoViewModel VideoViewModel =>
+            _videoViewModel ?? (_videoViewModel = new VideoViewModel());
     }
 }

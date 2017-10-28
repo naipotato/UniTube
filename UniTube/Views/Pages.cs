@@ -9,5 +9,6 @@
         Search,
         Settings,
         Trending,
+        Video
     }
 }

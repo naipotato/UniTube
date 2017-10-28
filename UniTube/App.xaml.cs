@@ -80,6 +80,7 @@ namespace UniTube
             keys.TryAdd(Pages.Search, typeof(SearchPage));
             keys.TryAdd(Pages.Settings, typeof(SettingsPage));
             keys.TryAdd(Pages.Trending, typeof(TrendingPage));
+            keys.TryAdd(Pages.Video, typeof(VideoPage));
 
             CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
 
