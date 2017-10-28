@@ -9,7 +9,7 @@
         <Setter Property="IsPaneToggleButtonVisible" Value="True"/>
         <Setter Property="LargeModeThresholdWidth" Value="641"/>
         <Setter Property="MinHeight" Value="48"/>
-        <Setter Property="Padding" Value="10 0 0 0"/>
+        <Setter Property="Padding" Value="10 10.57 0 10.57"/>
         <Setter Property="PaneToggleButtonStyle">
             <Setter.Value>
                 <Style TargetType="local:ToolbarButton">
@@ -29,7 +29,7 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="local:ToolbarButton">
-                                <Grid x:Name="LayoutRoot" Width="{TemplateBinding MinWidth}" Height="{TemplateBinding MinHeight}" Margin="{TemplateBinding Padding}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                <Grid x:Name="LayoutRoot" MinWidth="{TemplateBinding MinWidth}" MinHeight="{TemplateBinding MinHeight}" Margin="{TemplateBinding Padding}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                                     <VisualStateManager.VisualStateGroups>
                                         <VisualStateGroup x:Name="CommonStates">
                                             <VisualState x:Name="Normal"/>
@@ -108,7 +108,7 @@
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="*"/>
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="AutoSuggestBoxPresenter">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="10 0"/>
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="10 4"/>
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="HorizontalAlignment" Storyboard.TargetName="AutoSuggestBoxPresenter">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="Stretch"/>
@@ -153,7 +153,7 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <local:ToolbarButton x:Name="PaneToggleButton" Style="{TemplateBinding PaneToggleButtonStyle}"/>
+                        <local:ToolbarButton x:Name="PaneToggleButton" Style="{TemplateBinding PaneToggleButtonStyle}" VerticalAlignment="Stretch"/>
                         <ContentPresenter x:Name="ContentPresenter" Grid.Column="1" ContentTransitions="{TemplateBinding ContentTransitions}" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}"/>
                         <ItemsControl x:Name="ActionItemsControl" Grid.Column="2" ItemsSource="{TemplateBinding Actions}">
                             <ItemsControl.ItemsPanel>
@@ -163,8 +163,8 @@
                             </ItemsControl.ItemsPanel>
                         </ItemsControl>
                         <Grid x:Name="AutoSuggestArea" Grid.Column="3">
-                            <ContentControl x:Name="AutoSuggestBoxPresenter" Margin="0 0 10 0" IsTabStop="False" Content="{TemplateBinding AutoSuggestBox}" Width="{TemplateBinding AutoSuggestBoxWidth}" HorizontalContentAlignment="Stretch" VerticalAlignment="Center"/>
-                            <local:ToolbarButton x:Name="AutoSuggestButton" Visibility="Collapsed" Style="{TemplateBinding PaneToggleButtonStyle}" Content="&#xE11A;"/>
+                            <ContentControl x:Name="AutoSuggestBoxPresenter" Margin="0 4 10 4" IsTabStop="False" Content="{TemplateBinding AutoSuggestBox}" Width="{TemplateBinding AutoSuggestBoxWidth}" HorizontalContentAlignment="Stretch" VerticalAlignment="Center"/>
+                            <local:ToolbarButton x:Name="AutoSuggestButton" Visibility="Collapsed" Style="{TemplateBinding PaneToggleButtonStyle}" Content="&#xE11A;" VerticalAlignment="Stretch"/>
                         </Grid>
                     </Grid>
                 </ControlTemplate>
