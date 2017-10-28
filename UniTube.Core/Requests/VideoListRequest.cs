@@ -1,81 +1,125 @@
-﻿using Newtonsoft.Json;
-
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-using UniTube.Core.Responses;
+using Newtonsoft.Json;
 
-using Windows.UI.Xaml.Controls;
+using UniTube.Core.Responses;
 
 namespace UniTube.Core.Requests
 {
-    public class VideoListRequest : Request
+    public class VideoListRequest : RequestBase<VideoListResponse>
     {
-        /// <summary>
-        /// Especifica una lista separada por comas de una o más propiedades de recursos de video que se incluirán en la respuesta de la API.
-        /// </summary>
-        public string Part { get; set; }
+        private string _part;
+
+        internal VideoListRequest(string part) => _part = part;
 
         /// <summary>
-        /// Identifica el gráfico que deseas recuperar.
+        /// Identifies the chart that you want to retrieve.
         /// </summary>
-        public string Chart { get; set; }
+        public ChartEnum? Chart { get; set; }
 
         /// <summary>
-        /// Especifica una lista separada por comas de ID de video de YouTube para los recursos que se están recuperando.
+        /// Specifies a comma-separated list of the YouTube video ID(s) for the resource(s) that are being retrieved.
         /// </summary>
         public string Id { get; set; }
 
         /// <summary>
-        /// Establece el valor de este parámetro en like o dislike para indicarle a la API que muestre solo videos calificados por el usuario autenticado con "Me gusta" o "No me gusta".
+        /// Set this parameter's value to <see cref="MyRatingEnum.Like"/> or <see cref="MyRatingEnum.Dislike"/> to
+        /// instruct the API to only return videos liked or disliked by the authenticated user.
         /// </summary>
-        public string MyRating { get; set; }
+        public MyRatingEnum? MyRating { get; set; }
 
         /// <summary>
-        /// Especifica el número máximo de elementos que se debe mostrar en el conjunto de resultados.
+        /// Instructs the API to retrieve localized resource metadata for a specific application language that the
+        /// YouTube website supports.
+        /// </summary>
+        public string Hl { get; set; }
+
+        /// <summary>
+        /// Specifies the maximum height of the embedded player returned in the
+        /// <see cref="Resources.Video.Player.EmbedHtml"/> property.
+        /// </summary>
+        public uint? MaxHeight { get; set; }
+
+        /// <summary>
+        /// Specifies the maximum number of items that should be returned in the result set.
         /// </summary>
         public uint? MaxResults { get; set; }
 
         /// <summary>
-        /// Indica que las credenciales de autorización de la solicitud identifican a un usuario de CMS de YouTube que actúa en nombre del propietario de contenido especificado en el valor del parámetro.
+        /// Specifies the maximum width of the embedded player returned in the
+        /// <see cref="Resources.Video.Player.EmbedHtml"/> property.
+        /// </summary>
+        public uint? MaxWidth { get; set; }
+
+        /// <summary>
+        /// Indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf
+        /// of the content owner specified in the parameter value.
         /// </summary>
         public string OnBehalfOfContentOwner { get; set; }
 
         /// <summary>
-        /// Identifica una página específica en el conjunto de resultados que se debe mostrar. 
+        /// Identifies a specific page in the result set that should be returned.
         /// </summary>
         public string PageToken { get; set; }
 
         /// <summary>
-        /// Indica a la API que seleccione un gráfico de video disponible en la región especificada.
+        /// Instructs the API to select a video chart available in the specified region.
         /// </summary>
         public string RegionCode { get; set; }
 
         /// <summary>
-        /// Identifica la categoría de video para la cual se debe recuperar el gráfico.
+        /// Identifies the video category for which the chart should be retrieved.
         /// </summary>
         public string VideoCategoryId { get; set; }
 
-        public async Task<VideoListResponse> ExecuteAsync(ContentDialog errorHttpDialog = null)
+        public override bool Equals(object obj)
         {
-            string parameters = Part != null ? "part=" + Part + "&" : "";
-            parameters += Chart != null ? "chart=" + Chart + "&" : "";
-            parameters += Id != null ? "id=" + Id + "&" : "";
-            parameters += MyRating != null ? "myRating=" + MyRating + "&" : "";
-            parameters += MaxResults != null ? "maxResults=" + MaxResults + "&" : "";
-            parameters += OnBehalfOfContentOwner != null ? "onBehalfOfContentOwner=" + OnBehalfOfContentOwner + "&" : "";
-            parameters += PageToken != null ? "pageToken=" + PageToken + "&" : "";
-            parameters += RegionCode != null ? "regionCode=" + RegionCode + "&" : "";
-            parameters += VideoCategoryId != null ? "videoCategoryId=" + VideoCategoryId + "&" : "";
-            parameters += Access_Token != null ? "access_token=" + Access_Token + "&" : "";
-            parameters += Callback != null ? "callback=" + Callback + "&" : "";
-            parameters += Fields != null ? "fields=" + Fields + "&" : "";
-            parameters += Key != null ? "key=" + Key + "&" : "";
-            parameters += PrettyPrint != null ? "prettyPrint=" + PrettyPrint + "&" : "";
-            parameters += QuotaUser != null ? "quotaUser=" + QuotaUser + "&" : "";
-            parameters += UserIp != null ? "userIp=" + UserIp + "&" : "";
-            parameters = parameters.Remove(parameters.Length - 1);
+            var request = obj is VideoListRequest ? obj as VideoListRequest : null;
+            return request != null &&
+                   base.Equals(obj) &&
+                   _part == request._part &&
+                   EqualityComparer<ChartEnum?>.Default.Equals(Chart, request.Chart) &&
+                   Id == request.Id &&
+                   EqualityComparer<MyRatingEnum?>.Default.Equals(MyRating, request.MyRating) &&
+                   Hl == request.Hl &&
+                   EqualityComparer<uint?>.Default.Equals(MaxHeight, request.MaxHeight) &&
+                   EqualityComparer<uint?>.Default.Equals(MaxResults, request.MaxResults) &&
+                   EqualityComparer<uint?>.Default.Equals(MaxWidth, request.MaxWidth) &&
+                   OnBehalfOfContentOwner == request.OnBehalfOfContentOwner &&
+                   PageToken == request.PageToken &&
+                   RegionCode == request.RegionCode &&
+                   VideoCategoryId == request.VideoCategoryId;
+        }
+
+        public override async Task<VideoListResponse> ExecuteAsync()
+        {
+            var pairs = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("part", _part),
+                new KeyValuePair<string, string>("chart", Chart.ToString()),
+                new KeyValuePair<string, string>("id", Id),
+                new KeyValuePair<string, string>("myRating", MyRating.ToString()),
+                new KeyValuePair<string, string>("hl", Hl),
+                new KeyValuePair<string, string>("maxHeight", MaxHeight.ToString()),
+                new KeyValuePair<string, string>("maxResults", MaxResults.ToString()),
+                new KeyValuePair<string, string>("maxWidth", MaxWidth.ToString()),
+                new KeyValuePair<string, string>("onBehalfOfContentOwner", OnBehalfOfContentOwner),
+                new KeyValuePair<string, string>("pageToken", PageToken),
+                new KeyValuePair<string, string>("regionCode", RegionCode),
+                new KeyValuePair<string, string>("videoCategoryId", VideoCategoryId),
+                new KeyValuePair<string, string>("access_token", Access_Token),
+                new KeyValuePair<string, string>("callback", Callback),
+                new KeyValuePair<string, string>("fields", Fields),
+                new KeyValuePair<string, string>("key", Key),
+                new KeyValuePair<string, string>("prettyPrint", PrettyPrint),
+                new KeyValuePair<string, string>("quotaUser", QuotaUser),
+                new KeyValuePair<string, string>("userIp", UserIp)
+            };
+
+            var parameters = JoinPairs(pairs);
 
             var httpClient = new HttpClient();
 
@@ -84,21 +128,57 @@ namespace UniTube.Core.Requests
                 var httpResponse = await httpClient.GetAsync($"https://www.googleapis.com/youtube/v3/videos?{parameters}");
                 if (httpResponse.IsSuccessStatusCode)
                 {
-                    string contentResponse = await httpResponse.Content.ReadAsStringAsync();
+                    var contentResponse = await httpResponse.Content.ReadAsStringAsync();
                     var videoListResponse = JsonConvert.DeserializeObject<VideoListResponse>(contentResponse);
                     return videoListResponse;
                 }
                 else
-                {
-                    await errorHttpDialog?.ShowAsync();
-                }
+                    throw new Exception($"Error {httpResponse.StatusCode}\n{httpResponse.ReasonPhrase}\n{await httpResponse.Content.ReadAsStringAsync()}");
             }
-            catch
+            catch (HttpRequestException ex)
             {
-                await errorHttpDialog?.ShowAsync();
+                throw new Exception("Exception while request", ex);
             }
+        }
 
-            return null;
+        public override int GetHashCode()
+        {
+            var hashCode = 1761685064;
+            hashCode = hashCode * -1521134295 + base.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(_part);
+            hashCode = hashCode * -1521134295 + EqualityComparer<ChartEnum?>.Default.GetHashCode(Chart);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Id);
+            hashCode = hashCode * -1521134295 + EqualityComparer<MyRatingEnum?>.Default.GetHashCode(MyRating);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Hl);
+            hashCode = hashCode * -1521134295 + EqualityComparer<uint?>.Default.GetHashCode(MaxHeight);
+            hashCode = hashCode * -1521134295 + EqualityComparer<uint?>.Default.GetHashCode(MaxResults);
+            hashCode = hashCode * -1521134295 + EqualityComparer<uint?>.Default.GetHashCode(MaxWidth);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(OnBehalfOfContentOwner);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(PageToken);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(RegionCode);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(VideoCategoryId);
+            return hashCode;
+        }
+
+        public enum ChartEnum
+        {
+            /// <summary>
+            /// Return the most popular videos for the specified content region and video category.
+            /// </summary>
+            MostPopular = 0
+        }
+
+        public enum MyRatingEnum
+        {
+            /// <summary>
+            /// Returns only videos disliked by the authenticated user.
+            /// </summary>
+            Dislike = 0,
+
+            /// <summary>
+            /// Returns only video liked by the authenticated user.
+            /// </summary>
+            Like = 1
         }
     }
 }
