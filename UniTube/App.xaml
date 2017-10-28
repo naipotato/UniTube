@@ -1,10 +1,11 @@
-﻿<Application
-    x:Class="UniTube.App"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:services="using:UniTube.Services"
-    xmlns:viewmodels="using:UniTube.ViewModels"
-    xmlns:fcu="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)">
+﻿<common:BootStrapper x:Class="UniTube.App"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:common="using:Template10.Common"
+                     xmlns:fcu="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)"
+                     xmlns:helpers="using:UniTube.Helpers"
+                     xmlns:services="using:UniTube.Services"
+                     xmlns:viewmodels="using:UniTube.ViewModels">
     <Application.Resources>
         <ResourceDictionary>
 
@@ -44,5 +45,4 @@
 
         </ResourceDictionary>
     </Application.Resources>
-
-</Application>
+</common:BootStrapper>

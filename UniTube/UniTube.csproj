@@ -148,6 +148,7 @@
     <Compile Include="Services\WhatsNewDisplayService.cs" />
     <Compile Include="ViewModels\MasterViewModel.cs" />
     <Compile Include="ViewModels\VMLocator.cs" />
+    <Compile Include="Views\Pages.cs" />
     <Compile Include="Views\Splash.xaml.cs">
       <DependentUpon>Splash.xaml</DependentUpon>
     </Compile>
@@ -301,6 +302,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Template10\Template10.csproj">
+      <Project>{8ab2ee57-9860-4f26-9ff4-5959fb7606dd}</Project>
+      <Name>Template10</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UniTube.Core\UniTube.Core.csproj">
       <Project>{c2bc89fd-262b-475a-8cca-ed591a44a7af}</Project>
       <Name>UniTube.Core</Name>

@@ -1,65 +1,87 @@
 ﻿using System;
+using System.Threading.Tasks;
+
+using Template10.Common;
+using Template10.Utils;
 
 using UniTube.Core.Authentication;
-using UniTube.Dialogs;
 using UniTube.Helpers;
-using UniTube.Services;
+using UniTube.Services.SettingsServices;
 using UniTube.Views;
 
-using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Background;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Metadata;
 using Windows.Graphics.Display;
-using Windows.Storage;
-using Windows.System.Profile;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Animation;
-using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Media;
 
 namespace UniTube
 {
-    sealed partial class App : Application
+    sealed partial class App : BootStrapper
     {
-        /// <summary>
-        /// Root frame of the app
-        /// </summary>
-        internal static Frame RootFrame { get; set; }
-
-        /// <summary>
-        /// Content frame of the app
-        /// </summary>
-        internal static Frame ContentFrame { get; set; }
-
-        /// <summary>
-        /// Contains info about the user's session.
-        /// </summary>
-        internal static AuthResponse AuthInfo { get; set; }
-
         public App()
         {
             InitializeComponent();
-            Suspending += OnSuspending;
-            Resuming += OnResuming;
+
+            ShowShellBackButton = false;
+            SplashFactory = (s) => new Splash(s);
+
+            var settings = SettingsService.Instance;
+            if (settings.AppTheme != ElementTheme.Default)
+            {
+                RequestedTheme = settings.AppTheme.ToApplicationTheme();
+            }
         }
 
-        protected override async void OnLaunched(LaunchActivatedEventArgs e)
+        private async void OnDisplayOrientationChanged(DisplayInformation sender, object args)
         {
-            ElementSoundPlayer.State = ElementSoundPlayerState.On; // I like so much this sounds
-            if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile")
+            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
             {
-                ElementSoundPlayer.Volume = 0.3; // They sounds very loud on mobile devices, believe me :s
+                if (sender.CurrentOrientation == DisplayOrientations.Landscape || sender.CurrentOrientation == DisplayOrientations.LandscapeFlipped)
+                {
+                    var statusBar = StatusBar.GetForCurrentView();
+                    if (statusBar != null)
+                    {
+                        await statusBar.HideAsync();
+                    }
+                }
+                else
+                {
+                    var statusBar = StatusBar.GetForCurrentView();
+                    if (statusBar != null)
+                    {
+                        await statusBar.ShowAsync();
+                    }
+                }
             }
+        }
+
+        public override UIElement CreateRootElement(IActivatedEventArgs e)
+        {
+            var navigationService = NavigationServiceFactory(BackButton.Attach, ExistingContent.Include);
+            return new Controls.LoadingView
+            {
+                Content = navigationService.Frame,
+                RingForeground = Resources["MainColorBrush"] as Brush
+            };
+        }
+
+        public override async Task OnInitializeAsync(IActivatedEventArgs args)
+        {
+            var keys = PageKeys<Pages>();
+            keys.TryAdd(Pages.Master, typeof(MasterPage));
 
             CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
 
+            var display = DisplayInformation.GetForCurrentView();
+            display.OrientationChanged += OnDisplayOrientationChanged;
+
             if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))
             {
-                var display = DisplayInformation.GetForCurrentView();
                 if (display.ScreenWidthInRawPixels >= 1152 && display.ScreenHeightInRawPixels >= 768)
                 {
                     ApplicationView.PreferredLaunchViewSize = new Size(1024, 675);
@@ -69,25 +91,27 @@ namespace UniTube
                 var titleBar = ApplicationView.GetForCurrentView().TitleBar;
                 if (titleBar != null)
                 {
-                    titleBar.BackgroundColor = "#00000000".ToColor();
-                    titleBar.ForegroundColor = "#FFFFFFFF".ToColor();
+                    titleBar.BackgroundColor = "#0000".ToColor();
+                    titleBar.ForegroundColor = "#FFF".ToColor();
 
-                    titleBar.InactiveBackgroundColor = "#00000000".ToColor();
-                    titleBar.InactiveForegroundColor = "#FFFFFFFF".ToColor();
+                    titleBar.InactiveBackgroundColor = "#0000".ToColor();
+                    titleBar.InactiveForegroundColor = "#FFF".ToColor();
 
-                    titleBar.ButtonBackgroundColor = "#00000000".ToColor();
-                    titleBar.ButtonForegroundColor = "#FFFFFFFF".ToColor();
+                    titleBar.ButtonBackgroundColor = "#0000".ToColor();
+                    titleBar.ButtonForegroundColor = "#FFF".ToColor();
 
                     titleBar.ButtonHoverBackgroundColor = "#19FFFFFF".ToColor();
-                    titleBar.ButtonHoverForegroundColor = "#FFFFFFFF".ToColor();
+                    titleBar.ButtonHoverForegroundColor = "#FFF".ToColor();
 
                     titleBar.ButtonPressedBackgroundColor = "#33FFFFFF".ToColor();
-                    titleBar.ButtonPressedForegroundColor = "#FFFFFFFF".ToColor();
+                    titleBar.ButtonPressedForegroundColor = "#FFF".ToColor();
 
-                    titleBar.ButtonInactiveBackgroundColor = "#00000000".ToColor();
-                    titleBar.ButtonInactiveForegroundColor = "#FFFFFFFF".ToColor();
+                    titleBar.ButtonInactiveBackgroundColor = "#0000".ToColor();
+                    titleBar.ButtonInactiveForegroundColor = "#FFF".ToColor();
                 }
             }
+
+            var statusBarHideTask = Task.CompletedTask;
 
             if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
             {
@@ -97,88 +121,23 @@ namespace UniTube
                     statusBar.BackgroundOpacity = 0;
 
                     statusBar.ForegroundColor = "#B2FFFFFF".ToColor();
-                }
-            }
 
-            #region To erase all previous data
-            try
-            {
-                await ApplicationData.Current.RoamingSettings.ReadAsync<bool>("initialized");
-            }
-            catch
-            {
-                await ApplicationData.Current.ClearAsync();
-            }
-            #endregion
-
-            RootFrame = Window.Current.Content as Frame;
-
-            if (RootFrame == null)
-            {
-                RootFrame = new Frame
-                {
-                    ContentTransitions = new TransitionCollection
+                    if (display.CurrentOrientation == DisplayOrientations.Landscape || display.CurrentOrientation == DisplayOrientations.LandscapeFlipped)
                     {
-                        new NavigationThemeTransition()
+                        statusBarHideTask = statusBar.HideAsync().AsTask();
                     }
-                };
-
-                RootFrame.NavigationFailed += OnNavigationFailed;
-
-                if (e.PreviousExecutionState != ApplicationExecutionState.Running)
-                {
-                    bool loadState = (e.PreviousExecutionState == ApplicationExecutionState.Terminated);
-                    ExtendedSplash extendedSplash = new ExtendedSplash(e.SplashScreen, loadState);
-                    RootFrame.Content = extendedSplash;
-                    Window.Current.Content = RootFrame;
                 }
             }
-
-            if (RootFrame.Content == null)
-            {
-                bool initialized = await ApplicationData.Current.RoamingSettings.ReadAsync<bool>("Initialized");
-                if (initialized)
-                {
-                    NavigationService.SetMainPage("MasterPage");
-                }
-                else
-                {
-                    NavigationService.SetMainPage("WelcomePage");
-                }
-            }
-            Window.Current.Activate();
 
             RegisterBackgroundTask();
+
+            await statusBarHideTask;
         }
 
-        private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+        public override Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
-        }
-
-        private async void OnSuspending(object sender, SuspendingEventArgs e)
-        {
-            var deferral = e.SuspendingOperation.GetDeferral();
-
-            if (RootFrame != null)
-            {
-                await ApplicationData.Current.LocalSettings.SaveAsync("LastRootPage", RootFrame.SourcePageType.Name);
-            }
-            if (ContentFrame != null)
-            {
-                await ApplicationData.Current.LocalSettings.SaveAsync("LastContentPage", ContentFrame.SourcePageType.Name);
-            }
-
-            deferral.Complete();
-        }
-
-        private async void OnResuming(object sender, object e)
-        {
-            string refreshToken = await ApplicationData.Current.RoamingSettings.ReadAsync<string>("RefreshToken");
-            if (!refreshToken.IsNullOrEmpty())
-            {
-                AuthInfo = await Authenticator.RefreshAccesTokenAsync(refreshToken, new ErrorHttpDialog());
-            }
+            NavigationService.Navigate(Pages.Master);
+            return Task.CompletedTask;
         }
 
         private void RegisterBackgroundTask()
