@@ -6,6 +6,7 @@
         Home,
         Master,
         Saved,
+        Search,
         Settings,
     }
 }

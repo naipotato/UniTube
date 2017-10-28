@@ -94,6 +94,15 @@ namespace UniTube.ViewModels
             
         }
 
+        private void LoseFocus(object sender)
+        {
+            var isTabStop = (sender as Control).IsTabStop;
+            (sender as Control).IsTabStop = false;
+            (sender as Control).IsEnabled = false;
+            (sender as Control).IsEnabled = true;
+            (sender as Control).IsTabStop = isTabStop;
+        }
+
         private bool MenuClickCommandCanExecute(string arg) => !arg.IsNullOrEmpty();
 
         private void MenuClick(string arg)
@@ -107,6 +116,8 @@ namespace UniTube.ViewModels
 
         public void Search(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
+            MasterNavigationService.Navigate(Pages.Search, args.QueryText, new DrillInNavigationTransitionInfo());
+            LoseFocus(sender);
         }
 
         public async void UpdateSuggestions(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
@@ -155,6 +166,9 @@ namespace UniTube.ViewModels
                     break;
                 case "SavedPage":
                     PageTitle = "Saved";
+                    break;
+                case "SearchPage":
+                    PageTitle = "Search";
                     break;
                 case "SettingsPage":
                     PageTitle = "Settings";
