@@ -1,9 +1,11 @@
-﻿namespace UniTube.Controls
+﻿using System;
+
+namespace UniTube.Controls
 {
     /// <summary>
     /// Provides data for the <see cref="HamburgerMenu.DisplayModeChanged"/> event.
     /// </summary>
-    public sealed class HamburgerMenuDisplayModeChangedEventArgs
+    public sealed class HamburgerMenuDisplayModeChangedEventArgs : EventArgs
     {
         /// <summary>
         /// Gets the new display mode.

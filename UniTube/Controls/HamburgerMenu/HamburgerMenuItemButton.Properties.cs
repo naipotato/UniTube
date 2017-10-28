@@ -12,14 +12,14 @@ namespace UniTube.Controls
 
         public double CompactPaneLength
         {
-            get { return (double)GetValue(CompactPaneLengthProperty); }
-            private set { SetValue(CompactPaneLengthProperty, value); }
+            get => (double)GetValue(CompactPaneLengthProperty);
+            private set => SetValue(CompactPaneLengthProperty, value);
         }
 
         public string Glyph
         {
-            get { return (string)GetValue(GlyphProperty); }
-            set { SetValue(GlyphProperty, value); }
+            get => (string)GetValue(GlyphProperty);
+            set => SetValue(GlyphProperty, value);
         }
     }
 }

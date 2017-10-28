@@ -13,10 +13,7 @@ namespace UniTube.Controls
 
         private HamburgerMenu _hamburgerMenuHost;
 
-        public HamburgerMenuItem()
-        {
-            DefaultStyleKey = typeof(HamburgerMenuItem);
-        }
+        public HamburgerMenuItem() => DefaultStyleKey = typeof(HamburgerMenuItem);
 
         protected override void OnApplyTemplate()
         {
@@ -34,15 +31,10 @@ namespace UniTube.Controls
 
                 CompactPaneLength = _hamburgerMenuHost.CompactPaneLength;
 
-                _hamburgerMenuHost.RegisterPropertyChangedCallback(HamburgerMenu.IsPaneOpenProperty, (s, e) =>
-                {
-                    OnPaneToggled();
-                });
+                _hamburgerMenuHost.RegisterPropertyChangedCallback(HamburgerMenu.IsPaneOpenProperty, (s, e)
+                    => OnPaneToggled());
 
-                _hamburgerMenuHost.DisplayModeChanged += (s, e) =>
-                {
-                    OnPaneToggled();
-                };
+                _hamburgerMenuHost.DisplayModeChanged += (s, e) => OnPaneToggled();
 
                 OnPaneToggled();
             }
@@ -51,14 +43,9 @@ namespace UniTube.Controls
         private void OnPaneToggled()
         {
             if (_hamburgerMenuHost.IsPaneOpen)
-            {
                 VisualStateManager.GoToState(this, NotClosedCompactState, false);
-            }
-            else if (_hamburgerMenuHost.DisplayMode == HamburgerMenuDisplayMode.Compact ||
-                _hamburgerMenuHost.DisplayMode == HamburgerMenuDisplayMode.Expanded)
-            {
+            else if (_hamburgerMenuHost.DisplayMode == HamburgerMenuDisplayMode.Compact || _hamburgerMenuHost.DisplayMode == HamburgerMenuDisplayMode.Expanded)
                 VisualStateManager.GoToState(this, ClosedCompactState, false);
-            }
         }
     }
 }

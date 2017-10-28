@@ -4,9 +4,6 @@ namespace UniTube.Controls
 {
     public class HamburgerMenuItemSeparator : Control
     {
-        public HamburgerMenuItemSeparator()
-        {
-            DefaultStyleKey = typeof(HamburgerMenuItemSeparator);
-        }
+        public HamburgerMenuItemSeparator() => DefaultStyleKey = typeof(HamburgerMenuItemSeparator);
     }
 }
