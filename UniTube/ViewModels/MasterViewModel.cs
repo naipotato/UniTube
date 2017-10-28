@@ -173,6 +173,9 @@ namespace UniTube.ViewModels
                 case "SettingsPage":
                     PageTitle = "Settings";
                     break;
+                case "TrendingPage":
+                    PageTitle = "Trending";
+                    break;
             }
         }
         #endregion

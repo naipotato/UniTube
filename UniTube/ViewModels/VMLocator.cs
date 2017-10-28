@@ -17,5 +17,9 @@
         private SettingsViewModel _settingsViewModel;
         public SettingsViewModel SettingsViewModel =>
             _settingsViewModel ?? (_settingsViewModel = new SettingsViewModel());
+
+        private TrendingViewModel _trendingViewModel;
+        public TrendingViewModel TrendingViewModel =>
+            _trendingViewModel ?? (_trendingViewModel = new TrendingViewModel());
     }
 }

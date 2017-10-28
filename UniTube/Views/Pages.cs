@@ -8,5 +8,6 @@
         Saved,
         Search,
         Settings,
+        Trending,
     }
 }
