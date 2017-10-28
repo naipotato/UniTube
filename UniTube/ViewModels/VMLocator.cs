@@ -2,14 +2,10 @@
 {
     public class VMLocator
     {
-        public MasterViewModel Master { get; set; }
 
-        public WelcomeViewModel Welcome { get; set; }
+        private MasterViewModel _masterViewModel;
+        public MasterViewModel MasterViewModel =>
+            _masterViewModel ?? (_masterViewModel = new MasterViewModel());
 
-        public VMLocator()
-        {
-            Master = new MasterViewModel();
-            Welcome = new WelcomeViewModel();
-        }
     }
 }
