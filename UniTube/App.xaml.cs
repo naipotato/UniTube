@@ -200,11 +200,14 @@ namespace UniTube
                 var builder = new BackgroundTaskBuilder
                 {
                     Name = liveTileTaskName,
-                    TaskEntryPoint = "UniTube.Tasks.LiveTileTask"
+                    TaskEntryPoint = "UniTube.Tasks.LiveTileTask",
+                    CancelOnConditionLoss = true,
+                    IsNetworkRequested = true
                 };
                 builder.SetTrigger(new TimeTrigger(15, false));
                 builder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
-                BackgroundTaskRegistration task = builder.Register();
+                builder.AddCondition(new SystemCondition(SystemConditionType.BackgroundWorkCostNotHigh));
+                var task = builder.Register();
             }
         }
     }
