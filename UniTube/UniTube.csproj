@@ -104,6 +104,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Collections\IncrementalLoadingCollection\IIncrementalSource.cs" />
+    <Compile Include="Collections\IncrementalLoadingCollection\IncrementalLoadingCollection.cs" />
+    <Compile Include="Sources\SearchSource.cs" />
+    <Compile Include="Sources\TrendingSource.cs" />
     <Compile Include="Controls\Toolbar\Toolbar.cs" />
     <Compile Include="Controls\Toolbar\Toolbar.Properties.cs" />
     <Compile Include="Controls\Toolbar\ToolbarButton.cs" />
