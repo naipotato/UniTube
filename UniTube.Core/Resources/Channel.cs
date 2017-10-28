@@ -1,4 +1,5 @@
 ﻿using System;
+using UniTube.Core.Requests;
 
 namespace UniTube.Core.Resources
 {
@@ -51,5 +52,12 @@ namespace UniTube.Core.Resources
                 public string BannerImageUrl { get; set; }
             }
         }
+
+        /// <summary>
+        /// Returns a collection of zero or more <see cref="Channel"/> resources that match the request criteria.
+        /// </summary>
+        /// <param name="part">Specifies a comma-separated list of one or more <see cref="Channel"/> resource
+        /// properties that the API response will include.</param>
+        public static ChannelListRequest List(string part) => new ChannelListRequest(part);
     }
 }

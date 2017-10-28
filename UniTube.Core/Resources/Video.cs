@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UniTube.Core.Requests;
 
 namespace UniTube.Core.Resources
 {
@@ -28,5 +29,12 @@ namespace UniTube.Core.Resources
                 public Thumbnail Medium { get; set; }
             }
         }
+
+        /// <summary>
+        /// Returns a list of videos that match the API request parameters.
+        /// </summary>
+        /// <param name="part">Specifies a comma-separated list of one or more <see cref="Video"/> resource
+        /// properties that the API response will include.</param>
+        public static VideoListRequest List(string part) => new VideoListRequest(part);
     }
 }
