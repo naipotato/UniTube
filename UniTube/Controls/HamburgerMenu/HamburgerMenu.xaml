@@ -162,18 +162,17 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <Grid x:Name="PaneRoot" Background="{TemplateBinding PaneBackground}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Visibility="Collapsed" Width="{TemplateBinding OpenPaneLength}">
-                            <Border Child="{TemplateBinding Pane}"/>
+                            <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Margin="{TemplateBinding Padding}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Grid>
-                        <Grid x:Name="ContentRoot" Grid.ColumnSpan="2">
+                        <Grid x:Name="ContentRoot" Grid.ColumnSpan="2" Margin="0 -10 0 0">
                             <Grid.RenderTransform>
                                 <CompositeTransform x:Name="ContentTransform"/>
                             </Grid.RenderTransform>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Grid.Row="1"/>
-                            <Rectangle x:Name="LightDismissLayer" Fill="Transparent" Visibility="Collapsed" Grid.RowSpan="2"/>
+                            <local:DropShadowPanel BlurRadius="6.0" Color="Black" OffsetX="-3.0" OffsetY="-3.0" ShadowOpacity="0.16" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                                <Rectangle Fill="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}"/>
+                            </local:DropShadowPanel>
+                            <Frame x:Name="ContentFrame"/>
+                            <Rectangle x:Name="LightDismissLayer" Fill="Transparent" Visibility="Collapsed"/>
                         </Grid>
                         <Grid x:Name="OverlayRoot" Grid.ColumnSpan="2" Visibility="Collapsed">
                             <Grid.ColumnDefinitions>
@@ -347,18 +346,17 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <Grid x:Name="PaneRoot" Background="{TemplateBinding PaneBackground}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Visibility="Collapsed" Width="{TemplateBinding OpenPaneLength}">
-                            <Border Child="{TemplateBinding Pane}"/>
+                            <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Margin="{TemplateBinding Padding}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Grid>
-                        <Grid x:Name="ContentRoot" Grid.ColumnSpan="2">
+                        <Grid x:Name="ContentRoot" Grid.ColumnSpan="2" Margin="0 -10 0 0">
                             <Grid.RenderTransform>
                                 <CompositeTransform x:Name="ContentTransform"/>
                             </Grid.RenderTransform>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Grid.Row="1"/>
-                            <Rectangle x:Name="LightDismissLayer" Fill="Transparent" Visibility="Collapsed" Grid.RowSpan="2"/>
+                            <local:DropShadowPanel BlurRadius="6.0" Color="Black" OffsetX="-3.0" OffsetY="-3.0" ShadowOpacity="0.16" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                                <Rectangle Fill="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}"/>
+                            </local:DropShadowPanel>
+                            <Frame x:Name="ContentFrame"/>
+                            <Rectangle x:Name="LightDismissLayer" Fill="Transparent" Visibility="Collapsed"/>
                         </Grid>
                         <Grid x:Name="OverlayRoot" Grid.ColumnSpan="2" Visibility="Collapsed">
                             <Grid.ColumnDefinitions>

@@ -1,4 +1,8 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+
+using Template10.Services.NavigationService;
+
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
 
@@ -17,6 +21,12 @@ namespace UniTube.Controls
         /// </summary>
         public static readonly DependencyProperty CompactPaneLengthProperty = DependencyProperty.Register(
             nameof(CompactPaneLength), typeof(double), typeof(HamburgerMenu), new PropertyMetadata(default(double), OnCompactPaneLengthChanged));
+
+        /// <summary>
+        /// Identifies the <see cref="DefaultPageType"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty DefaultPageTypeProperty = DependencyProperty.Register(
+            nameof(DefaultPageType), typeof(Type), typeof(HamburgerMenu), new PropertyMetadata(default(Type)));
 
         /// <summary>
         /// Identifies the <see cref="DisplayMode"/> dependency property.
@@ -42,9 +52,9 @@ namespace UniTube.Controls
         public static readonly DependencyProperty OpenPaneLengthProperty = DependencyProperty.Register(
             nameof(OpenPaneLength), typeof(double), typeof(HamburgerMenu), new PropertyMetadata(default(double), OnOpenPaneLengthChanged));
 
-        public static readonly DependencyProperty PaneProperty = DependencyProperty.Register(
-            nameof(Pane), typeof(object), typeof(HamburgerMenu), new PropertyMetadata(default(object)));
-
+        /// <summary>
+        /// Identifies the <see cref="PaneBackground"/> dependency property.
+        /// </summary>
         public static readonly DependencyProperty PaneBackgroundProperty = DependencyProperty.Register(
             nameof(PaneBackground), typeof(Brush), typeof(HamburgerMenu), new PropertyMetadata(default(Brush)));
 
@@ -54,9 +64,32 @@ namespace UniTube.Controls
         public static readonly DependencyProperty TemplateSettingsProperty = DependencyProperty.Register(
             nameof(TemplateSettingsProperty), typeof(HamburgerMenuTemplateSettings), typeof(HamburgerMenu), new PropertyMetadata(default(HamburgerMenuTemplateSettings)));
 
+        private FrameFacade FrameFacade
+        {
+            get => _frameFacade;
+            set
+            {
+                if (_frameFacade != null)
+                {
+                    _frameFacade.BackRequested -= OnFrameFacadeBackRequested;
+                    _frameFacade.ForwardRequested -= OnFrameFacadeForwardRequested;
+                    _frameFacade.Navigated -= OnFrameFacadeNavigated;
+                }
+
+                _frameFacade = value;
+
+                if (_frameFacade != null)
+                {
+                    _frameFacade.BackRequested += OnFrameFacadeBackRequested;
+                    _frameFacade.ForwardRequested += OnFrameFacadeForwardRequested;
+                    _frameFacade.Navigated += OnFrameFacadeNavigated;
+                }
+            }
+        }
+
         private Rectangle LightDismissLayer
         {
-            get { return _lightDismissLayer; }
+            get => _lightDismissLayer;
             set
             {
                 if (_lightDismissLayer != null)
@@ -75,7 +108,7 @@ namespace UniTube.Controls
 
         private Rectangle PanArea
         {
-            get { return _panArea; }
+            get => _panArea;
             set
             {
                 if (_panArea != null)
@@ -100,8 +133,8 @@ namespace UniTube.Controls
         /// </summary>
         public double CompactModeThresholdWidth
         {
-            get { return (double)GetValue(CompactModeThresholdWidthProperty); }
-            set { SetValue(CompactModeThresholdWidthProperty, value); }
+            get => (double)GetValue(CompactModeThresholdWidthProperty);
+            set => SetValue(CompactModeThresholdWidthProperty, value);
         }
 
         /// <summary>
@@ -109,8 +142,14 @@ namespace UniTube.Controls
         /// </summary>
         public double CompactPaneLength
         {
-            get { return (double)GetValue(CompactPaneLengthProperty); }
-            set { SetValue(CompactPaneLengthProperty, value); }
+            get => (double)GetValue(CompactPaneLengthProperty);
+            set => SetValue(CompactPaneLengthProperty, value);
+        }
+
+        public Type DefaultPageType
+        {
+            get => (Type)GetValue(DefaultPageTypeProperty);
+            set => SetValue(DefaultPageTypeProperty, value);
         }
 
         /// <summary>
@@ -119,8 +158,8 @@ namespace UniTube.Controls
         /// </summary>
         public HamburgerMenuDisplayMode DisplayMode
         {
-            get { return (HamburgerMenuDisplayMode)GetValue(DisplayModeProperty); }
-            set { SetValue(DisplayModeProperty, value); }
+            get => (HamburgerMenuDisplayMode)GetValue(DisplayModeProperty);
+            set => SetValue(DisplayModeProperty, value);
         }
 
         /// <summary>
@@ -129,8 +168,8 @@ namespace UniTube.Controls
         /// </summary>
         public double ExpandedModeThresholdWidth
         {
-            get { return (double)GetValue(ExpandedModeThresholdWidthProperty); }
-            set { SetValue(ExpandedModeThresholdWidthProperty, value); }
+            get => (double)GetValue(ExpandedModeThresholdWidthProperty);
+            set => SetValue(ExpandedModeThresholdWidthProperty, value);
         }
 
         /// <summary>
@@ -139,29 +178,28 @@ namespace UniTube.Controls
         /// </summary>
         public bool IsPaneOpen
         {
-            get { return (bool)GetValue(IsPaneOpenProperty); }
-            set { SetValue(IsPaneOpenProperty, value); }
+            get => (bool)GetValue(IsPaneOpenProperty);
+            set => SetValue(IsPaneOpenProperty, value);
         }
+
+        public INavigationService NavigationService => this._navigationService;
 
         /// <summary>
         /// Gets or sets the width of the <see cref="HamburgerMenu"/> pane when it's fully expanded.
         /// </summary>
         public double OpenPaneLength
         {
-            get { return (double)GetValue(OpenPaneLengthProperty); }
-            set { SetValue(OpenPaneLengthProperty, value); }
+            get => (double)GetValue(OpenPaneLengthProperty);
+            set => SetValue(OpenPaneLengthProperty, value);
         }
 
-        public object Pane
-        {
-            get { return GetValue(PaneProperty); }
-            set { SetValue(PaneProperty, value); }
-        }
-
+        /// <summary>
+        /// Gets or sets the background of the pane.
+        /// </summary>
         public Brush PaneBackground
         {
-            get { return (Brush)GetValue(PaneBackgroundProperty); }
-            set { SetValue(PaneBackgroundProperty, value); }
+            get => (Brush)GetValue(PaneBackgroundProperty);
+            set => SetValue(PaneBackgroundProperty, value);
         }
 
         /// <summary>
@@ -170,44 +208,40 @@ namespace UniTube.Controls
         /// </summary>
         public HamburgerMenuTemplateSettings TemplateSettings
         {
-            get { return (HamburgerMenuTemplateSettings)GetValue(TemplateSettingsProperty); }
-            internal set { SetValue(TemplateSettingsProperty, value); }
+            get => (HamburgerMenuTemplateSettings)GetValue(TemplateSettingsProperty);
+            internal set => SetValue(TemplateSettingsProperty, value);
         }
 
         private static void OnCompactPaneLengthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (e.NewValue == e.OldValue)
-                return;
+            if (e.NewValue == e.OldValue) return;
 
-            var navView = d as HamburgerMenu;
-            navView.OnCompactPaneLengthChanged((double)e.NewValue);
+            var hamburgerMenu = d as HamburgerMenu;
+            hamburgerMenu.OnCompactPaneLengthChanged((double)e.NewValue);
         }
 
         private static void OnDisplayModeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (e.NewValue == e.OldValue)
-                return;
+            if (e.NewValue == e.OldValue) return;
 
-            var navView = d as HamburgerMenu;
-            navView.OnDisplayModeChanged((HamburgerMenuDisplayMode)e.NewValue);
+            var hamburgerMenu = d as HamburgerMenu;
+            hamburgerMenu.OnDisplayModeChanged((HamburgerMenuDisplayMode)e.NewValue);
         }
 
         private static void OnIsPaneOpenChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (e.NewValue == e.OldValue)
-                return;
+            if (e.NewValue == e.OldValue) return;
 
-            var navView = d as HamburgerMenu;
-            navView.OnIsPaneOpenChanged((bool)e.NewValue);
+            var hamburgerMenu = d as HamburgerMenu;
+            hamburgerMenu.OnIsPaneOpenChanged((bool)e.NewValue);
         }
 
         private static void OnOpenPaneLengthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (e.NewValue == e.OldValue)
-                return;
+            if (e.NewValue == e.OldValue) return;
 
-            var navView = d as HamburgerMenu;
-            navView.OnOpenPaneLengthChanged((double)e.NewValue);
+            var hamburgerMenu = d as HamburgerMenu;
+            hamburgerMenu.OnOpenPaneLengthChanged((double)e.NewValue);
         }
     }
 }
