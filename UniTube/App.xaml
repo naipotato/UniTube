@@ -520,7 +520,7 @@
             </Style>
 
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Controls/Generic.xaml"/>
+                <ResourceDictionary Source="Themes/Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
         </ResourceDictionary>

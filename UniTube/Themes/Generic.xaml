@@ -1,0 +1,11 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ms-appx:///Controls/DropShadowPanel/DropShadowPanel.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Controls/HamburgerMenu/HamburgerMenu.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Controls/Loading/LoadingView.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Controls/Toolbar/Toolbar.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
+</ResourceDictionary>
