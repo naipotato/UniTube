@@ -16,6 +16,17 @@ namespace UniTube.Helpers
 
             switch (value.Length)
             {
+                case 3:
+                    return Color.FromArgb(255,
+                        byte.Parse($"{value.Substring(0, 1)}{value.Substring(0, 1)}", NumberStyles.HexNumber),
+                        byte.Parse($"{value.Substring(1, 1)}{value.Substring(1, 1)}", NumberStyles.HexNumber),
+                        byte.Parse($"{value.Substring(2, 1)}{value.Substring(2, 1)}", NumberStyles.HexNumber));
+                case 4:
+                    return Color.FromArgb(
+                        byte.Parse($"{value.Substring(0, 1)}{value.Substring(0, 1)}", NumberStyles.HexNumber),
+                        byte.Parse($"{value.Substring(1, 1)}{value.Substring(1, 1)}", NumberStyles.HexNumber),
+                        byte.Parse($"{value.Substring(2, 1)}{value.Substring(2, 1)}", NumberStyles.HexNumber),
+                        byte.Parse($"{value.Substring(3, 1)}{value.Substring(3, 1)}", NumberStyles.HexNumber));
                 case 6:
                     return Color.FromArgb(255,
                         byte.Parse(value.Substring(0, 2), NumberStyles.HexNumber),
