@@ -2,6 +2,9 @@
 {
     public class VMLocator
     {
+        private HomeViewModel _homeViewModel;
+        public HomeViewModel HomeViewModel =>
+            _homeViewModel ?? (_homeViewModel = new HomeViewModel());
 
         private MasterViewModel _masterViewModel;
         public MasterViewModel MasterViewModel =>

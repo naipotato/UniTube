@@ -150,6 +150,9 @@ namespace UniTube.ViewModels
                 case "HistoryPage":
                     PageTitle = "History";
                     break;
+                case "HomePage":
+                    PageTitle = "Home";
+                    break;
                 case "SavedPage":
                     PageTitle = "Saved";
                     break;

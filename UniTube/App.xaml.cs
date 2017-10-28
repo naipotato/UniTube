@@ -74,6 +74,7 @@ namespace UniTube
         {
             var keys = PageKeys<Pages>();
             keys.TryAdd(Pages.History, typeof(HistoryPage));
+            keys.TryAdd(Pages.Home, typeof(HomePage));
             keys.TryAdd(Pages.Master, typeof(MasterPage));
             keys.TryAdd(Pages.Saved, typeof(SavedPage));
             keys.TryAdd(Pages.Settings, typeof(SettingsPage));
