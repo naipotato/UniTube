@@ -4,9 +4,6 @@ namespace UniTube.Controls
 {
     public class ToolbarButton : Button, IToolbarElement
     {
-        public ToolbarButton()
-        {
-            DefaultStyleKey = typeof(ToolbarButton);
-        }
+        public ToolbarButton() => DefaultStyleKey = typeof(ToolbarButton);
     }
 }
