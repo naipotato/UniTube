@@ -164,6 +164,12 @@
   <data name="SubscribedMenu" xml:space="preserve">
     <value>Subscribed to</value>
   </data>
+  <data name="SubscriptionsSection" xml:space="preserve">
+    <value>Subscriptions</value>
+  </data>
+  <data name="TrendingMenu" xml:space="preserve">
+    <value>Trending</value>
+  </data>
   <data name="UserCancelDialogMessage" xml:space="preserve">
     <value>You have cancelled the logon.</value>
     <comment>Message when user cancels logon</comment>
