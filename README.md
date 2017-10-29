@@ -11,7 +11,7 @@ UniTube is an open source YouTube client built to bring an amazing experience to
 5. The API supports two types of credentials. Create both:
     - OAuth 2.0
     - API keys
-6. Clone the repo `git clone --recursive https://github.com/nahuelale/UniTube-UWP.git`.
+6. Clone the repo `git clone --recursive https://github.com/NucleuxSoft/UniTube-UWP.git`.
 7. Create a new file inside `UniTube-UWP/UniTube.Core` and name it `Client.Secrets.cs`:
 ```csharp
 namespace UniTube.Core
