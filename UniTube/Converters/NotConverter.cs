@@ -2,7 +2,7 @@
 
 using Windows.UI.Xaml.Data;
 
-namespace UniTube.Helpers
+namespace UniTube.Converters
 {
     public class NotConverter : IValueConverter
     {

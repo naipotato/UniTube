@@ -3,7 +3,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
-namespace UniTube.Helpers
+namespace UniTube.Converters
 {
     public class SelectedItemConverter : IValueConverter
     {
