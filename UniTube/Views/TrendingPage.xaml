@@ -85,7 +85,7 @@
                   cu:ItemContainerStyle="{StaticResource StretchGridViewItemStyle}"
                   fcu:ItemContainerStyle="{StaticResource StretchRevealGridViewItemStyle}"
                   ItemContainerTransitions="{StaticResource GridViewItemContainerTransitions}"
-                  ItemClick="TrendingGridView_ItemClick"
+                  ItemClick="{x:Bind ViewModel.OpenVideo}"
                   Padding="10 10 -5 5">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="resources:Video">
