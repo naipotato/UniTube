@@ -4,15 +4,12 @@ using System.Threading.Tasks;
 using Template10.Common;
 using Template10.Utils;
 
-using UniTube.Core.Authentication;
 using UniTube.Helpers;
 using UniTube.Services.SettingsServices;
 using UniTube.Views;
 
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Background;
-using Windows.ApplicationModel.Core;
-using Windows.Foundation;
 using Windows.Foundation.Metadata;
 using Windows.Graphics.Display;
 using Windows.UI.ViewManagement;
@@ -82,19 +79,12 @@ namespace UniTube
             keys.TryAdd(Pages.Trending, typeof(TrendingPage));
             keys.TryAdd(Pages.Video, typeof(VideoPage));
 
-            CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
-
             var display = DisplayInformation.GetForCurrentView();
             display.OrientationChanged += OnDisplayOrientationChanged;
 
             if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))
             {
-                if (display.ScreenWidthInRawPixels >= 1152 && display.ScreenHeightInRawPixels >= 768)
-                {
-                    ApplicationView.PreferredLaunchViewSize = new Size(1024, 675);
-                    ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
-                }
-
+                ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.Auto;
                 var titleBar = ApplicationView.GetForCurrentView().TitleBar;
                 if (titleBar != null)
                 {
