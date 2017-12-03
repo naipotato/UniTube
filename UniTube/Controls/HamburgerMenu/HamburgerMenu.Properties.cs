@@ -182,7 +182,7 @@ namespace UniTube.Controls
             set => SetValue(IsPaneOpenProperty, value);
         }
 
-        public INavigationService NavigationService => this._navigationService;
+        public INavigationService NavigationService => _navigationService;
 
         /// <summary>
         /// Gets or sets the width of the <see cref="HamburgerMenu"/> pane when it's fully expanded.
