@@ -39,6 +39,7 @@ namespace UniTube.Sources
 
                 await PopulateTrendingList(_nextPageToken);
 
+                // TODO: this is not the best way to determine if invoke or not the en action
                 if (_trending.Count == 50)
                 {
                     _endFirstLoadAction?.Invoke();
