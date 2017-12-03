@@ -119,7 +119,7 @@
     <Compile Include="Resources\Channel.cs" />
     <Compile Include="Resources\Search.cs" />
     <Compile Include="Resources\SearchResult.cs" />
-    <Compile Include="Resources\Thumbnail.cs" />
+    <Compile Include="Resources\Thumbnails.cs" />
     <Compile Include="Resources\Video.cs" />
     <Compile Include="Responses\ChannelListResponse.cs" />
     <Compile Include="Responses\SearchListResponse.cs" />

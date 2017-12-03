@@ -17,14 +17,7 @@ namespace UniTube.Core.Resources
             public string Title { get; set; }
             public string Description { get; set; }
             public DateTime PublishedAt { get; set; }
-            public ChannelThumbnails Thumbnails { get; set; }
-
-            public class ChannelThumbnails
-            {
-                public Thumbnail Default { get; set; }
-                public Thumbnail Medium { get; set; }
-                public Thumbnail High { get; set; }
-            }
+            public Thumbnails Thumbnails { get; set; }
         }
 
         public class ChannelStatistics
