@@ -50,6 +50,8 @@ namespace UniTube.Controls
             DefaultStyleKey = typeof(HamburgerMenu);
 
             SizeChanged += OnSizeChanged;
+            Loaded += OnLoaded;
+            Unloaded += OnUnloaded;
         }
 
         /// <summary>
@@ -84,6 +86,15 @@ namespace UniTube.Controls
             }
         }
 
+        private void OnBootStrapperBackRequested(object sender, HandledEventArgs e)
+        {
+            if (IsPaneOpen && DisplayMode != HamburgerMenuDisplayMode.Expanded)
+            {
+                e.Handled = true;
+                IsPaneOpen = false;
+            }
+        }
+
         private void OnCompactPaneLengthChanged(double newValue) => TemplateSettings = new HamburgerMenuTemplateSettings(newValue, OpenPaneLength);
 
         private void OnDisplayModeChanged(HamburgerMenuDisplayMode newValue)
@@ -115,6 +126,8 @@ namespace UniTube.Controls
         private void OnIsPaneOpenChanged(bool newValue) => UpdateDisplayMode(DisplayMode, newValue);
 
         private void OnLigthDismissLayerTapped(object sender, TappedRoutedEventArgs e) => IsPaneOpen = false;
+
+        private void OnLoaded(object sender, RoutedEventArgs e) => BootStrapper.BackRequested += OnBootStrapperBackRequested;
 
         private void OnOpenPaneLengthChanged(double newValue)
             => TemplateSettings = new HamburgerMenuTemplateSettings(CompactPaneLength, newValue);
@@ -152,6 +165,8 @@ namespace UniTube.Controls
                 DisplayMode = HamburgerMenuDisplayMode.Minimal;
             }
         }
+
+        private void OnUnloaded(object sender, RoutedEventArgs e) => BootStrapper.BackRequested -= OnBootStrapperBackRequested;
 
         private INavigable ResolveForPage(Page page)
         {
