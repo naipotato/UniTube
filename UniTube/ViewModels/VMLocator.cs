@@ -2,6 +2,10 @@
 {
     public class VMLocator
     {
+        private HistoryViewModel _historyViewModel;
+        public HistoryViewModel HistoryViewModel =>
+            _historyViewModel ?? (_historyViewModel = new HistoryViewModel());
+
         private HomeViewModel _homeViewModel;
         public HomeViewModel HomeViewModel =>
             _homeViewModel ?? (_homeViewModel = new HomeViewModel());
@@ -9,6 +13,10 @@
         private MasterViewModel _masterViewModel;
         public MasterViewModel MasterViewModel =>
             _masterViewModel ?? (_masterViewModel = new MasterViewModel());
+
+        private SavedViewModel _savedViewModel;
+        public SavedViewModel SavedViewModel =>
+            _savedViewModel ?? (_savedViewModel = new SavedViewModel());
 
         private SearchViewModel _searchViewModel;
         public SearchViewModel SearchViewModel =>
