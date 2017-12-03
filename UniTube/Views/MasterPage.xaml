@@ -32,7 +32,7 @@
                 <RowDefinition Height="24" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="10" />
+                <RowDefinition Height="5" />
             </Grid.RowDefinitions>
 
             <Grid x:Name="TitleBar"
