@@ -1,21 +1,16 @@
-﻿using Newtonsoft.Json.Linq;
-
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 
 using Template10.Mvvm;
 using Template10.Services.NavigationService;
 
 using UniTube.Controls;
+using UniTube.Core.Requests;
 using UniTube.Helpers;
 using UniTube.Views;
 
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
-using UniTube.Collections;
-using UniTube.Core.Requests;
 using Windows.System.UserProfile;
 
 namespace UniTube.ViewModels
