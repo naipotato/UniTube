@@ -28,8 +28,7 @@
                                 Icon="Copy" />
                 
                 <MenuFlyoutItem Text="Watch later"
-                                Icon="Clock"
-                                Visibility="{x:Bind ViewModel.Locator.MasterViewModel.IsLoggedIn, Mode=OneWay}" />
+                                Icon="Clock" />
                 
                 <MenuFlyoutSubItem Text="Save"
                                    Icon="Save">
@@ -92,12 +91,12 @@
                 <DataTemplate x:DataType="resources:Video">
                     <Grid Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}"
                           ContextFlyout="{StaticResource ContextMenuVideo}">
-                        
+
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        
+
                         <Viewbox x:Name="Thumbnail">
                             <Rectangle Height="213.75"
                                        Width="380">

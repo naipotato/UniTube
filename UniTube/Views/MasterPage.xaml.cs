@@ -23,8 +23,6 @@ namespace UniTube.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            base.OnNavigatedTo(e);
-
             var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             Window.Current.SetTitleBar(MainTitleBar);
             coreTitleBar.IsVisibleChanged += OnCoreTitleBarIsVisibleChanged;
@@ -34,8 +32,6 @@ namespace UniTube.Views
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            base.OnNavigatingFrom(e);
-
             var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.IsVisibleChanged -= OnCoreTitleBarIsVisibleChanged;
             coreTitleBar.LayoutMetricsChanged -= OnCoreTitleBarLayoutMetricsChanged;

@@ -1,5 +1,6 @@
 ﻿using UniTube.ViewModels;
 
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace UniTube.Views
@@ -8,6 +9,9 @@ namespace UniTube.Views
     {
         public VideoViewModel ViewModel => (DataContext as VideoViewModel);
 
-        public VideoPage() => InitializeComponent();
+        public VideoPage()
+        {
+            InitializeComponent();
+        }
     }
 }
