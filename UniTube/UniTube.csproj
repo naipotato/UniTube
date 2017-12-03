@@ -106,6 +106,7 @@
     </Compile>
     <Compile Include="Collections\IncrementalLoadingCollection\IIncrementalSource.cs" />
     <Compile Include="Collections\IncrementalLoadingCollection\IncrementalLoadingCollection.cs" />
+    <Compile Include="Converters\ThumbnailsToBitmapImageConverter.cs" />
     <Compile Include="Sources\SearchSource.cs" />
     <Compile Include="Sources\TrendingSource.cs" />
     <Compile Include="Controls\Toolbar\Toolbar.cs" />
@@ -138,8 +139,8 @@
     </Compile>
     <Compile Include="Helpers\Json.cs" />
     <Compile Include="Helpers\ListViewBehaviour.cs" />
-    <Compile Include="Helpers\NotConverter.cs" />
-    <Compile Include="Helpers\SelectedItemConverter.cs" />
+    <Compile Include="Converters\NotConverter.cs" />
+    <Compile Include="Converters\SelectedItemConverter.cs" />
     <Compile Include="Helpers\SettingsStorageExtensions.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

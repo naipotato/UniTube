@@ -62,7 +62,7 @@ namespace UniTube.Sources
                 videoListRequest.PageToken = nextPageToken;
                 videoListRequest.Hl = GlobalizationPreferences.Languages[0];
                 videoListRequest.Key = Client.ApiKey;
-                videoListRequest.Fields = "nextPageToken,pageInfo/totalResults,items(id,snippet(title,channelTitle,thumbnails/high/url))";
+                videoListRequest.Fields = "nextPageToken,pageInfo/totalResults,items(id,snippet(title,channelTitle,thumbnails(high/url,maxres/url)))";
 
                 return await videoListRequest.ExecuteAsync();
             });

@@ -36,6 +36,7 @@
 
             <converters:NotConverter x:Key="NotConverter" />
             <converters:SelectedItemConverter x:Key="SelectedItemConverter" />
+            <converters:ThumbnailsToBitmapImageConverter x:Key="ThumbnailsToBitmapImageConverter" />
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/Generic.xaml" />

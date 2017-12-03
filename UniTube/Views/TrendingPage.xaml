@@ -102,7 +102,7 @@
                             <Rectangle Height="213.75"
                                        Width="380">
                                 <Rectangle.Fill>
-                                    <ImageBrush ImageSource="{x:Bind Snippet.Thumbnails.High.Url}"
+                                    <ImageBrush ImageSource="{x:Bind Snippet.Thumbnails, Converter={StaticResource ThumbnailsToBitmapImageConverter}}"
                                                 Stretch="UniformToFill" />
                                 </Rectangle.Fill>
                             </Rectangle>
