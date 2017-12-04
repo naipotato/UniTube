@@ -15,6 +15,7 @@ namespace UniTube.Sources
 {
     public class TrendingSource : IIncrementalSource<Video>
     {
+        private bool _hasBeenLoaded;
         private string _nextPageToken;
         private int _totalResults = 1;
         private readonly List<Video> _trending;
@@ -32,7 +33,7 @@ namespace UniTube.Sources
         {
             if (_trending.Count < _totalResults && _trending.Count < ((pageIndex + 1) * pageSize))
             {
-                if (_trending.Count == 0)
+                if (!_hasBeenLoaded)
                 {
                     _startFirstLoadAction?.Invoke();
                 }
@@ -40,7 +41,7 @@ namespace UniTube.Sources
                 await PopulateTrendingList(_nextPageToken);
 
                 // TODO: this is not the best way to determine if invoke or not the en action
-                if (_trending.Count == 50)
+                if (_hasBeenLoaded)
                 {
                     _endFirstLoadAction?.Invoke();
                 }
@@ -73,6 +74,7 @@ namespace UniTube.Sources
             _trending.AddRange(response.Items);
             _nextPageToken = response.NextPageToken;
             _totalResults = response.PageInfo.TotalResults;
+            _hasBeenLoaded = true;
         }
     }
 }
