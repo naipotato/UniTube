@@ -232,7 +232,7 @@ namespace UniTube.Core.Requests
                 new KeyValuePair<string, string>("relevanceLanguage", RelevanceLangugage),
                 new KeyValuePair<string, string>("safeSearch", SafeSearch.ToString()),
                 new KeyValuePair<string, string>("topicId", TopicId),
-                new KeyValuePair<string, string>("type", Type.ToString()),
+                new KeyValuePair<string, string>("type", Type.ToString().ToLower()),
                 new KeyValuePair<string, string>("videoCaption", VideoCaption.ToString()),
                 new KeyValuePair<string, string>("videoCategoryId", VideoCategoryId),
                 new KeyValuePair<string, string>("videoDefinition", VideoDefinition.ToString()),
