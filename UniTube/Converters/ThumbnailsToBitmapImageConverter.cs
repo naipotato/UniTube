@@ -37,6 +37,10 @@ namespace UniTube.Converters
                     return new BitmapImage();
                 }
             }
+            else if (value is null)
+            {
+                return new BitmapImage();
+            }
 
             throw new NotImplementedException();
         }
