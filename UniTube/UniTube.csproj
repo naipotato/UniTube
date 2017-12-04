@@ -21,7 +21,7 @@
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>0A5188A2A072E0D0BE6004ACFF6275961A7D45B3</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>4BBF32815B817DC6137AFECE58A1BCBCCE23CE41</PackageCertificateThumbprint>
     <ShouldCreateLogs>True</ShouldCreateLogs>
     <AdvancedSettingsExpanded>False</AdvancedSettingsExpanded>
     <UpdateAssemblyVersion>False</UpdateAssemblyVersion>
@@ -194,7 +194,6 @@
     </AppxManifest>
     <PRIResource Include="Strings\en-US\Resources.resw" />
     <None Include="UniTube_StoreKey.pfx" />
-    <None Include="UniTube_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\LargeTile\LargeTile.scale-100.png" />
