@@ -65,7 +65,7 @@ namespace UniTube.Sources
                 searchListRequest.PageToken = nextPageToken;
                 searchListRequest.RelevanceLangugage = GlobalizationPreferences.Languages[0];
                 searchListRequest.Key = Client.ApiKey;
-                searchListRequest.Fields = "nextPageToken,pageInfo/totalResults,items(id(kind,videoId,channelId,playlistId),snippet(title,channelTitle,thumbnails/high/url))";
+                searchListRequest.Fields = "nextPageToken,pageInfo/totalResults,items(id(kind,videoId,channelId,playlistId),snippet(title,channelTitle,channelId,publishedAt,description,thumbnails/high/url))";
                 searchListRequest.Type = SearchListRequest.TypeEnum.Video;
 
                 return await searchListRequest.ExecuteAsync();
@@ -82,9 +82,12 @@ namespace UniTube.Sources
                             Kind = searchResult.Id.Kind,
                             Snippet = new Video.VideoSnippet
                             {
+                                ChannelId = searchResult.Snippet.ChannelId,
+                                PublishedAt = searchResult.Snippet.PublishedAt,
                                 ChannelTitle = searchResult.Snippet.ChannelTitle,
                                 Title = searchResult.Snippet.Title,
-                                Thumbnails = searchResult.Snippet.Thumbnails
+                                Thumbnails = searchResult.Snippet.Thumbnails,
+                                Description = searchResult.Snippet.Description
                             }
                         };
                         _search.Add(video);
@@ -96,8 +99,10 @@ namespace UniTube.Sources
                             Kind = searchResult.Id.Kind,
                             Snippet = new Channel.ChannelSnippet
                             {
+                                PublishedAt = searchResult.Snippet.PublishedAt,
                                 Thumbnails = searchResult.Snippet.Thumbnails,
-                                Title = searchResult.Snippet.Title
+                                Title = searchResult.Snippet.Title,
+                                Description = searchResult.Snippet.Description
                             }
                         };
                         _search.Add(channel);
@@ -109,9 +114,12 @@ namespace UniTube.Sources
                             Kind = searchResult.Id.Kind,
                             Snippet = new Playlist.PlaylistSnippet
                             {
+                                PublishedAt = searchResult.Snippet.PublishedAt,
                                 ChannelTitle = searchResult.Snippet.ChannelTitle,
                                 Thumbnails = searchResult.Snippet.Thumbnails,
-                                Title = searchResult.Snippet.Title
+                                Title = searchResult.Snippet.Title,
+                                Description = searchResult.Snippet.Description,
+                                ChannelId = searchResult.Snippet.ChannelId
                             }
                         };
                         _search.Add(playlist);
