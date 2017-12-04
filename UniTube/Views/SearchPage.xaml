@@ -59,15 +59,16 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        
+
                         <Viewbox>
                             <Rectangle Height="213.75"
-                                       Width="380">
-                                <Rectangle.Fill>
-                                    <ImageBrush ImageSource="{x:Bind Snippet.Thumbnails.High.Url}"
-                                                Stretch="UniformToFill" />
-                                </Rectangle.Fill>
-                            </Rectangle>
+                                           Width="380"
+                                           Grid.RowSpan="1">
+                                    <Rectangle.Fill>
+                                        <ImageBrush ImageSource="{x:Bind Snippet.Thumbnails, Converter={StaticResource ThumbnailsToBitmapImageConverter}}"
+                                                    Stretch="UniformToFill" />
+                                    </Rectangle.Fill>
+                                </Rectangle>
                         </Viewbox>
                         
                         <TextBlock Text="&#10;&#10;"
@@ -87,7 +88,23 @@
                                        TextTrimming="CharacterEllipsis"
                                        TextWrapping="NoWrap"
                                        x:Phase="2" />
-                            
+
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                       Text="{x:Bind Snippet.Title}"
+                                       TextTrimming="CharacterEllipsis"
+                                       TextWrapping="Wrap"
+                                       x:Phase="1" />
+
+                                <TextBlock Text=" - "/>
+
+                                <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                       Text="{x:Bind Snippet.ChannelTitle}"
+                                       TextTrimming="CharacterEllipsis"
+                                       TextWrapping="NoWrap"
+                                       x:Phase="2" />
+                            </StackPanel>
+
                         </StackPanel>
                         
                     </Grid>
