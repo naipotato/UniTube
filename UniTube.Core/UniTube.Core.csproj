@@ -117,6 +117,7 @@
     <Compile Include="Requests\SuggestionListRequest.cs" />
     <Compile Include="Requests\VideoListRequest.cs" />
     <Compile Include="Resources\Channel.cs" />
+    <Compile Include="Resources\ISearchResult.cs" />
     <Compile Include="Resources\Search.cs" />
     <Compile Include="Resources\SearchResult.cs" />
     <Compile Include="Resources\Thumbnails.cs" />

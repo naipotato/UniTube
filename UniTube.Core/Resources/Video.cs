@@ -4,7 +4,7 @@ using UniTube.Core.Requests;
 
 namespace UniTube.Core.Resources
 {
-    public class Video
+    public class Video : ISearchResult
     {
         public string Kind { get; set; }
         public string Etag { get; set; }

@@ -3,7 +3,7 @@ using UniTube.Core.Requests;
 
 namespace UniTube.Core.Resources
 {
-    public class Channel
+    public class Channel : ISearchResult
     {
         public string Kind { get; set; }
         public string Etag { get; set; }
