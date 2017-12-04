@@ -15,6 +15,7 @@ namespace UniTube.Sources
 {
     public class SearchSource : IIncrementalSource<ISearchResult>
     {
+        private bool _hasBeenLoaded;
         private string _nextPageToken;
         private string _query;
         private int _totalResults = 1;
@@ -34,14 +35,14 @@ namespace UniTube.Sources
         {
             if (_search.Count < _totalResults && _search.Count < ((pageIndex + 1) * pageSize))
             {
-                if (_search.Count == 0)
+                if (!_hasBeenLoaded)
                 {
                     _startFirstLoadAction?.Invoke();
                 }
 
                 await PopulateSearchList(_nextPageToken);
 
-                if (_search.Count == 50)
+                if (_hasBeenLoaded)
                 {
                     _endFirstLoadAction?.Invoke();
                 }
@@ -130,6 +131,7 @@ namespace UniTube.Sources
 
             _nextPageToken = response.NextPageToken;
             _totalResults = response.PageInfo.TotalResults;
+            _hasBeenLoaded = true;
         }
     }
 }
