@@ -65,7 +65,8 @@ namespace UniTube.Sources
                 searchListRequest.PageToken = nextPageToken;
                 searchListRequest.RelevanceLangugage = GlobalizationPreferences.Languages[0];
                 searchListRequest.Key = Client.ApiKey;
-                searchListRequest.Fields = "nextPageToken,pageInfo/totalResults,items(id/videoId,snippet(title,channelTitle,thumbnails/high/url))";
+                searchListRequest.Fields = "nextPageToken,pageInfo/totalResults,items(id(kind,videoId,channelId,playlistId),snippet(title,channelTitle,thumbnails/high/url))";
+                searchListRequest.Type = SearchListRequest.TypeEnum.Video;
 
                 return await searchListRequest.ExecuteAsync();
             });
@@ -77,15 +78,11 @@ namespace UniTube.Sources
                     case "youtube#video":
                         var video = new Video
                         {
-                            Etag = searchResult.Etag,
                             Id = searchResult.Id.VideoId,
                             Kind = searchResult.Id.Kind,
                             Snippet = new Video.VideoSnippet
                             {
-                                ChannelId = searchResult.Snippet.ChannelId,
                                 ChannelTitle = searchResult.Snippet.ChannelTitle,
-                                PublishedAt = searchResult.Snippet.PublishedAt,
-                                Description = searchResult.Snippet.Description,
                                 Title = searchResult.Snippet.Title,
                                 Thumbnails = searchResult.Snippet.Thumbnails
                             }
@@ -95,13 +92,10 @@ namespace UniTube.Sources
                     case "youtube#channel":
                         var channel = new Channel
                         {
-                            Etag = searchResult.Etag,
                             Id = searchResult.Id.ChannelId,
                             Kind = searchResult.Id.Kind,
                             Snippet = new Channel.ChannelSnippet
                             {
-                                Description = searchResult.Snippet.Description,
-                                PublishedAt = searchResult.Snippet.PublishedAt,
                                 Thumbnails = searchResult.Snippet.Thumbnails,
                                 Title = searchResult.Snippet.Title
                             }
@@ -111,15 +105,11 @@ namespace UniTube.Sources
                     case "youtube#playlist":
                         var playlist = new Playlist
                         {
-                            Etag = searchResult.Etag,
                             Id = searchResult.Id.PlaylistId,
                             Kind = searchResult.Id.Kind,
                             Snippet = new Playlist.PlaylistSnippet
                             {
-                                ChannelId = searchResult.Snippet.ChannelId,
-                                PublishedAt = searchResult.Snippet.PublishedAt,
                                 ChannelTitle = searchResult.Snippet.ChannelTitle,
-                                Description = searchResult.Snippet.Description,
                                 Thumbnails = searchResult.Snippet.Thumbnails,
                                 Title = searchResult.Snippet.Title
                             }
