@@ -67,6 +67,14 @@ namespace UniTube.Sources
 
                 return await videoListRequest.ExecuteAsync();
             });
+            
+            foreach (var item in response.Items)
+            {
+                if (item.Snippet.Title.ToLower() == "Deleted video")
+                {
+                    response.Items.Remove(item);
+                }
+            }
 
             _trending.AddRange(response.Items);
             _nextPageToken = response.NextPageToken;
