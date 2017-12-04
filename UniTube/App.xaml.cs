@@ -10,6 +10,7 @@ using UniTube.Views;
 
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Background;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation.Metadata;
 using Windows.Graphics.Display;
 using Windows.UI.ViewManagement;
@@ -78,6 +79,8 @@ namespace UniTube
             keys.TryAdd(Pages.Settings, typeof(SettingsPage));
             keys.TryAdd(Pages.Trending, typeof(TrendingPage));
             keys.TryAdd(Pages.Video, typeof(VideoPage));
+
+            CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
 
             var display = DisplayInformation.GetForCurrentView();
             display.OrientationChanged += OnDisplayOrientationChanged;
