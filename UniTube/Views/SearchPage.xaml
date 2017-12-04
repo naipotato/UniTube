@@ -41,7 +41,7 @@
                 
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        
+
         <GridView ItemsSource="{x:Bind ViewModel.SearchList, Mode=OneWay}"
                   SelectionMode="None"
                   IsItemClickEnabled="True"
@@ -53,9 +53,9 @@
                   ItemContainerTransitions="{StaticResource GridViewItemContainerTransitions}"
                   Padding="10 10 -5 5">
             <GridView.ItemTemplate>
-                <DataTemplate x:DataType="resources:SearchResult">
+                <DataTemplate x:DataType="resources:Video">
                     <Grid Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
-                        
+
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
@@ -65,19 +65,26 @@
                             <Rectangle Height="213.75"
                                        Width="380"
                                        Grid.RowSpan="1">
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{x:Bind Snippet.Thumbnails, Converter={StaticResource ThumbnailsToBitmapImageConverter}}"
-                                                    Stretch="UniformToFill" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="{x:Bind Snippet.Thumbnails, Converter={StaticResource ThumbnailsToBitmapImageConverter}}"
+                                                Stretch="UniformToFill" />
+                                </Rectangle.Fill>
+                            </Rectangle>
                         </Viewbox>
-                        <Grid Background="{ThemeResource SystemControlBackgroundAltMediumBrush}" 
-                              Opacity="0.9" 
-                              VerticalAlignment="Bottom" 
+                        <Grid Background="{ThemeResource SystemControlBackgroundAltMediumBrush}"
+                              Opacity="0.9"
+                              VerticalAlignment="Bottom"
                               Height="24">
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                                <TextBlock Text="HD" FontWeight="SemiBold" Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
-                                <TextBlock Text="5:33" Margin="5,0,0,0" FontWeight="SemiBold" Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center">
+                                <TextBlock Text="HD"
+                                           FontWeight="SemiBold"
+                                           Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}" />
+                                <TextBlock Text="5:33"
+                                           Margin="5,0,0,0"
+                                           FontWeight="SemiBold"
+                                           Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}" />
                             </StackPanel>
 
                         </Grid>
@@ -85,9 +92,10 @@
                         <TextBlock Text="&#10;&#10;"
                                    Margin="10"
                                    Grid.Row="1" />
-                        
-                        <StackPanel Margin="10" Grid.Row="1">
-                            
+
+                        <StackPanel Margin="10"
+                                    Grid.Row="1">
+
                             <TextBlock MaxLines="2"
                                        Text="{x:Bind Snippet.Title}"
                                        TextTrimming="CharacterEllipsis"
@@ -95,7 +103,7 @@
                                        FontSize="14"
                                        FontWeight="SemiBold"
                                        x:Phase="1" />
-                            
+
                             <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                        Text="{x:Bind Snippet.ChannelTitle}"
                                        TextTrimming="CharacterEllipsis"
@@ -103,26 +111,27 @@
                                        FontSize="12"
                                        x:Phase="2" />
 
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center">
                                 <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                       Text="{x:Bind Snippet.Title}"
-                                       TextTrimming="CharacterEllipsis"
-                                       TextWrapping="Wrap"
-                                       x:Phase="1"
-                                       Margin="0,0,5,0"/>
+                                           Text="{x:Bind Snippet.Title}"
+                                           TextTrimming="CharacterEllipsis"
+                                           TextWrapping="Wrap"
+                                           x:Phase="1"
+                                           Margin="0,0,5,0" />
 
-                                <TextBlock Text="●"/>
+                                <TextBlock Text="●" />
 
                                 <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                       Text="{x:Bind Snippet.ChannelTitle}"
-                                       TextTrimming="CharacterEllipsis"
-                                       TextWrapping="NoWrap"
-                                       x:Phase="2"
-                                       Margin="5,0,0,0"/>
+                                           Text="{x:Bind Snippet.ChannelTitle}"
+                                           TextTrimming="CharacterEllipsis"
+                                           TextWrapping="NoWrap"
+                                           x:Phase="2"
+                                           Margin="5,0,0,0" />
                             </StackPanel>
 
                         </StackPanel>
-                        
+
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
