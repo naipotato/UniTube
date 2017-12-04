@@ -14,7 +14,6 @@
                  Source="{StaticResource Locator}" />
     </Page.DataContext>
 
-
     <Grid>
         
         <VisualStateManager.VisualStateGroups>
@@ -123,19 +122,12 @@
                                 <TextBlock Text="●" />
 
                                 <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-<<<<<<< HEAD
-                                           Text="{x:Bind Snippet.ChannelTitle}"
+                                           Text="{x:Bind Snippet.PublishedAt, Converter={StaticResource DateTimeToStringConverter}}"
                                            TextTrimming="CharacterEllipsis"
                                            TextWrapping="NoWrap"
                                            x:Phase="2"
                                            Margin="5,0,0,0" />
-=======
-                                       Text="{x:Bind Snippet.PublishedAt, Converter={StaticResource DateTimeToStringConverter}}"
-                                       TextTrimming="CharacterEllipsis"
-                                       TextWrapping="NoWrap"
-                                       x:Phase="2"
-                                       Margin="5,0,0,0"/>
->>>>>>> search
+                                
                             </StackPanel>
 
                         </StackPanel>
