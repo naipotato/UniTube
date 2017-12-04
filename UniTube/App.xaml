@@ -37,6 +37,7 @@
             <converters:NotConverter x:Key="NotConverter" />
             <converters:SelectedItemConverter x:Key="SelectedItemConverter" />
             <converters:ThumbnailsToBitmapImageConverter x:Key="ThumbnailsToBitmapImageConverter" />
+            <converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter"/>
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/Generic.xaml" />

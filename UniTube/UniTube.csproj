@@ -106,6 +106,7 @@
     </Compile>
     <Compile Include="Collections\IncrementalLoadingCollection\IIncrementalSource.cs" />
     <Compile Include="Collections\IncrementalLoadingCollection\IncrementalLoadingCollection.cs" />
+    <Compile Include="Converters\DateTimeToStringConverter.cs" />
     <Compile Include="Converters\ThumbnailsToBitmapImageConverter.cs" />
     <Compile Include="Sources\SearchSource.cs" />
     <Compile Include="Sources\TrendingSource.cs" />

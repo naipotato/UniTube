@@ -114,7 +114,7 @@
                                 <TextBlock Text="●"/>
 
                                 <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                       Text="{x:Bind Snippet.ChannelTitle}"
+                                       Text="{x:Bind Snippet.PublishedAt, Converter={StaticResource DateTimeToStringConverter}}"
                                        TextTrimming="CharacterEllipsis"
                                        TextWrapping="NoWrap"
                                        x:Phase="2"
