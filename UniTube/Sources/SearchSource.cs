@@ -13,24 +13,24 @@ using Windows.System.UserProfile;
 
 namespace UniTube.Sources
 {
-    public class SearchSource : IIncrementalSource<SearchResult>
+    public class SearchSource : IIncrementalSource<ISearchResult>
     {
         private string _nextPageToken;
         private string _query;
         private int _totalResults = 1;
-        private readonly List<SearchResult> _search;
+        private readonly List<ISearchResult> _search;
         private Action _startFirstLoadAction;
         private Action _endFirstLoadAction;
 
         public SearchSource(string query, Action startFirstLoadAction = null, Action endFirstLoadAction = null)
         {
             _query = query;
-            _search = new List<SearchResult>();
+            _search = new List<ISearchResult>();
             _startFirstLoadAction = startFirstLoadAction;
             _endFirstLoadAction = endFirstLoadAction;
         }
 
-        public async Task<IEnumerable<SearchResult>> GetPagedItemsAsync(int pageIndex, int pageSize, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<IEnumerable<ISearchResult>> GetPagedItemsAsync(int pageIndex, int pageSize, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (_search.Count < _totalResults && _search.Count < ((pageIndex + 1) * pageSize))
             {
@@ -70,7 +70,66 @@ namespace UniTube.Sources
                 return await searchListRequest.ExecuteAsync();
             });
 
-            _search.AddRange(response.Items);
+            foreach (var searchResult in response.Items)
+            {
+                switch (searchResult.Id.Kind)
+                {
+                    case "youtube#video":
+                        var video = new Video
+                        {
+                            Etag = searchResult.Etag,
+                            Id = searchResult.Id.VideoId,
+                            Kind = searchResult.Id.Kind,
+                            Snippet = new Video.VideoSnippet
+                            {
+                                ChannelId = searchResult.Snippet.ChannelId,
+                                ChannelTitle = searchResult.Snippet.ChannelTitle,
+                                PublishedAt = searchResult.Snippet.PublishedAt,
+                                Description = searchResult.Snippet.Description,
+                                Title = searchResult.Snippet.Title,
+                                Thumbnails = searchResult.Snippet.Thumbnails
+                            }
+                        };
+                        _search.Add(video);
+                        break;
+                    case "youtube#channel":
+                        var channel = new Channel
+                        {
+                            Etag = searchResult.Etag,
+                            Id = searchResult.Id.ChannelId,
+                            Kind = searchResult.Id.Kind,
+                            Snippet = new Channel.ChannelSnippet
+                            {
+                                Description = searchResult.Snippet.Description,
+                                PublishedAt = searchResult.Snippet.PublishedAt,
+                                Thumbnails = searchResult.Snippet.Thumbnails,
+                                Title = searchResult.Snippet.Title
+                            }
+                        };
+                        _search.Add(channel);
+                        break;
+                    case "youtube#playlist":
+                        var playlist = new Playlist
+                        {
+                            Etag = searchResult.Etag,
+                            Id = searchResult.Id.PlaylistId,
+                            Kind = searchResult.Id.Kind,
+                            Snippet = new Playlist.PlaylistSnippet
+                            {
+                                ChannelId = searchResult.Snippet.ChannelId,
+                                PublishedAt = searchResult.Snippet.PublishedAt,
+                                ChannelTitle = searchResult.Snippet.ChannelTitle,
+                                Description = searchResult.Snippet.Description,
+                                Thumbnails = searchResult.Snippet.Thumbnails,
+                                Title = searchResult.Snippet.Title
+                            }
+                        };
+                        _search.Add(playlist);
+                        break;
+                }
+
+            }
+
             _nextPageToken = response.NextPageToken;
             _totalResults = response.PageInfo.TotalResults;
         }
