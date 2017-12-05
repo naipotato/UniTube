@@ -7,6 +7,7 @@
       xmlns:cu="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,5)"
       xmlns:fcu="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)"
       xmlns:resources="using:UniTube.Core.Resources"
+      xmlns:datatemplateselectors="using:UniTube.DataTemplateSelectors"
       mc:Ignorable="d">
 
     <Page.DataContext>
@@ -14,7 +15,101 @@
                  Source="{StaticResource Locator}" />
     </Page.DataContext>
 
+    <Page.Resources>
+        <datatemplateselectors:ResourceTemplateSelector x:Key="ResourceTemplateSelector">
+            <datatemplateselectors:ResourceTemplateSelector.VideoTemplate>
+                <DataTemplate x:DataType="resources:Video">
+                    <Grid Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
 
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Viewbox>
+                            <Rectangle Height="213.75"
+                                       Width="380"
+                                       Grid.RowSpan="1">
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="{x:Bind Snippet.Thumbnails, Converter={StaticResource ThumbnailsToBitmapImageConverter}}"
+                                                Stretch="UniformToFill" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Viewbox>
+                        <Grid Background="{ThemeResource SystemControlBackgroundAltMediumBrush}"
+                              Opacity="0.9"
+                              VerticalAlignment="Bottom"
+                              Height="24">
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center">
+                                <TextBlock Text="HD"
+                                           FontWeight="SemiBold"
+                                           Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}" />
+                                <TextBlock Text="5:33"
+                                           Margin="5,0,0,0"
+                                           FontWeight="SemiBold"
+                                           Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}" />
+                            </StackPanel>
+
+                        </Grid>
+
+                        <TextBlock Text="&#10;&#10;"
+                                   Margin="10"
+                                   Grid.Row="1" />
+
+                        <StackPanel Margin="10"
+                                    Grid.Row="1">
+
+                            <TextBlock MaxLines="2"
+                                       Text="{x:Bind Snippet.Title}"
+                                       TextTrimming="CharacterEllipsis"
+                                       TextWrapping="Wrap"
+                                       FontSize="14"
+                                       FontWeight="SemiBold"
+                                       x:Phase="1" />
+
+                            <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                       Text="{x:Bind Snippet.ChannelTitle}"
+                                       TextTrimming="CharacterEllipsis"
+                                       TextWrapping="NoWrap"
+                                       FontSize="12"
+                                       x:Phase="2" />
+
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center">
+
+                                <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                           Text="0 views"
+                                           TextTrimming="CharacterEllipsis"
+                                           TextWrapping="Wrap"
+                                           Margin="0,0,5,0" />
+
+                                <TextBlock Text="·" />
+
+                                <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                           Text="{x:Bind Snippet.PublishedAt, Converter={StaticResource DateTimeToStringConverter}}"
+                                           TextTrimming="CharacterEllipsis"
+                                           TextWrapping="NoWrap"
+                                           x:Phase="2"
+                                           Margin="5,0,0,0" />
+
+                            </StackPanel>
+
+                        </StackPanel>
+
+                    </Grid>
+                </DataTemplate>
+            </datatemplateselectors:ResourceTemplateSelector.VideoTemplate>
+            <datatemplateselectors:ResourceTemplateSelector.ChannelTemplate>
+                <DataTemplate />
+            </datatemplateselectors:ResourceTemplateSelector.ChannelTemplate>
+            <datatemplateselectors:ResourceTemplateSelector.PlaylistTemplate>
+                <DataTemplate />
+            </datatemplateselectors:ResourceTemplateSelector.PlaylistTemplate>
+        </datatemplateselectors:ResourceTemplateSelector>
+    </Page.Resources>
+    
     <Grid>
         
         <VisualStateManager.VisualStateGroups>
@@ -41,7 +136,7 @@
                 
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        
+
         <GridView ItemsSource="{x:Bind ViewModel.SearchList, Mode=OneWay}"
                   SelectionMode="None"
                   IsItemClickEnabled="True"
@@ -51,81 +146,8 @@
                   cu:ItemContainerStyle="{StaticResource StretchGridViewItemStyle}"
                   fcu:ItemContainerStyle="{StaticResource StretchRevealGridViewItemStyle}"
                   ItemContainerTransitions="{StaticResource GridViewItemContainerTransitions}"
+                  ItemTemplateSelector="{StaticResource ResourceTemplateSelector}"
                   Padding="10 10 -5 5">
-            <GridView.ItemTemplate>
-                <DataTemplate x:DataType="resources:SearchResult">
-                    <Grid Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
-                        
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-
-                        <Viewbox>
-                            <Rectangle Height="213.75"
-                                       Width="380"
-                                       Grid.RowSpan="1">
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{x:Bind Snippet.Thumbnails, Converter={StaticResource ThumbnailsToBitmapImageConverter}}"
-                                                    Stretch="UniformToFill" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                        </Viewbox>
-                        <Grid Background="{ThemeResource SystemControlBackgroundAltMediumBrush}" 
-                              Opacity="0.9" 
-                              VerticalAlignment="Bottom" 
-                              Height="24">
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                                <TextBlock Text="HD" FontWeight="SemiBold" Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
-                                <TextBlock Text="5:33" Margin="5,0,0,0" FontWeight="SemiBold" Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
-                            </StackPanel>
-
-                        </Grid>
-
-                        <TextBlock Text="&#10;&#10;"
-                                   Margin="10"
-                                   Grid.Row="1" />
-                        
-                        <StackPanel Margin="10" Grid.Row="1">
-                            
-                            <TextBlock MaxLines="2"
-                                       Text="{x:Bind Snippet.Title}"
-                                       TextTrimming="CharacterEllipsis"
-                                       TextWrapping="Wrap"
-                                       FontSize="14"
-                                       FontWeight="SemiBold"
-                                       x:Phase="1" />
-                            
-                            <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                       Text="{x:Bind Snippet.ChannelTitle}"
-                                       TextTrimming="CharacterEllipsis"
-                                       TextWrapping="NoWrap"
-                                       FontSize="12"
-                                       x:Phase="2" />
-
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                       Text="{x:Bind Snippet.Title}"
-                                       TextTrimming="CharacterEllipsis"
-                                       TextWrapping="Wrap"
-                                       x:Phase="1"
-                                       Margin="0,0,5,0"/>
-
-                                <TextBlock Text="●"/>
-
-                                <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                       Text="{x:Bind Snippet.PublishedAt, Converter={StaticResource DateTimeToStringConverter}}"
-                                       TextTrimming="CharacterEllipsis"
-                                       TextWrapping="NoWrap"
-                                       x:Phase="2"
-                                       Margin="5,0,0,0"/>
-                            </StackPanel>
-
-                        </StackPanel>
-                        
-                    </Grid>
-                </DataTemplate>
-            </GridView.ItemTemplate>
         </GridView>
     </Grid>
 </Page>

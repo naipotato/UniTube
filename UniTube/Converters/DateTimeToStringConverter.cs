@@ -8,127 +8,68 @@ namespace UniTube.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value is DateTime)
+            if (value is DateTime dateTime)
             {
-                DateTime date1 = (DateTime)value;
-                TimeSpan timeSpan = date1.Subtract(DateTime.Now);
-                if (-(timeSpan.Seconds) <= 59 && timeSpan.Hours == 0 && timeSpan.Minutes == 0 && timeSpan.Days == 0)
+                var timeSpan = DateTime.Now - dateTime;
+                if (timeSpan < TimeSpan.FromMinutes(1))
                 {
-                    return "Hace unos segundos";
+                    return "A few seconds ago";
                 }
-                if (-(timeSpan.Minutes) <= 10 && -(timeSpan.Minutes) >= 1 && timeSpan.Hours == 0 && timeSpan.Days == 0)
+                else if (timeSpan <= TimeSpan.FromMinutes(10) && timeSpan > TimeSpan.FromMinutes(1))
                 {
-                    return "Hace unos minutos";
+                    return "A few minutes ago";
                 }
-                if (-(timeSpan.Minutes) <= 59 && -(timeSpan.Minutes) > 10 && timeSpan.Hours == 0 && timeSpan.Days == 0)
+                else if (timeSpan < TimeSpan.FromHours(1) && timeSpan > TimeSpan.FromMinutes(10))
                 {
-                    return "Hace " + -(timeSpan.Minutes) + " minutos";
+                    return $"{timeSpan.Minutes} minutes ago";
                 }
-                if (-(timeSpan.Hours) == 1 && timeSpan.Days == 0)
+                else if (timeSpan == TimeSpan.FromHours(1))
                 {
-                    return "Hace una hora";
+                    return "An hour ago";
                 }
-                if (-(timeSpan.Hours) <= 23 && -(timeSpan.Minutes) < 59 && -(timeSpan.Hours) > 1 && timeSpan.Days == 0)
+                else if (timeSpan < TimeSpan.FromDays(1) && timeSpan > TimeSpan.FromHours(1))
                 {
-                    return "Hace " + -(timeSpan.Hours) + " horas";
+                    return $"{timeSpan.Hours} hours ago";
                 }
-                if (-(timeSpan.Days) == 1)
+                else if (timeSpan == TimeSpan.FromDays(1))
                 {
-                    return "Hace un dia";
+                    return "A day ago";
                 }
-                if (-(timeSpan.Days) <= 7 && -(timeSpan.Days) > 1)
+                else if (timeSpan < TimeSpan.FromDays(7) && timeSpan > TimeSpan.FromDays(1))
                 {
-                    return "Hace " + -(timeSpan.Days) + " dias";
+                    return $"{timeSpan.Days} days ago";
                 }
-                if (-(timeSpan.Days) <= 31 && -(timeSpan.Days) > 7)
+                else if (timeSpan == TimeSpan.FromDays(7))
                 {
-                    int week = 1;
-                    return "Hace una semana";
-                    if (-(timeSpan.Days) > 7)
-                    {
-                        week = 2;
-                        return "Hace " + week + " semanas";
-                    }
-                    if (-(timeSpan.Days) > 14)
-                    {
-                        week = 3;
-                        return "Hace " + week + " semanas";
-                    }
-                    if (-(timeSpan.Days) > 28)
-                    {
-                        week = 4;
-                        return "Hace " + week + " semanas";
-                    }
-
+                    return "A week ago";
                 }
-                if (-(timeSpan.Days) < 365 && -(timeSpan.Days) > 31)
+                else if (timeSpan < TimeSpan.FromDays(30) && timeSpan > TimeSpan.FromDays(7))
                 {
-                    int month = 1;
-                    return "Hace un mes";
-                    if (-(timeSpan.Days) >= 56)
-                    {
-                        month = 2;
-                        return "Hace " + month + " meses";
-                    }
-                    if (-(timeSpan.Days) >= 84)
-                    {
-                        month = 3;
-                        return "Hace " + month + " meses";
-                    }
-                    if (-(timeSpan.Days) >= 112)
-                    {
-                        month = 4;
-                        return "Hace " + month + " meses";
-                    }
-                    if (-(timeSpan.Days) >= 140)
-                    {
-                        month = 5;
-                        return "Hace " + month + " meses";
-                    }
-                    if (-(timeSpan.Days) >= 168)
-                    {
-                        month = 6;
-                        return "Hace " + month + " meses";
-                    }
-                    if (-(timeSpan.Days) >= 196)
-                    {
-                        month = 7;
-                        return "Hace " + month + " meses";
-                    }
-                    if (-(timeSpan.Days) >= 224)
-                    {
-                        month = 8;
-                        return "Hace " + month + " meses";
-                    }
-                    if (-(timeSpan.Days) >= 252)
-                    {
-                        month = 9;
-                        return "Hace " + month + " meses";
-                    }
-                    if (-(timeSpan.Days) >= 280)
-                    {
-                        month = 10;
-                        return "Hace " + month + " meses";
-                    }
-                    if (-(timeSpan.Days) >= 308)
-                    {
-                        month = 11;
-                        return "Hace " + month + " meses";
-                    }
-                    if (-(timeSpan.Days) >= 336)
-                    {
-                        month = 12;
-                        return "Hace " + month + " meses";
-                    }
+                    return $"{Math.Truncate(timeSpan.Days / 7d)} weeks ago";
+                }
+                else if (timeSpan == TimeSpan.FromDays(30))
+                {
+                    return "A month ago";
+                }
+                else if (timeSpan < TimeSpan.FromDays(365) && timeSpan > TimeSpan.FromDays(30))
+                {
+                    return $"{Math.Truncate(timeSpan.Days / 30d)} months ago";
+                }
+                else if (timeSpan == TimeSpan.FromDays(365))
+                {
+                    return "A year ago";
+                }
+                else if (timeSpan > TimeSpan.FromDays(365))
+                {
+                    return $"{Math.Truncate(timeSpan.Days / 365d)} years ago";
                 }
             }
             else if (value is null)
             {
-                return "None";
+                return string.Empty;
             }
 
             throw new NotImplementedException();
-
         }
         
 

@@ -18,7 +18,7 @@ namespace UniTube.ViewModels
         private SearchSource _searchSource;
         private string _query = string.Empty;
 
-        public IncrementalLoadingCollection<SearchSource, SearchResult> SearchList { get; private set; }
+        public IncrementalLoadingCollection<SearchSource, ISearchResult> SearchList { get; private set; }
 
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
@@ -35,7 +35,7 @@ namespace UniTube.ViewModels
                 {
                     loading.IsLoading = false;
                 });
-                SearchList = new IncrementalLoadingCollection<SearchSource, SearchResult>(_searchSource,
+                SearchList = new IncrementalLoadingCollection<SearchSource, ISearchResult>(_searchSource,
                     onError: (ex) =>
                     {
                         loading.IsLoading = false;
