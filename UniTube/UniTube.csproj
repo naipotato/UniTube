@@ -108,6 +108,7 @@
     <Compile Include="Collections\IncrementalLoadingCollection\IncrementalLoadingCollection.cs" />
     <Compile Include="Converters\DateTimeToStringConverter.cs" />
     <Compile Include="Converters\ThumbnailsToBitmapImageConverter.cs" />
+    <Compile Include="DataTemplateSelectors\ResourceTemplateSelector.cs" />
     <Compile Include="Sources\SearchSource.cs" />
     <Compile Include="Sources\TrendingSource.cs" />
     <Compile Include="Controls\Toolbar\Toolbar.cs" />
