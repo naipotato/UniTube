@@ -28,11 +28,10 @@
 
                         <Viewbox>
                             <Rectangle Height="213.75"
-                                       Width="380"
-                                       Grid.RowSpan="1">
+                                       Width="380">
                                 <Rectangle.Fill>
                                     <ImageBrush ImageSource="{x:Bind Snippet.Thumbnails, Converter={StaticResource ThumbnailsToBitmapImageConverter}}"
-                                                Stretch="UniformToFill" />
+                                                Stretch="UniformToFill" />                                    
                                 </Rectangle.Fill>
                             </Rectangle>
                         </Viewbox>
@@ -54,9 +53,17 @@
 
                         </Grid>
 
-                        <TextBlock Text="&#10;&#10;"
-                                   Margin="10"
-                                   Grid.Row="1" />
+                        <StackPanel Margin="10" 
+                                    Grid.Row="1">
+
+                            <TextBlock FontSize="23" 
+                                       Text="&#10;" />
+
+                            <TextBlock />
+
+                            <Button Style="{StaticResource TextBlockButtonStyle}" />
+
+                        </StackPanel>
 
                         <StackPanel Margin="10"
                                     Grid.Row="1">
@@ -102,7 +109,101 @@
                 </DataTemplate>
             </datatemplateselectors:ResourceTemplateSelector.VideoTemplate>
             <datatemplateselectors:ResourceTemplateSelector.ChannelTemplate>
-                <DataTemplate />
+                <DataTemplate x:DataType="resources:Channel">
+                    <Grid Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Viewbox>
+                            <Grid Height="213.75"
+                                  Width="380">
+                                
+                                <Rectangle Height="213.75"
+                                           Width="380">
+                                    <Rectangle.Fill>
+                                        <ImageBrush ImageSource="{x:Bind Snippet.Thumbnails, Converter={StaticResource ThumbnailsToBitmapImageConverter}}"
+                                                Stretch="UniformToFill" />
+                                    </Rectangle.Fill>
+                                </Rectangle>
+
+                                <Rectangle Height="213.75"
+                                           Width="380">
+                                    <Rectangle.Fill>
+                                        <fcu:AcrylicBrush BackgroundSource="Backdrop" TintOpacity="0"/>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+
+                                <Ellipse Height="203.75" 
+                                         Width="203.75"
+                                         Margin="5">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="{x:Bind Snippet.Thumbnails, Converter={StaticResource ThumbnailsToBitmapImageConverter}}"
+                                                    Stretch="UniformToFill" />
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                
+                            </Grid>
+                        </Viewbox>
+
+                        <StackPanel Margin="10" 
+                                    Grid.Row="1">
+
+                            <TextBlock FontSize="23" 
+                                       Text="&#10;" />
+
+                            <TextBlock />
+
+                            <Button Style="{StaticResource TextBlockButtonStyle}" />
+
+                        </StackPanel>
+
+                        <StackPanel Margin="10"
+                                    Grid.Row="1">
+
+                            <TextBlock MaxLines="2"
+                                       Text="{x:Bind Snippet.Title}"
+                                       TextTrimming="CharacterEllipsis"
+                                       TextWrapping="Wrap"
+                                       FontSize="16"
+                                       TextAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       FontWeight="SemiBold"
+                                       x:Phase="1" />
+
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center">
+
+                                <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                           Text="0 subscribers"
+                                           TextTrimming="CharacterEllipsis"
+                                           TextWrapping="NoWrap"
+                                           Margin="0,0,5,0" />
+
+                                <TextBlock Text="·" />
+
+                                <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                           Text="0 videos"
+                                           TextTrimming="CharacterEllipsis"
+                                           TextWrapping="NoWrap"
+                                           Margin="5,0,0,0" />
+
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                                        Grid.Row="1">
+                                <Button Content="Subscribe"
+                                        Style="{ThemeResource TextBlockButtonStyle}" 
+                                        Foreground="{StaticResource SystemControlForegroundBaseHighBrush}" />
+                            </StackPanel>
+
+                        </StackPanel>
+
+                    </Grid>
+                </DataTemplate>
             </datatemplateselectors:ResourceTemplateSelector.ChannelTemplate>
             <datatemplateselectors:ResourceTemplateSelector.PlaylistTemplate>
                 <DataTemplate />
