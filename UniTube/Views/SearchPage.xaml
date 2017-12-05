@@ -112,14 +112,15 @@
 
                             <StackPanel Orientation="Horizontal"
                                         HorizontalAlignment="Center">
+                                
                                 <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                           Text="{x:Bind Snippet.Title}"
+                                           Text="0 views"
                                            TextTrimming="CharacterEllipsis"
                                            TextWrapping="Wrap"
-                                           x:Phase="1"
+                                           
                                            Margin="0,0,5,0" />
 
-                                <TextBlock Text="●" />
+                                <TextBlock Text="·" />
 
                                 <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                            Text="{x:Bind Snippet.PublishedAt, Converter={StaticResource DateTimeToStringConverter}}"
