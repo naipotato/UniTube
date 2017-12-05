@@ -7,6 +7,7 @@
       xmlns:cu="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,5)"
       xmlns:fcu="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)"
       xmlns:resources="using:UniTube.Core.Resources"
+      xmlns:datatemplateselectors="using:UniTube.DataTemplateSelectors"
       mc:Ignorable="d">
 
     <Page.DataContext>
@@ -14,44 +15,9 @@
                  Source="{StaticResource Locator}" />
     </Page.DataContext>
 
-    <Grid>
-        
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                
-                <VisualState>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
-                    </VisualState.StateTriggers>
-                </VisualState>
-                
-                <VisualState>
-                    
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="641" />
-                    </VisualState.StateTriggers>
-                    
-                    <VisualState.Setters>
-                        <Setter Target="SearchGridView.Padding"
-                                Value="20 20 5 15" />
-                    </VisualState.Setters>
-                    
-                </VisualState>
-                
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-
-        <GridView ItemsSource="{x:Bind ViewModel.SearchList, Mode=OneWay}"
-                  SelectionMode="None"
-                  IsItemClickEnabled="True"
-                  helpers:ListViewBehavior.FillBeforeWrap="True"
-                  helpers:ListViewBehavior.MinItemWidth="190"
-                  x:Name="SearchGridView"
-                  cu:ItemContainerStyle="{StaticResource StretchGridViewItemStyle}"
-                  fcu:ItemContainerStyle="{StaticResource StretchRevealGridViewItemStyle}"
-                  ItemContainerTransitions="{StaticResource GridViewItemContainerTransitions}"
-                  Padding="10 10 -5 5">
-            <GridView.ItemTemplate>
+    <Page.Resources>
+        <datatemplateselectors:ResourceTemplateSelector x:Key="ResourceTemplateSelector">
+            <datatemplateselectors:ResourceTemplateSelector.VideoTemplate>
                 <DataTemplate x:DataType="resources:Video">
                     <Grid Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
 
@@ -112,12 +78,11 @@
 
                             <StackPanel Orientation="Horizontal"
                                         HorizontalAlignment="Center">
-                                
+
                                 <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                            Text="0 views"
                                            TextTrimming="CharacterEllipsis"
                                            TextWrapping="Wrap"
-                                           
                                            Margin="0,0,5,0" />
 
                                 <TextBlock Text="·" />
@@ -128,14 +93,61 @@
                                            TextWrapping="NoWrap"
                                            x:Phase="2"
                                            Margin="5,0,0,0" />
-                                
+
                             </StackPanel>
 
                         </StackPanel>
 
                     </Grid>
                 </DataTemplate>
-            </GridView.ItemTemplate>
+            </datatemplateselectors:ResourceTemplateSelector.VideoTemplate>
+            <datatemplateselectors:ResourceTemplateSelector.ChannelTemplate>
+                <DataTemplate />
+            </datatemplateselectors:ResourceTemplateSelector.ChannelTemplate>
+            <datatemplateselectors:ResourceTemplateSelector.PlaylistTemplate>
+                <DataTemplate />
+            </datatemplateselectors:ResourceTemplateSelector.PlaylistTemplate>
+        </datatemplateselectors:ResourceTemplateSelector>
+    </Page.Resources>
+    
+    <Grid>
+        
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                
+                <VisualState>
+                    
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="641" />
+                    </VisualState.StateTriggers>
+                    
+                    <VisualState.Setters>
+                        <Setter Target="SearchGridView.Padding"
+                                Value="20 20 5 15" />
+                    </VisualState.Setters>
+                    
+                </VisualState>
+                
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <GridView ItemsSource="{x:Bind ViewModel.SearchList, Mode=OneWay}"
+                  SelectionMode="None"
+                  IsItemClickEnabled="True"
+                  helpers:ListViewBehavior.FillBeforeWrap="True"
+                  helpers:ListViewBehavior.MinItemWidth="190"
+                  x:Name="SearchGridView"
+                  cu:ItemContainerStyle="{StaticResource StretchGridViewItemStyle}"
+                  fcu:ItemContainerStyle="{StaticResource StretchRevealGridViewItemStyle}"
+                  ItemContainerTransitions="{StaticResource GridViewItemContainerTransitions}"
+                  ItemTemplateSelector="{StaticResource ResourceTemplateSelector}"
+                  Padding="10 10 -5 5">
         </GridView>
     </Grid>
 </Page>
