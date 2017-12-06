@@ -206,7 +206,108 @@
                 </DataTemplate>
             </datatemplateselectors:ResourceTemplateSelector.ChannelTemplate>
             <datatemplateselectors:ResourceTemplateSelector.PlaylistTemplate>
-                <DataTemplate />
+                <DataTemplate x:DataType="resources:Playlist">
+                    <Grid Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Viewbox>
+                            <Rectangle Height="213.75"
+                                       Width="380">
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="{x:Bind Snippet.Thumbnails, Converter={StaticResource ThumbnailsToBitmapImageConverter}}"
+                                                Stretch="UniformToFill" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Viewbox>
+                        <Grid>
+
+                            <Rectangle Fill="{ThemeResource SystemControlBackgroundAltMediumBrush}"
+                                       HorizontalAlignment="Left"
+                                       Width="30"
+                                       Opacity="0.9" />
+
+                            <TextBlock Text=""
+                                       FontFamily="Segoe MDL2 Assets"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="7" />
+
+                            <Ellipse Fill="{ThemeResource SystemControlBackgroundAltMediumBrush}"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     Width="40"
+                                     Height="40"
+                                     Opacity="0.9" />
+
+                            <TextBlock Text=""
+                                       FontFamily="Segoe MDL2 Assets"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       FontSize="14" />
+
+                            <Rectangle Fill="{ThemeResource SystemControlBackgroundAltMediumBrush}"
+                                       HorizontalAlignment="Right"
+                                       Width="30"
+                                       Opacity="0.9" />
+
+                            <TextBlock Text=""
+                                       FontFamily="Segoe MDL2 Assets"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Right"
+                                       Margin="7" />
+
+                        </Grid>
+
+                        <StackPanel Margin="10" 
+                                    Grid.Row="1">
+
+                            <TextBlock FontSize="23" 
+                                       Text="&#10;" />
+
+                            <TextBlock />
+
+                            <Button Style="{StaticResource TextBlockButtonStyle}" />
+
+                        </StackPanel>
+
+                        <StackPanel Margin="10"
+                                    Grid.Row="1">
+
+                            <TextBlock MaxLines="2"
+                                       Text="{x:Bind Snippet.Title}"
+                                       TextTrimming="CharacterEllipsis"
+                                       TextWrapping="Wrap"
+                                       FontSize="14"
+                                       FontWeight="SemiBold"
+                                       x:Phase="1" />
+
+                            <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                       Text="{x:Bind Snippet.ChannelTitle}"
+                                       TextTrimming="CharacterEllipsis"
+                                       TextWrapping="NoWrap"
+                                       FontSize="12"
+                                       x:Phase="2" />
+
+
+
+                            <StackPanel Orientation="Horizontal"
+                                        VerticalAlignment="Bottom"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="1">
+                                <Button Content="See complete list"
+                                        Style="{ThemeResource TextBlockButtonStyle}" 
+                                        Foreground="{StaticResource SystemControlForegroundBaseHighBrush}" />
+                            </StackPanel>
+
+
+                        </StackPanel>
+
+                    </Grid>
+                </DataTemplate>
             </datatemplateselectors:ResourceTemplateSelector.PlaylistTemplate>
         </datatemplateselectors:ResourceTemplateSelector>
     </Page.Resources>
