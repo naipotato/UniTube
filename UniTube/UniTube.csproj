@@ -353,13 +353,13 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Template10\Template10.csproj">
-      <Project>{8ab2ee57-9860-4f26-9ff4-5959fb7606dd}</Project>
-      <Name>Template10</Name>
-    </ProjectReference>
     <ProjectReference Include="..\UniTube.Core\UniTube.Core.csproj">
       <Project>{c2bc89fd-262b-475a-8cca-ed591a44a7af}</Project>
       <Name>UniTube.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UniTube.Framework\UniTube.Framework.csproj">
+      <Project>{bec97816-e65f-4f6a-aa18-c0b8ee2b78fd}</Project>
+      <Name>UniTube.Framework</Name>
     </ProjectReference>
     <ProjectReference Include="..\UniTube.Tasks\UniTube.Tasks.csproj">
       <Project>{e413cb41-8d3a-41d8-8c2f-b11862353a62}</Project>

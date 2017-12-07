@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-using Template10.Common;
-using Template10.Utils;
-
+using UniTube.Framework;
 using UniTube.Helpers;
 using UniTube.Services.SettingsServices;
 using UniTube.Views;
@@ -19,14 +17,14 @@ using Windows.UI.Xaml.Media;
 
 namespace UniTube
 {
-    sealed partial class App : BootStrapper
+    sealed partial class App : MvvmApplication
     {
         public App()
         {
             InitializeComponent();
 
             ShowShellBackButton = false;
-            SplashFactory = (s) => new Splash(s);
+            ExtendedSplashScreenFactory = (s) => new Splash(s);
 
             var settings = SettingsService.Instance;
             if (settings.AppTheme != ElementTheme.Default)
