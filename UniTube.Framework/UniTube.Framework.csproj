@@ -106,7 +106,15 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AppModel\ISessionStateService.cs" />
     <Compile Include="MvvmApplication.cs" />
+    <Compile Include="Navigation\FrameFacade.cs" />
+    <Compile Include="Navigation\IFrameFacade.cs" />
+    <Compile Include="Navigation\INavigationAware.cs" />
+    <Compile Include="Navigation\INavigationService.cs" />
+    <Compile Include="Navigation\NavigatedToEventArgs.cs" />
+    <Compile Include="Navigation\NavigatingFromEventArgs.cs" />
+    <Compile Include="Navigation\NavigationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\UniTube.Framework.rd.xml" />
   </ItemGroup>

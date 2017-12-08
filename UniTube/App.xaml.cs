@@ -56,7 +56,7 @@ namespace UniTube
             }
         }
 
-        public override UIElement CreateRootElement(IActivatedEventArgs e)
+        public override UIElement OnCreateRootElement(IActivatedEventArgs e)
         {
             var navigationService = NavigationServiceFactory(BackButton.Attach, ExistingContent.Include);
             return new Controls.LoadingView
