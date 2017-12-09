@@ -1,8 +1,5 @@
-Brief description about the issue.
+### Expected behavior
 
-- **Device family:** (Mobile or desktop)
-- **Version:** (and if is public or not public)
-- **Steps to reproduce:**
-  - Step 1
-  - Step 2
-  - ...
+### Actual behavior
+
+### Steps to reproduce the behavior
