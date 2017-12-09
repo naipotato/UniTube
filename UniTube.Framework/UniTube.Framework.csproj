@@ -107,6 +107,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AppModel\ISessionStateService.cs" />
+    <Compile Include="AppModel\SessionStateService.cs" />
     <Compile Include="MvvmApplication.cs" />
     <Compile Include="Navigation\FrameFacade.cs" />
     <Compile Include="Navigation\IFrameFacade.cs" />
