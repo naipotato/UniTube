@@ -3,7 +3,11 @@ UniTube is an open source YouTube client built to bring an amazing experience to
 
 ## Why we do this?
 We do because we like it.
+
 We don't know if a lot of users will use it, but even if we are the only users, we will continue developing.
+
+## Social
+We have a group in spanish on Telegram. If you want to join click [here](https://t.me/UnitubeTesters)
 
 ## Build instructions
 **IMPORTANT:** You MUST have Visual Studio 2017 in order to compile this project.
