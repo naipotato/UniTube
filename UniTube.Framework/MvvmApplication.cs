@@ -23,6 +23,10 @@ namespace UniTube.Framework
             Resuming += OnResuming;
         }
 
+        #region Properties
+        /// <summary>
+        /// Gets the actual instance of the <see cref="MvvmApplication"/> class.
+        /// </summary>
         public new static MvvmApplication Current { get; private set; }
 
         /// <summary>
@@ -30,6 +34,10 @@ namespace UniTube.Framework
         /// </summary>
         public bool IsSuspending { get; private set; }
 
+        protected INavigationService NavigationService { get; private set; }
+
+        protected ISessionStateService SessionStateService { get; private set; }
+        #endregion
         private void OnResuming(object sender, object e)
         {
         }
@@ -42,6 +50,10 @@ namespace UniTube.Framework
                 var deferral = e.SuspendingOperation.GetDeferral();
 
                 await OnSuspendingAsync(sender, e);
+
+                NavigationService.Suspending();
+
+                await SessionStateService.SaveAsync();
 
                 deferral.Complete();
             }
