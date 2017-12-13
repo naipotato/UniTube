@@ -112,6 +112,7 @@
     <Compile Include="AppModel\SessionStateService.cs" />
     <Compile Include="MvvmApplication.cs" />
     <Compile Include="Mvvm\BindableBase.cs" />
+    <Compile Include="Mvvm\SessionStateAwarePage.cs" />
     <Compile Include="Mvvm\ViewModelBase.cs" />
     <Compile Include="Mvvm\ViewModelLocationProvider.cs" />
     <Compile Include="Mvvm\ViewModelLocator.cs" />
