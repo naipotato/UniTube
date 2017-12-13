@@ -107,6 +107,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AppModel\AppManifestHelper.cs" />
+    <Compile Include="AppModel\DeviceGestureEventArgs.cs" />
+    <Compile Include="AppModel\IDeviceGestureService.cs" />
     <Compile Include="AppModel\ISessionStateService.cs" />
     <Compile Include="AppModel\RestorableStateAttribute.cs" />
     <Compile Include="AppModel\SessionStateService.cs" />
