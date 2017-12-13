@@ -107,9 +107,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AppModel\ISessionStateService.cs" />
+    <Compile Include="AppModel\RestorableStateAttribute.cs" />
     <Compile Include="AppModel\SessionStateService.cs" />
     <Compile Include="MvvmApplication.cs" />
     <Compile Include="Mvvm\BindableBase.cs" />
+    <Compile Include="Mvvm\ViewModelBase.cs" />
     <Compile Include="Navigation\FrameFacade.cs" />
     <Compile Include="Navigation\IFrameFacade.cs" />
     <Compile Include="Navigation\INavigationAware.cs" />
