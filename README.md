@@ -7,7 +7,7 @@ We develop it because we like to program and we like the UWP (Universal Windows 
 We don't know if many people would use the app, but if even we are the only users, we would continue developing.
 
 ## Social
-We have a group in spanish on Telegram. If you want to join click [here](https://t.me/UnitubeTesters)
+We have a spanish group on Telegram. If you want to join click [here](https://t.me/UnitubeTesters)
 
 ## Build instructions
 **IMPORTANT:** You MUST have Visual Studio 2017 in order to compile this project.
