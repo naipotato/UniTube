@@ -10,7 +10,9 @@ namespace UniTube.Framework
     /// </summary>
     public abstract class MvvmApplication : Application
     {
-        private object _pageKeys;
+        #region Private variables
+        private object _pageKeys; 
+        #endregion
 
         /// <summary>
         /// Initialize a new instance of the <see cref="MvvmApplication"/> class.
@@ -38,6 +40,8 @@ namespace UniTube.Framework
 
         protected ISessionStateService SessionStateService { get; private set; }
         #endregion
+
+        #region Methods
         private void OnResuming(object sender, object e)
         {
         }
@@ -82,5 +86,6 @@ namespace UniTube.Framework
 
             return (_pageKeys = new Dictionary<T, Type>()) as Dictionary<T, Type>;
         }
+        #endregion
     }
 }
