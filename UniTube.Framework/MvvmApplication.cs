@@ -25,12 +25,30 @@ namespace UniTube.Framework
 
         public new static MvvmApplication Current { get; private set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsSuspending { get; private set; }
+
         private void OnResuming(object sender, object e)
         {
         }
+
         private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
+            IsSuspending = true;
+            try
+            {
+                var deferral = e.SuspendingOperation.GetDeferral();
+
+                deferral.Complete();
+            }
+            finally
+            {
+                IsSuspending = false;
+            }
         }
+
         public Dictionary<T, Type> PageKeys<T>() where T : struct, IConvertible
         {
             if (!typeof(T).GetTypeInfo().IsEnum)
