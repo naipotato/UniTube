@@ -108,6 +108,7 @@
   <ItemGroup>
     <Compile Include="AppModel\AppManifestHelper.cs" />
     <Compile Include="AppModel\DeviceGestureEventArgs.cs" />
+    <Compile Include="AppModel\DeviceGestureService.cs" />
     <Compile Include="AppModel\IDeviceGestureService.cs" />
     <Compile Include="AppModel\ISessionStateService.cs" />
     <Compile Include="AppModel\RestorableStateAttribute.cs" />
@@ -132,6 +133,11 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.0.1</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Windows.Phone.PhoneContract">
+      <HintPath>C:\Program Files (x86)\Windows Kits\10\References\10.0.16299.0\Windows.Phone.PhoneContract\1.0.0.0\Windows.Phone.PhoneContract.winmd</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
