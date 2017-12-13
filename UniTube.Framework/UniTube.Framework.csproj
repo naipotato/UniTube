@@ -113,6 +113,7 @@
     <Compile Include="MvvmApplication.cs" />
     <Compile Include="Mvvm\BindableBase.cs" />
     <Compile Include="Mvvm\ViewModelBase.cs" />
+    <Compile Include="Mvvm\ViewModelLocationProvider.cs" />
     <Compile Include="Mvvm\ViewModelLocator.cs" />
     <Compile Include="Navigation\FrameFacade.cs" />
     <Compile Include="Navigation\IFrameFacade.cs" />
