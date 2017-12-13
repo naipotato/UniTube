@@ -1,6 +1,14 @@
 # UniTube-UWP
 UniTube is an open source YouTube client built to bring an amazing experience to the Universal Windows Platform (UWP)
 
+## Why do we develop this app?
+We develop it because we like to program and we like the UWP (Universal Windows Platform).
+
+We don't know if many people would use the app, but if even we are the only users, we would continue developing.
+
+## Social
+We have a spanish group on Telegram. If you want to join click [here](https://t.me/UnitubeTesters)
+
 ## Build instructions
 **IMPORTANT:** You MUST have Visual Studio 2017 in order to compile this project.
 
