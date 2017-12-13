@@ -15,10 +15,22 @@ namespace UniTube.Framework
         /// <summary>
         /// Initialize a new instance of the <see cref="MvvmApplication"/> class.
         /// </summary>
-        public MvvmApplication() => Current = this;
+        public MvvmApplication()
+        {
+            Current = this;
+
+            Suspending += OnSuspending;
+            Resuming += OnResuming;
+        }
 
         public new static MvvmApplication Current { get; private set; }
 
+        private void OnResuming(object sender, object e)
+        {
+        }
+        private async void OnSuspending(object sender, SuspendingEventArgs e)
+        {
+        }
         public Dictionary<T, Type> PageKeys<T>() where T : struct, IConvertible
         {
             if (!typeof(T).GetTypeInfo().IsEnum)
