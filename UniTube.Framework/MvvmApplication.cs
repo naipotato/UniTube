@@ -1,6 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading.Tasks;
+using UniTube.Framework.AppModel;
+using UniTube.Framework.Mvvm;
+using UniTube.Framework.Navigation;
+using Windows.ApplicationModel;
+using Windows.ApplicationModel.Activation;
+using Windows.Foundation;
 using Windows.UI.Xaml;
 
 namespace UniTube.Framework
