@@ -41,6 +41,8 @@ namespace UniTube.Framework
             {
                 var deferral = e.SuspendingOperation.GetDeferral();
 
+                await OnSuspendingAsync(sender, e);
+
                 deferral.Complete();
             }
             finally
@@ -49,17 +51,22 @@ namespace UniTube.Framework
             }
         }
 
+        /// <summary>
+        /// Invoked when the application is suspending, but before the general suspension calls.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <returns>An <see cref="IAsyncAction"/> that represents an asynchronous action.</returns>
+        protected virtual IAsyncAction OnSuspendingAsync(object sender, SuspendingEventArgs e)
+            => Task.CompletedTask.AsAsyncAction();
+
         public Dictionary<T, Type> PageKeys<T>() where T : struct, IConvertible
         {
             if (!typeof(T).GetTypeInfo().IsEnum)
-            {
                 throw new ArgumentException("T must be an enumerated type");
-            }
 
             if (_pageKeys != null && _pageKeys is Dictionary<T, Type>)
-            {
                 return _pageKeys as Dictionary<T, Type>;
-            }
 
             return (_pageKeys = new Dictionary<T, Type>()) as Dictionary<T, Type>;
         }
