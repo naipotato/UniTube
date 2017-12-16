@@ -1,10 +1,8 @@
-﻿using Newtonsoft.Json;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-
+using UniTube.Framework.Utils;
 using Windows.Security.Authentication.Web;
 using Windows.UI.Xaml.Controls;
 using Windows.Web.Http;
@@ -31,7 +29,7 @@ namespace UniTube.Core.Authentication
                 return null;
             }
 
-            string authorizationCode = string.Empty;
+            var authorizationCode = string.Empty;
 
             switch (authenticationResult.ResponseStatus)
             {
@@ -66,8 +64,8 @@ namespace UniTube.Core.Authentication
                 var httpResponse = await httpClient.PostAsync(Client.TokenUri, httpContent);
                 if (httpResponse.IsSuccessStatusCode)
                 {
-                    string contentResponse = await httpResponse.Content.ReadAsStringAsync();
-                    var authResponse = JsonConvert.DeserializeObject<AuthResponse>(contentResponse);
+                    var contentResponse = await httpResponse.Content.ReadAsStringAsync();
+                    var authResponse = await JsonUtils.ToObjectAsync<AuthResponse>(contentResponse);
                     return authResponse;
                 }
                 else
@@ -101,8 +99,8 @@ namespace UniTube.Core.Authentication
                 var httpResponse = await httpClient.PostAsync(Client.TokenUri, httpContent);
                 if (httpResponse.IsSuccessStatusCode)
                 {
-                    string contentResponse = await httpResponse.Content.ReadAsStringAsync();
-                    var authResponse = JsonConvert.DeserializeObject<AuthResponse>(contentResponse);
+                    var contentResponse = await httpResponse.Content.ReadAsStringAsync();
+                    var authResponse = await JsonUtils.ToObjectAsync<AuthResponse>(contentResponse);
                     return authResponse;
                 }
                 else

@@ -5,8 +5,9 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+
+using UniTube.Framework.Utils;
 
 namespace UniTube.Core.Requests
 {
@@ -73,7 +74,7 @@ namespace UniTube.Core.Requests
                 if (httpResponse.IsSuccessStatusCode)
                 {
                     var contentResponse = await httpResponse.Content.ReadAsStringAsync();
-                    var listObject = JsonConvert.DeserializeObject<List<object>>(contentResponse);
+                    var listObject = await JsonUtils.ToObjectAsync<List<object>>(contentResponse);
                     var listString = (listObject[1] as JArray).Select((c) => (string)c).ToList();
                     return listString;
                 }

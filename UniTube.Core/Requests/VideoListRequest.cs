@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-using Newtonsoft.Json;
-
 using UniTube.Core.Responses;
+using UniTube.Framework.Utils;
 
 namespace UniTube.Core.Requests
 {
@@ -129,7 +128,7 @@ namespace UniTube.Core.Requests
                 if (httpResponse.IsSuccessStatusCode)
                 {
                     var contentResponse = await httpResponse.Content.ReadAsStringAsync();
-                    var videoListResponse = JsonConvert.DeserializeObject<VideoListResponse>(contentResponse);
+                    var videoListResponse = await JsonUtils.ToObjectAsync<VideoListResponse>(contentResponse);
                     return videoListResponse;
                 }
                 else
