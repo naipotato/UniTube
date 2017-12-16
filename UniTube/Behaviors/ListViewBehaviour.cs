@@ -3,7 +3,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace UniTube.Helpers
+namespace UniTube.Behaviors
 {
     public static class ListViewBehavior
     {

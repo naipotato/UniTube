@@ -137,7 +137,7 @@
     <Compile Include="Dialogs\WhatsNewDialog.xaml.cs">
       <DependentUpon>WhatsNewDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\ListViewBehaviour.cs" />
+    <Compile Include="Behaviors\ListViewBehaviour.cs" />
     <Compile Include="Converters\NotConverter.cs" />
     <Compile Include="Converters\SelectedItemConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
