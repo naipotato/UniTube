@@ -6,11 +6,11 @@ namespace UniTube.Framework.Navigation
 {
     public interface INavigationService
     {
+        bool CanGoBack { get; }
+        bool CanGoForward { get; }
         Type CurrentPageType { get; }
         object CurrentPageParam { get; }
 
-        bool CanGoBack();
-        bool CanGoForward();
         void ClearHistory();
         void GoBack(NavigationTransitionInfo infoOverride = null);
         void GoForward(NavigationTransitionInfo infoOverride = null);
