@@ -134,6 +134,12 @@
       <Version>10.0.3</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UniTube.Framework\UniTube.Framework.csproj">
+      <Project>{BEC97816-E65F-4F6A-AA18-C0B8EE2B78FD}</Project>
+      <Name>UniTube.Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
