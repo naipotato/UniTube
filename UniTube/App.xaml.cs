@@ -9,10 +9,12 @@ using UniTube.Views;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Background;
 using Windows.ApplicationModel.Core;
+using Windows.Foundation;
 using Windows.Foundation.Metadata;
 using Windows.Graphics.Display;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
 namespace UniTube
@@ -23,7 +25,6 @@ namespace UniTube
         {
             InitializeComponent();
 
-            ShowShellBackButton = false;
             ExtendedSplashScreenFactory = (s) => new Splash(s);
 
             var settings = SettingsService.Instance;
@@ -56,17 +57,13 @@ namespace UniTube
             }
         }
 
-        public override UIElement OnCreateRootElement(IActivatedEventArgs e)
+        protected override UIElement CreateShell(Frame rootFrame) => new Controls.LoadingView
         {
-            var navigationService = NavigationServiceFactory(BackButton.Attach, ExistingContent.Include);
-            return new Controls.LoadingView
-            {
-                Content = navigationService.Frame,
-                RingForeground = Resources["MainColorBrush"] as Brush
-            };
-        }
+            Content = rootFrame,
+            RingForeground = XamlUtils.GetResource("MainColorBrush", default(SolidColorBrush))
+        };
 
-        public override async Task OnInitializeAsync(IActivatedEventArgs args)
+        protected override IAsyncAction OnInitializeAsync(IActivatedEventArgs args) => Task.Run(async () =>
         {
             var keys = PageKeys<Pages>();
             keys.TryAdd(Pages.History, typeof(HistoryPage));
@@ -109,8 +106,6 @@ namespace UniTube
                 }
             }
 
-            var statusBarHideTask = Task.CompletedTask;
-
             if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
             {
                 var statusBar = StatusBar.GetForCurrentView();
@@ -122,21 +117,18 @@ namespace UniTube
 
                     if (display.CurrentOrientation == DisplayOrientations.Landscape || display.CurrentOrientation == DisplayOrientations.LandscapeFlipped)
                     {
-                        statusBarHideTask = statusBar.HideAsync().AsTask();
+                        await statusBar.HideAsync();
                     }
                 }
             }
 
             RegisterBackgroundTask();
+        }).AsAsyncAction();
 
-            await statusBarHideTask;
-        }
-
-        public override Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
+        protected override IAsyncAction OnStartAsync(LaunchActivatedEventArgs args) => Task.Run(() =>
         {
             NavigationService.Navigate(Pages.Master);
-            return Task.CompletedTask;
-        }
+        }).AsAsyncAction();
 
         private void RegisterBackgroundTask()
         {
