@@ -37,24 +37,22 @@ namespace UniTube.Framework.Navigation
         /// <summary>
         /// 
         /// </summary>
+        public bool CanGoBack => _frame.CanGoBack;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool CanGoForward => _frame.CanGoForward;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public Type CurrentPageType => _frame.CurrentPageType;
 
         /// <summary>
         /// 
         /// </summary>
         public object CurrentPageParam => _frame.CurrentPageParam;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public bool CanGoBack() => _frame.CanGoBack();
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public bool CanGoForward() => _frame.CanGoForward();
 
         /// <summary>
         /// 
@@ -70,35 +68,13 @@ namespace UniTube.Framework.Navigation
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="infoOverride"></param>
-        public void GoForward(NavigationTransitionInfo infoOverride = null) => _frame.GoForward(infoOverride);
+        public void GoForward() => _frame.GoForward();
 
-        /// <summary>
-        /// Navigate to the page with the specified key, passing the specified parameter.
-        /// </summary>
-        /// <typeparam name="T">An enum that identifies the key.</typeparam>
-        /// <param name="key">The key.</param>
-        /// <param name="parameter">The parameter.</param>
-        /// <param name="infoOverride">The navigation transition.</param>
-        /// <returns><c>true</c> if the navigation was successful; otherwise, <c>false</c>.</returns>
-        public IAsyncOperation<bool> NavigateAsync<T>(T key, object parameter = null, NavigationTransitionInfo infoOverride = null)
-            where T : struct, IConvertible => Task.Run(() =>
-            {
-                var keys = MvvmApplication.Current.PageKeys<T>();
+        public bool Navigate(string pageToken, object parameter = null, NavigationTransitionInfo infoOverride = null)
+            => NavigateAsync(pageToken, parameter, infoOverride).GetResults();
 
-                if (!keys.ContainsKey(key))
-                    throw new KeyNotFoundException(key.ToString());
-
-                var page = keys[key];
-
-                if ((page.FullName == CurrentPageType?.FullName) && (parameter == CurrentPageParam))
-                    return false;
-
-                if ((page.FullName == CurrentPageType?.FullName) && (parameter?.Equals(CurrentPageParam) ?? false))
-                    return false;
-
-                return _frame.Navigate(page, parameter, infoOverride);
-            }).AsAsyncOperation();
+        public bool Navigate<T>(T key, object parameter = null, NavigationTransitionInfo infoOverride = null)
+            where T : struct, IConvertible => NavigateAsync(key, parameter, infoOverride).GetResults();
 
         /// <summary>
         /// Navigate to the page with the specified page token, passing the specified parameter.
@@ -127,6 +103,33 @@ namespace UniTube.Framework.Navigation
                     return false;
 
                 return _frame.Navigate(pageType, parameter, infoOverride);
+            }).AsAsyncOperation();
+
+        /// <summary>
+        /// Navigate to the page with the specified key, passing the specified parameter.
+        /// </summary>
+        /// <typeparam name="T">An enum that identifies the key.</typeparam>
+        /// <param name="key">The key.</param>
+        /// <param name="parameter">The parameter.</param>
+        /// <param name="infoOverride">The navigation transition.</param>
+        /// <returns><c>true</c> if the navigation was successful; otherwise, <c>false</c>.</returns>
+        public IAsyncOperation<bool> NavigateAsync<T>(T key, object parameter = null, NavigationTransitionInfo infoOverride = null)
+            where T : struct, IConvertible => Task.Run(() =>
+            {
+                var keys = MvvmApplication.Current.PageKeys<T>();
+
+                if (!keys.ContainsKey(key))
+                    throw new KeyNotFoundException(key.ToString());
+
+                var page = keys[key];
+
+                if ((page.FullName == CurrentPageType?.FullName) && (parameter == CurrentPageParam))
+                    return false;
+
+                if ((page.FullName == CurrentPageType?.FullName) && (parameter?.Equals(CurrentPageParam) ?? false))
+                    return false;
+
+                return _frame.Navigate(page, parameter, infoOverride);
             }).AsAsyncOperation();
 
         private void OnFrameNavigatedTo(object sender, NavigatedToEventArgs e) => NavigateToCurrentViewModel(e);
@@ -326,22 +329,16 @@ namespace UniTube.Framework.Navigation
         /// <summary>
         /// 
         /// </summary>
-        public void RestoreSavedNavigation()
+        public void RestoreSavedNavigation() => NavigateToCurrentViewModel(new NavigatedToEventArgs()
         {
-            NavigateToCurrentViewModel(new NavigatedToEventArgs()
-            {
-                NavigationMode = NavigationMode.Refresh,
-                Parameter = CurrentPageParam
-            });
-        }
+            NavigationMode = NavigationMode.Refresh,
+            Parameter = CurrentPageParam
+        });
 
         /// <summary>
         /// 
         /// </summary>
-        public void Suspending()
-        {
-            NavigateFromCurrentViewModel(new NavigatingFromEventArgs(), true);
-        }
+        public void Suspending() => NavigateFromCurrentViewModel(new NavigatingFromEventArgs(), true);
 
         private void NavigateToCurrentViewModel(NavigatedToEventArgs e)
         {
@@ -361,8 +358,7 @@ namespace UniTube.Framework.Navigation
 
             var newView = _frame.Content as FrameworkElement;
             if (newView == null) return;
-            var newViewModel = newView.DataContext as INavigationAware;
-            if (newViewModel != null)
+            if (newView.DataContext is INavigationAware newViewModel)
             {
                 Dictionary<string, object> viewModelState;
                 if (frameState.ContainsKey(viewModelKey))
@@ -383,10 +379,9 @@ namespace UniTube.Framework.Navigation
             var departingView = _frame.Content as FrameworkElement;
             if (departingView == null) return;
             var frameState = _sessionStateService.GetSessionStateForFrame(_frame);
-            var departingViewModel = departingView.DataContext as INavigationAware;
 
             var viewModelKey = $"ViewModel-{_frame.BackStackDepth}";
-            if (departingViewModel != null)
+            if (departingView.DataContext is INavigationAware departingViewModel)
             {
                 var viewModelState = frameState.ContainsKey(viewModelKey) ? frameState[viewModelKey] as Dictionary<string, object> : null;
 
