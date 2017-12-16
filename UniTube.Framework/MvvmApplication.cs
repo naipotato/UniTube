@@ -34,6 +34,8 @@ namespace UniTube.Framework
 
             Suspending += OnSuspending;
             Resuming += OnResuming;
+
+            RestoreNavigationStateOnResume = true;
         }
 
         #region Properties
@@ -65,7 +67,7 @@ namespace UniTube.Framework
         /// <summary>
         /// Gets or sets a value that indicates whether the application triggers navigation restore on app resume.
         /// </summary>
-        protected bool RestoreNavigationStateOnResume { get; set; } = true;
+        protected bool RestoreNavigationStateOnResume { get; set; }
 
         /// <summary>
         /// Gets the session state service.
@@ -212,6 +214,33 @@ namespace UniTube.Framework
         }).AsAsyncAction();
 
         /// <summary>
+        /// Override this method with logic that will be performed after application is activated through other means
+        /// than a normal launch (i.e. Voice Commands, URI activation, being used as a share target from another app).
+        /// For example, navigating to the application's home page.
+        /// </summary>
+        /// <param name="args">The <see cref="IActivatedEventArgs"/> instance containing the event data.</param>
+        /// <returns></returns>
+        protected virtual IAsyncAction OnActivateAsync(IActivatedEventArgs args) => Task.CompletedTask.AsAsyncAction();
+
+        protected override async void OnActivated(IActivatedEventArgs args)
+        {
+            await InitializeShellAsync(args);
+
+            if (Window.Current.Content != null && (!_isRestoringFromTermination || args != null))
+            {
+                await OnActivateAsync(args);
+            }
+            else if (Window.Current.Content != null && _isRestoringFromTermination && !_handledOnResume)
+            {
+                await OnResumeAsync(args);
+            }
+
+            Window.Current.Activate();
+        }
+
+        protected override void OnCachedFileUpdaterActivated(CachedFileUpdaterActivatedEventArgs args) => OnActivated(args);
+
+        /// <summary>
         /// Creates the device gesture service. Use this to inject your own <see cref="IDeviceGestureService"/>
         /// implementation.
         /// </summary>
@@ -262,6 +291,12 @@ namespace UniTube.Framework
                 }
             }
         }
+
+        protected override void OnFileActivated(FileActivatedEventArgs args) => OnActivated(args);
+
+        protected override void OnFileOpenPickerActivated(FileOpenPickerActivatedEventArgs args) => OnActivated(args);
+
+        protected override void OnFileSavePickerActivated(FileSavePickerActivatedEventArgs args) => OnActivated(args);
 
         /// <summary>
         /// Override this method with the initialization logic of your application. Here you can initialize services,
@@ -320,6 +355,10 @@ namespace UniTube.Framework
             OnResumeAsync(null);
         }
 #pragma warning restore CS4014
+
+        protected override void OnSearchActivated(SearchActivatedEventArgs args) => OnActivated(args);
+
+        protected override void OnShareTargetActivated(ShareTargetActivatedEventArgs args) => OnActivated(args);
 
         protected abstract IAsyncAction OnStartAsync(LaunchActivatedEventArgs args);
 
