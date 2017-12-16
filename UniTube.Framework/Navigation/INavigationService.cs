@@ -14,6 +14,8 @@ namespace UniTube.Framework.Navigation
         void ClearHistory();
         void GoBack(NavigationTransitionInfo infoOverride = null);
         void GoForward();
+        bool Navigate(string pageToken, object parameter = null, NavigationTransitionInfo infoOverride = null);
+        bool Navigate<T>(T key, object parameter = null, NavigationTransitionInfo infoOverride = null) where T : struct, IConvertible;
         IAsyncOperation<bool> NavigateAsync(string pageToken, object parameter = null, NavigationTransitionInfo infoOverride = null);
         IAsyncOperation<bool> NavigateAsync<T>(T key, object parameter = null, NavigationTransitionInfo infoOverride = null) where T : struct, IConvertible;
         void RemoveAllPages(string pageToken = null, object parameter = null);
