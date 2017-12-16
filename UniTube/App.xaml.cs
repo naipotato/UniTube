@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 
 using UniTube.Framework;
-using UniTube.Helpers;
+using UniTube.Framework.Utils;
 using UniTube.Services.SettingsServices;
 using UniTube.Views;
 

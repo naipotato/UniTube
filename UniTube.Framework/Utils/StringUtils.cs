@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Globalization;
-
 using Windows.UI;
 
-namespace UniTube.Helpers
+namespace UniTube.Framework.Utils
 {
-    public static class StringExtensions
+    public static class StringUtils
     {
         public static bool IsNullOrEmpty(this string value) => string.IsNullOrEmpty(value);
 
@@ -39,7 +38,7 @@ namespace UniTube.Helpers
                         byte.Parse(value.Substring(4, 2), NumberStyles.HexNumber),
                         byte.Parse(value.Substring(6, 2), NumberStyles.HexNumber));
                 default:
-                    throw new Exception("Color not valid.");
+                    throw new Exception("Invalid color.");
             }
         }
     }

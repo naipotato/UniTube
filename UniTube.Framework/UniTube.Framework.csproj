@@ -127,11 +127,19 @@
     <Compile Include="Navigation\NavigatingFromEventArgs.cs" />
     <Compile Include="Navigation\NavigationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\IEnumerableUtils.cs" />
+    <Compile Include="Utils\JsonUtils.cs" />
+    <Compile Include="Utils\SettingsStorageUtils.cs" />
+    <Compile Include="Utils\StringUtils.cs" />
+    <Compile Include="Utils\XamlUtils.cs" />
     <EmbeddedResource Include="Properties\UniTube.Framework.rd.xml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.0.5</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>10.0.3</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
