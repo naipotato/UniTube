@@ -1,3 +1,6 @@
 .vscode/
+
 bin/
 obj/
+
+Client.Secret.cs
