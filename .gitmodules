@@ -1,0 +1,6 @@
+[submodule "UniTube.Core"]
+	path = UniTube.Core
+	url = https://github.com/NucleuxSoft/UniTube.Core.git
+[submodule "UniTube.GTK"]
+	path = UniTube.GTK
+	url = https://github.com/NucleuxSoft/UniTube.GTK.git
