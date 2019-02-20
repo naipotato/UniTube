@@ -1,6 +1,7 @@
 /* 
- * UniTube - An open source client for YouTube
  * Copyright (C) 2019 Nucleux Software
+ * 
+ * This file is part of UniTube.
  * 
  * UniTube is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,31 +14,18 @@
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with UniTube.  If not, see <https://www.gnu.org/licenses>.
+ * along with UniTube.  If not, see <https://www.gnu.org/licenses/>.
  * 
  * Author: Nahuel Gomez Castro <nahual_gomca@outlook.com.ar>
  */
 
-using System;
-using Gtk;
+using UniTube.Core.Requests;
 
-namespace UniTube.GTK
+namespace UniTube.Core.Resources
 {
-    class Program
+    public class Search
     {
-        [STAThread]
-        public static void Main(string[] args)
-        {
-            Application.Init();
-
-            var app = new Application("org.UniTube.GTK.UniTube.GTK", GLib.ApplicationFlags.None);
-            app.Register(GLib.Cancellable.Current);
-
-            var win = new MainWindow();
-            app.AddWindow(win);
-
-            win.Show();
-            Application.Run();
-        }
+        public static SearchListRequest List(string part)
+            => new SearchListRequest(part);
     }
 }
