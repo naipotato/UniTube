@@ -35,6 +35,13 @@ namespace UniTube.GTK
             builder.Autoconnect(this);
 
             this.Titlebar = new Widgets.HeaderBar();
+
+            this.DeleteEvent += OnDeleteEvent;
+        }
+
+        private void OnDeleteEvent(object sender, DeleteEventArgs a)
+        {
+        	Application.Quit();
         }
     }
 }
