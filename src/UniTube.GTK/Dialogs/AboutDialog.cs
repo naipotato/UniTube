@@ -17,29 +17,18 @@
 // 
 // Author: Nahuel Gomez Castro <nahual_gomca@outlook.com.ar>
 
-using System;
-using GLib;
 using Gtk;
 
 namespace UniTube.GTK
 {
-    class Program
-    {
-        [STAThread]
-        public static void Main(string[] args)
-        {
-			Gtk.Application.Init();
+	class AboutDialog : Gtk.AboutDialog
+	{
+		public AboutDialog() : this(new Builder("AboutDialog.glade")) { }
 
-            var app = new Gtk.Application("com.nucleuxsoft.UniTube",
-				GLib.ApplicationFlags.None);
-            app.Register(GLib.Cancellable.Current);
-
-			var window = new MainWindow();
-			app.AddWindow(window);
-
-			window.ShowAll();
-
-            Gtk.Application.Run();
-        }
-    }
+		private AboutDialog(Builder builder) :
+			base(builder.GetObject("AboutDialog").Handle)
+		{
+			builder.Autoconnect(this);
+		}
+	}
 }
