@@ -10,7 +10,8 @@ build:
     - dotnet build
   artifacts:
     paths:
-      - bin/
+      - src/UniTube.Core/bin/
+      - src/UniTube.GTK/bin/
 
 test:
   stage: test
