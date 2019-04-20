@@ -9,7 +9,7 @@ build:
   script:
     - dotnet build
   artifacts:
-    path:
+    paths:
       - bin/
 
 test:
