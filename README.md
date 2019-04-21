@@ -19,7 +19,7 @@ We have a spanish group on Telegram. If you want to join click [here](https://t.
 5. The API supports two types of credentials. Create both:
     - OAuth 2.0
     - API keys
-6. Clone the repo `git clone https://github.com/NucleuxSoft/UniTube-UWP.git`.
+6. Clone this repo.
 7. Create a new file inside `UniTube-UWP/UniTube.Core` and name it `Client.Secrets.cs`:
 ```csharp
 namespace UniTube.Core
