@@ -1,6 +1,8 @@
 UniTube
 =======
 
+[![pipeline status](https://gitlab.com/nucleux-software/unitube/badges/reborn/pipeline.svg)](https://gitlab.com/nucleux-software/unitube/commits/reborn)
+
 UniTube is an open source YouTube alternative client built with .NET
 technologies to provide an incredible experience on Windows 10, Android or
 Linux devices.
