@@ -1,16 +1,20 @@
-<p align="center">
-  <img src="data/logos/Unitube-vertical.png">
-  <br>
-  An Open Source client for YouTube.
-</p>
-<p align="center">
-  <a href="https://gitlab.com/nucleux-software/unitube/commits/master">
-    <img alt="pipeline status" src="https://img.shields.io/gitlab/pipeline/nucleux-software/unitube/reborn.svg">
-  </a>
-  <a href="LICENSE">
-    <img alt="license" src="https://img.shields.io/github/license/nucleuxsoft/unitube.svg">
-  </a>
-</p>
+<div align="center">
+  <p align="center">
+    <img src="data/logos/Unitube-vertical.png">
+    <br>
+    An Open Source client for YouTube.
+  </p>
+</div>
+<div align="center">
+  <p align="center">
+    <a href="https://gitlab.com/nucleux-software/unitube/commits/master">
+      <img alt="pipeline status" src="https://img.shields.io/gitlab/pipeline/nucleux-software/unitube/reborn.svg">
+    </a>
+    <a href="LICENSE">
+      <img alt="license" src="https://img.shields.io/github/license/nucleuxsoft/unitube.svg">
+    </a>
+  </p>
+</div>
 
 ## About
 UniTube is a new client for YouTube built in with .NET technologies to provide a
@@ -75,6 +79,7 @@ character line limit.
 
 ## License
 This project is licensed under the [GNU General Public License v3](LICENSE).
+
 But if you're too lazy to read (just like me), basically you may copy,
 distribute and modify the software as long as you track changes/dates in source
 files. Any modifications to or software including (via compiler) GPL-licensed
