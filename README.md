@@ -1,9 +1,9 @@
-<p style="text-align: center;">
+<p align="center">
   <img src="data/logos/Unitube-vertical.png">
   <br>
   An Open Source client for YouTube.
 </p>
-<p style="text-align: center;">
+<p align="center">
   <a href="https://gitlab.com/nucleux-software/unitube/commits/master">
     <img alt="pipeline status" src="https://img.shields.io/gitlab/pipeline/nucleux-software/unitube/reborn.svg">
   </a>
