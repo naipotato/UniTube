@@ -7,7 +7,7 @@ stages:
 build:
   stage: build
   script:
-    - dotnet build
+    - dotnet build src/UniTube.sln
   artifacts:
     paths:
       - src/UniTube.Core/bin/
@@ -15,4 +15,4 @@ build:
 test:
   stage: test
   script:
-    - dotnet test
+    - dotnet test src/UniTube.sln
