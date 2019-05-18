@@ -1,55 +1,76 @@
-![Unitube-horizontal.png](https://cdn.steemitimages.com/DQmSdg3f7tR9r8mnGM4Fgw9Pn8z4fCM7WX1hKT9P8q3K2G2/Unitube-horizontal.png)
+<p style="text-align: center;">
+  <img src="data/logos/Unitube-vertical.png">
 
-UniTube is an open source YouTube client built to bring an amazing experience to the Universal Windows Platform (UWP)
+  <p style="text-align: center;">
+    An Open Source client for YouTube.
+  </p>
+</p>
 
-## Why do we develop this app?
-We develop it because we like to program and we like the UWP (Universal Windows Platform).
+## About
+UniTube is a new client for YouTube built in with .NET technologies to provide a
+new YouTube experience on all possible platforms.
 
-We don't know if many people would use the app, but if even we are the only users, we would continue developing.
+Originally, this project was designed only for UWP, but since I'm working on
+different platforms, I decided to start over and target all platforms where .NET
+can run... And where I can do properly debugging 😅️
 
-## Social
-We have a spanish group on Telegram. If you want to join click [here](https://t.me/UnitubeTesters)
+## Status
+I'm working on the unified core for the project. It will be able to send and
+receive HTTP requests from the YouTube Data API, and manage local data from a
+local database on SQLite. Why I do not use the one provided by Google? 'Cause I
+don't know if it works on UWP correctly. So, to avoid future problems, I prefer
+to use something that I'm sure that works.
 
-## Build instructions
-**IMPORTANT:** You MUST have Visual Studio 2017 in order to compile this project.
+## Build
+For all those who want to build this project, they simply need the following:
 
-1. Go to the [Google Developers Console](https://console.developers.google.com/).
-2. Select or create a project.
-3. On the left sidebar, select **API and authentication**. In the API list, make sure the status in **ON** for **version 3 of the YouTube data API**.
-4. On the left sidebar, select **Credentials**.
-5. The API supports two types of credentials. Create both:
-    - OAuth 2.0
-    - API keys
-6. Clone this repo.
-7. Create a new file inside `UniTube-UWP/UniTube.Core` and name it `Client.Secrets.cs`:
-```csharp
-namespace UniTube.Core
-{
-    public static partial class Client
-    {
-        static Client()
-        {
-            ApiKey = "your_api_key";
-            ClientId = "your_client_id";
-            ClientSecret = "your_client_secret";
-        }
-    }
-}
+- .NET Core 2.2 of higher
+- Any properly IDE or code editor to work with .NET Core
+
+And the obvious requirements for any platform that they want to program for. By
+example, for UWP you need the last version of Windows 10 and the last version
+of the SDK for UWP, for GTK you need GTK installed on your system, and so on.
+
+Clone this project, with any tool that you commonly use, or with this command
+
+```sh
+git clone https://gitlab.com/nucleux-software/unitube.git
+cd unitube
 ```
-8. Replace `your_api_key`, `your_client_id` and `your_client_secret` with the data obtained from step 5.
 
-## Roadmap
+Then you need to use the tools that provide your IDE or code editor to build the
+project. Note that actually I only provide tools for Visual Studio Code, that is
+the code editor that I use. But if you don't want to use any tool like that, or
+if your code editor doesn't include any tool for building .NET Core projects,
+you can use this command to build the project:
 
-### Current Features
-- Trending videos
-- Search videos
-- Fluent Design System
-- Live Tile
+```sh
+dotnet build
+```
 
-### Planned Features
-- Play videos
-- Manage multiple accounts
-- Cast videos to any screen
-- Save videos
-- Upload videos
-- and more...
+If you want to run the project, just select the desired project and launch it
+with:
+
+```sh
+dotnet run --project /path/to/the/project
+```
+
+> But right now there's no project to run 😅️ my bad.
+
+## Contribute
+I really appreciate any kind of help, from logos (just like the actual one,
+thanks to @davidmind) to code contributions.
+
+If you want to contribute to the code, just document all your changes, and try
+to follow the... default code style for C#? But trying to not use expressions
+bodies for methods or properties, except if it's redundant, always
+use braces, even for `if` blocks with only one line of code, and use a soft 80
+character line limit.
+
+## License
+This project is licensed under the [GNU General Public License v3](LICENSE).
+But if you're too lazy to read (just like me), basically you may copy,
+distribute and modify the software as long as you track changes/dates in source
+files. Any modifications to or software including (via compiler) GPL-licensed
+code must also be available under the GPL along with build & install
+instructions.
