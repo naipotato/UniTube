@@ -8,7 +8,7 @@
 <div align="center">
   <p align="center">
     <a href="https://gitlab.com/nucleux-software/unitube/commits/master">
-      <img alt="pipeline status" src="https://img.shields.io/gitlab/pipeline/nucleux-software/unitube/reborn.svg">
+      <img alt="pipeline status" src="https://gitlab.com/nucleux-software/unitube/badges/master/pipeline.svg"/>
     </a>
     <a href="LICENSE">
       <img alt="license" src="https://img.shields.io/github/license/nucleuxsoft/unitube.svg">
