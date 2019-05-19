@@ -90,9 +90,9 @@ namespace UniTube.Core
             }
         }
 
-        public abstract VideoListResponse Execute();
+        public abstract T Execute();
 
-        public abstract Task<VideoListResponse> ExecuteAsync();
+        public abstract Task<T> ExecuteAsync();
 
         protected void SetParameter(string key, string value)
         {
