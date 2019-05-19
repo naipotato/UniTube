@@ -18,20 +18,16 @@
 
 namespace UniTube.Core.Data
 {
-    public class Video
+    public class VideoStatistics
     {
-        public string Kind { get; set; }
+        public ulong ViewCount { get; set; }
 
-        public string Etag { get; set; }
+        public ulong LikeCount { get; set; }
 
-        public string Id { get; set; }
+        public ulong DislikeCount { get; set; }
 
-        public VideoSnippet Snippet { get; set; }
+        public ulong FavoriteCount { get; set; }
 
-        public VideoContentDetails ContentDetails { get; set; }
-
-        public VideoStatus Status { get; set; }
-
-        public VideoStatistics Statistics { get; set; }
+        public ulong CommentCount { get; set; }
     }
 }
