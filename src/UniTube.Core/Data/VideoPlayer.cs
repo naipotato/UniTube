@@ -18,22 +18,12 @@
 
 namespace UniTube.Core.Data
 {
-    public class Video
+    public class VideoPlayer
     {
-        public string Kind { get; set; }
+        public string EmbedHtml { get; set; }
 
-        public string Etag { get; set; }
+        public long EmbedHeight { get; set; }
 
-        public string Id { get; set; }
-
-        public VideoSnippet Snippet { get; set; }
-
-        public VideoContentDetails ContentDetails { get; set; }
-
-        public VideoStatus Status { get; set; }
-
-        public VideoStatistics Statistics { get; set; }
-
-        public VideoPlayer Player { get; set; }
+        public long EmbedWidth { get; set; }
     }
 }
