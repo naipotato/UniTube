@@ -18,30 +18,22 @@
 
 namespace UniTube.Core.Data
 {
-    public class Video
+    public class VideoProcessingDetails
     {
-        public string Kind { get; set; }
+        public string ProcessingStatus { get; set; }
 
-        public string Etag { get; set; }
+        public ProcessingProgress ProcessingProgress { get; set; }
 
-        public string Id { get; set; }
+        public string ProcessingFailureReason { get; set; }
 
-        public VideoSnippet Snippet { get; set; }
+        public string FileDetailsAvailability { get; set; }
 
-        public VideoContentDetails ContentDetails { get; set; }
+        public string ProcessingIssuesAvailability { get; set; }
 
-        public VideoStatus Status { get; set; }
+        public string TagSuggestionsAvailability { get; set; }
 
-        public VideoStatistics Statistics { get; set; }
+        public string EditorSuggestionsAvailability { get; set; }
 
-        public VideoPlayer Player { get; set; }
-
-        public VideoTopicDetails TopicDetails { get; set; }
-
-        public VideoRecordingDetails RecordingDetails { get; set; }
-
-        public VideoFileDetails FileDetails { get; set; }
-
-        public VideoProcessingDetails ProcessingDetails { get; set; }
+        public string ThumbnailsAvailability { get; set; }
     }
 }
