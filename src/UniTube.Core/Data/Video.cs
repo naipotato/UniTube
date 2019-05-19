@@ -16,6 +16,8 @@
 //
 // Author: Nahuel Gomez Castro <nahual_gomca@outlook.com.ar>
 
+using System.Collections.Generic;
+
 namespace UniTube.Core.Data
 {
     public class Video
@@ -47,5 +49,7 @@ namespace UniTube.Core.Data
         public VideoSuggestions Suggestions { get; set; }
 
         public VideoLiveStreamingDetails LiveStreamingDetails { get; set; }
+
+        public Dictionary<string, VideoLocalization> Localizations { get; set; }
     }
 }
