@@ -16,18 +16,14 @@
 //
 // Author: Nahuel Gomez Castro <nahual_gomca@outlook.com.ar>
 
+using System.Collections.Generic;
+
 namespace UniTube.Core.Data
 {
-    public class Video
+    public class RegionRestriction
     {
-        public string Kind { get; set; }
+        public List<string> Allowed { get; set; }
 
-        public string Etag { get; set; }
-
-        public string Id { get; set; }
-
-        public VideoSnippet Snippet { get; set; }
-
-        public VideoContentDetails ContentDetails { get; set; }
+        public List<string> Blocked { get; set; }
     }
 }
