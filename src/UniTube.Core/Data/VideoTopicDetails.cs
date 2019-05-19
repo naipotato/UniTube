@@ -16,26 +16,12 @@
 //
 // Author: Nahuel Gomez Castro <nahual_gomca@outlook.com.ar>
 
+using System.Collections.Generic;
+
 namespace UniTube.Core.Data
 {
-    public class Video
+    public class VideoTopicDetails
     {
-        public string Kind { get; set; }
-
-        public string Etag { get; set; }
-
-        public string Id { get; set; }
-
-        public VideoSnippet Snippet { get; set; }
-
-        public VideoContentDetails ContentDetails { get; set; }
-
-        public VideoStatus Status { get; set; }
-
-        public VideoStatistics Statistics { get; set; }
-
-        public VideoPlayer Player { get; set; }
-
-        public VideoTopicDetails TopicDetails { get; set; }
+        public List<string> TopicCategories { get; set; }
     }
 }
