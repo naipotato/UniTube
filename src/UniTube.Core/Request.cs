@@ -24,54 +24,47 @@ namespace UniTube.Core
 {
     public abstract class Request<T>
     {
-        protected Dictionary<string, string> parameters;
+        private Dictionary<string, string> parameters;
 
         public string AccessToken
         {
-            get => this.parameters.ContainsKey("access_token") ?
-                this.parameters["access_token"] : null;
+            get => this.GetParameterString("access_token");
             set => this.SetParameter("access_token", value);
         }
 
         public string Callback
         {
-            get => this.parameters.ContainsKey("callback") ?
-                this.parameters["callback"] : null;
+            get => this.GetParameterString("callback");
             set => this.SetParameter("callback", value);
         }
 
         public string Fields
         {
-            get => this.parameters.ContainsKey("fields") ?
-                this.parameters["fields"] : null;
+            get => this.GetParameterString("fields");
             set => this.SetParameter("fields", value);
         }
 
         public string Key
         {
-            get => this.parameters.ContainsKey("key") ?
-                this.parameters["key"] : null;
+            get => this.GetParameterString("key");
             set => this.SetParameter("key", value);
         }
 
         public string PrettyPrint
         {
-            get => this.parameters.ContainsKey("prettyPrint") ?
-                this.parameters["prettyPrint"] : null;
+            get => this.GetParameterString("prettyPrint");
             set => this.SetParameter("prettyPrint", value);
         }
 
         public string QuotaUser
         {
-            get => this.parameters.ContainsKey("quotaUser") ?
-                this.parameters["quotaUser"] : null;
+            get => this.GetParameterString("quotaUser");
             set => this.SetParameter("quotaUser", value);
         }
 
         public string UserIp
         {
-            get => this.parameters.ContainsKey("userIp") ?
-                this.parameters["userIp"] : null;
+            get => this.GetParameterString("userIp");
             set => this.SetParameter("userIp", value);
         }
 
@@ -93,6 +86,14 @@ namespace UniTube.Core
         public abstract T Execute();
 
         public abstract Task<T> ExecuteAsync();
+
+        protected string GetParameterString(string key)
+            => this.parameters.ContainsKey(key) ?
+                this.parameters[key] : null;
+
+        protected uint? GetParameterUint(string key)
+            => this.parameters.ContainsKey(key) ?
+                uint.Parse(this.parameters[key]) : (uint?) null;
 
         protected void SetParameter(string key, string value)
         {
