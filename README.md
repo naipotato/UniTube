@@ -72,9 +72,7 @@ I really appreciate any kind of help, from logos (just like the actual one,
 thanks to [@davidmind](https://github.com/davidmind)) to code contributions.
 
 If you want to contribute to the code, just document all your changes, and try
-to follow the... default code style for C#? But trying to not use expressions
-bodies for methods or properties, except if it's redundant, always
-use braces, even for `if` blocks with only one line of code, and use a soft 80
+to follow the... default code style for C#? But trying to use a soft 80
 character line limit.
 
 ## License
