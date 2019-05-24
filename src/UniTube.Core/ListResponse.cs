@@ -17,11 +17,12 @@
 // Author: Nahuel Gomez Castro <nahual_gomca@outlook.com.ar>
 
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using UniTube.Core.Data;
 
 namespace UniTube.Core
 {
-    public class VideoListResponse
+    public class ListResponse<T>
     {
         public string Kind { get; set; }
 
@@ -33,6 +34,16 @@ namespace UniTube.Core
 
         public PageInfo PageInfo { get; set; }
 
-        public List<Video> Items { get; set; }
+        public List<T> Items { get; set; }
+
+        public static ListResponse<T> FromJson(string json)
+            => JsonConvert.DeserializeObject<ListResponse<T>>(json);
+    }
+
+    public class PageInfo
+    {
+        public int TotalResults { get; set; }
+
+        public int ResultsPerPage { get; set; }
     }
 }
