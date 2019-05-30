@@ -44,7 +44,7 @@ of the SDK for UWP, for GTK you need GTK installed on your system, and so on.
 Clone this project, with any tool that you commonly use, or with this command
 
 ```sh
-git clone https://gitlab.com/nucleux-software/unitube.git
+git clone https://github.com/NucleuxSoft/UniTube.git
 cd unitube
 ```
 
