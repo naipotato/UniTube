@@ -2,7 +2,6 @@ image: microsoft/dotnet:latest
 
 stages:
   - build
-  - test
 
 build:
   stage: build
@@ -11,8 +10,3 @@ build:
   artifacts:
     paths:
       - src/UniTube.Core/bin/
-
-test:
-  stage: test
-  script:
-    - dotnet test src/UniTube.sln
