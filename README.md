@@ -10,6 +10,9 @@
     <a href="https://gitlab.com/nucleux-software/unitube/commits/master">
       <img alt="pipeline status" src="https://gitlab.com/nucleux-software/unitube/badges/master/pipeline.svg"/>
     </a>
+    <a href="https://travis-ci.org/NucleuxSoft/UniTube">
+      <img alt="build status" src="https://travis-ci.org/NucleuxSoft/UniTube.svg?branch=master">
+    </a>
     <a href="LICENSE">
       <img alt="license" src="https://img.shields.io/github/license/nucleuxsoft/unitube.svg">
     </a>
