@@ -2,6 +2,7 @@ language: csharp
 
 mono: none
 dotnet: 2.2.300
+dist: xenial
 
 script:
   - dotnet build src/UniTube.sln
