@@ -26,6 +26,8 @@ namespace UniTube.Core
     {
         private Dictionary<string, string> parameters;
 
+        public Request() => this.parameters = new Dictionary<string, string>();
+
         public string AccessToken
         {
             get => this.GetParameterString("access_token");

@@ -36,7 +36,7 @@ namespace UniTube.Core
 
         public class ListRequest : Request<ListResponse<Video>>
         {
-            public ListRequest(string part, string apiKey)
+            public ListRequest(string part, string apiKey) : base()
             {
                 base.Key = apiKey;
                 this.Part = part;
