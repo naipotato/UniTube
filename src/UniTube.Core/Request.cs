@@ -68,21 +68,6 @@ namespace UniTube.Core
             set => this.SetParameter("userIp", value);
         }
 
-        protected string Parameters
-        {
-            get
-            {
-                var joined_pairs = new List<string>();
-
-                foreach (var item in this.parameters)
-                    if (string.IsNullOrWhiteSpace(item.Value))
-                        joined_pairs.Add(WebUtility.UrlEncode(item.Key) + "=" +
-                            WebUtility.UrlEncode(item.Value));
-
-                return string.Join("&", joined_pairs);
-            }
-        }
-
         public abstract T Execute();
 
         public abstract Task<T> ExecuteAsync();
@@ -101,6 +86,18 @@ namespace UniTube.Core
                 this.parameters.Remove(key);
             else
                 this.parameters[key] = value;
+        }
+
+        protected string GetParametersAsString()
+        {
+            var joined_pairs = new List<string>();
+
+            foreach (var item in this.parameters)
+                if (string.IsNullOrWhiteSpace(item.Value))
+                    joined_pairs.Add(WebUtility.UrlEncode(item.Key) + "=" +
+                        WebUtility.UrlEncode(item.Value));
+
+            return string.Join("&", joined_pairs);
         }
     }
 }

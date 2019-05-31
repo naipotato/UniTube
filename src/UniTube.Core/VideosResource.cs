@@ -123,7 +123,7 @@ namespace UniTube.Core
                 var client = new HttpClient();
 
                 // Then, we need to set up the message.
-                var url = $"https://www.googleapis.com/youtube/v3/videos?{base.Parameters}";
+                var url = $"https://www.googleapis.com/youtube/v3/videos?{base.GetParametersAsString()}";
                 var message = new HttpRequestMessage(HttpMethod.Get, url);
 
                 // Send msg to the server and wait for the response
