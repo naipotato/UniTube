@@ -114,9 +114,6 @@ namespace UniTube.Core
                 set => base.SetParameter("videoCategoryId", value);
             }
 
-            public override ListResponse<Video> Execute()
-                => ExecuteAsync().GetAwaiter().GetResult();
-
             public override async Task<ListResponse<Video>> ExecuteAsync()
             {
                 // First of all, we need the HttpClient
@@ -140,7 +137,7 @@ namespace UniTube.Core
                 }
                 else
                 {
-                    // If not, then throw an ApiException
+                    // If not, throw an ApiException
                     throw ApiException.FromJson(contentData);
                 }
             }

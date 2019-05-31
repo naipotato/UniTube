@@ -70,7 +70,8 @@ namespace UniTube.Core
             set => this.SetParameter("userIp", value);
         }
 
-        public abstract T Execute();
+        public virtual T Execute()
+            => this.ExecuteAsync().GetAwaiter().GetResult();
 
         public abstract Task<T> ExecuteAsync();
 
